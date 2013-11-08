@@ -60,4 +60,12 @@ public class Lobster implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
