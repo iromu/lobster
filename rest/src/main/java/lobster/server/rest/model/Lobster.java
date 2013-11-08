@@ -26,6 +26,9 @@ public class Lobster implements Serializable {
 
     private String email;
 
+    @OneToOne
+    private Status status;
+
     public Integer getId() {
         return id;
     }
