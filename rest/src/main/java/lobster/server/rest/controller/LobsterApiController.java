@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,4 +32,12 @@ public class LobsterApiController {
         lobster = lobsterService.create(lobster);
         return lobster.getId();
     }
+
+    @ResponseBody
+    @RequestMapping(value = "lobsters", method = RequestMethod.GET)
+    public List<Lobster> getLobsters()
+    {
+        return lobsterService.getAll();
+    }
+
 }

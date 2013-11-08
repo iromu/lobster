@@ -1,8 +1,11 @@
 package lobster.server.rest.persistence;
 
 import lobster.server.rest.model.Lobster;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,4 +33,9 @@ public class LobsterService {
         return lobster;
     }
 
+    public List<Lobster> getAll()
+    {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(Lobster.class);
+        return crit.list();
+    }
 }
