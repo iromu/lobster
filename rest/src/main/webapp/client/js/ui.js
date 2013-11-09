@@ -252,7 +252,7 @@ function eat(element) {
 		{
 			this.state = "eat";
 			player.animation.gotoAndPlay("eat");
-			setTimeout(function(){player.animation.gotoAndPlay("idle");player.state = "idle";updateState();}, 2000);
+			setTimeout(function(){player.animation.gotoAndPlay("idle");player.state = "idle";/*updateState();*/}, 2000);
         },
         error: handleError
     });
@@ -276,7 +276,7 @@ function play(element)
 		{
 			this.state = "playGame"+element.id;
 			player.animation.gotoAndPlay("playGame"+element.id);
-			setTimeout(function(){player.animation.gotoAndPlay("idle");player.state = "idle";queryState();}, 2000);
+			setTimeout(function(){player.animation.gotoAndPlay("idle");player.state = "idle";/*queryState();*/}, 2000);
         },
         error: function (jqXHR, textStatus, errorThrown)
 		{
