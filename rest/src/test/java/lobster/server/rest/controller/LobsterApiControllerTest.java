@@ -38,7 +38,7 @@ public class LobsterApiControllerTest {
         Lobster lobster = new Lobster();
         lobster.setName("test");
 
-        Integer id = restTemplate.postForObject("http://localhost:8080/api/lobsters", lobster, Integer.class);
+        Integer id = restTemplate.postForObject("http://localhost:8080/api/lobster/new", lobster, Integer.class);
         lobster.setId(id);
         lobster.setEmail("email");
         lobster.setStatus(null);
@@ -52,7 +52,7 @@ public class LobsterApiControllerTest {
 
         List < Lobster > list;
         ResponseEntity<List> l;
-        l = restTemplate.getForEntity("http://localhost:8080/api/lobsters", List.class);
+        l = restTemplate.getForEntity("http://localhost:8080/api/lobster/list", List.class);
 
         System.out.println(l.toString());
     }

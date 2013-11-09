@@ -19,7 +19,7 @@ import java.util.List;
  * Time: 21:59
  * To change this template use File | Settings | File Templates.
  */
-@RequestMapping("/api/")
+@RequestMapping("/lobster/")
 @Controller
 public class LobsterApiController {
 
@@ -27,14 +27,14 @@ public class LobsterApiController {
     private LobsterService lobsterService;
 
     @ResponseBody
-    @RequestMapping(value = "lobsters", method = RequestMethod.POST)
+    @RequestMapping(value = "new", method = RequestMethod.POST)
     public Integer addLobster(@Valid @RequestBody Lobster lobster) {
         lobster = lobsterService.create(lobster);
         return lobster.getId();
     }
 
     @ResponseBody
-    @RequestMapping(value = "lobsters", method = RequestMethod.GET)
+    @RequestMapping(value = "list", method = RequestMethod.GET)
     public List<Lobster> getLobsters()
     {
         return lobsterService.getAll();
