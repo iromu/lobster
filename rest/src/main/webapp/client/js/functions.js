@@ -64,7 +64,6 @@ function createUI()
 	light.scaleX = 0.3;
 	light.scaleY = 0.3;
 	light.y = 10;
-	
 	food = new createjs.Bitmap("img/fork.png");
 	food.scaleX = 0.3;
 	food.scaleY = 0.3;
@@ -95,12 +94,16 @@ function createPlayer()
 	player = new function() {
 		this.state = "patrol";
 		this.direction = "right";
-		this.sleepDirection = "open";
 		
 		this.data = {
 			images: ["img/guy.png"],
 			frames: {width:110, height:186},
-			animations: {right:[16,23,"right",0.4], idle:[0,1,"idle",0.1], left:[30,37,"left",0.4], eat:[2,5,"idle",0.4], open:[6,6,"open",0.1]}
+			animations: {	right:[16,23,"right",0.4], 
+							idle:[0,1,"idle",0.1], 
+							left:[30,37,"left",0.4], 
+							eat:[2,5,"idle",0.4], 
+							open:[6,6,"open",0.1],
+							sleep:[70,71,"sleep",0.1]}
 		};
 		
 		this.spriteSheet = new createjs.SpriteSheet(this.data);
@@ -138,11 +141,13 @@ function createPlayer()
 		this.sleep = function ()
 		{
 			this.state = "sleep";
+			player.animation.gotoAndPlay("sleep");
 		};
 		
 		this.wakeUp = function ()
 		{
 			this.state = "patrol";
+			player.animation.gotoAndPlay("patrol");
 		};
 	}
 	
@@ -167,14 +172,17 @@ function createContent()
 	bg = new createjs.Bitmap("img/background_01.png");
 	bg.image.onload = function()
 	{
-		bg.addEventListener("click", handleBackground);
 		bg.scaleX = stage.canvas.width/bg.image.width;
 		bg.scaleY = stage.canvas.height/bg.image.height;
 		stage.addChild(bg);
 		
 		createPlayer();
 		createUI();
+		
+		bg.image.onload = undefined;
 	};
+	
+	bg.addEventListener("click", handleBackground);
 	
 	isDay = true;
 }

@@ -4,16 +4,17 @@ function handleLight()
 	
 	if(isDay)
 	{
-		player.wakeUp();
 		light.image.src = "img/light_on.png";
+		player.wakeUp();
 	}
 	else
 	{
-		player.sleep();
 		light.image.src = "img/light_off.png";
+		player.sleep();	
 	}
-	
 	setBackground(isDay);
+	
+	stage.update();
 }
 
 function handleBackground()

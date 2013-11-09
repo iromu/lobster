@@ -29,22 +29,5 @@ function moveIdle(player)
 
 function moveSleeping(player)
 {
-	if(player.sleepDirection == "open")
-	{
-		player.mouth.scaleY += 0.1;
-		
-		if(player.mouth.scaleY > 2)
-		{
-			player.sleepDirection = "close";
-		}
-	}
-	else
-	{
-		player.mouth.scaleY -= 0.1;
-		
-		if(player.mouth.scaleY < 1)
-		{
-			player.sleepDirection = "open";
-		}
-	}
+	
 }
