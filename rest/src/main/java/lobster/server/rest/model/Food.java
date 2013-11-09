@@ -27,6 +27,8 @@ public class Food implements Serializable {
 
     private Integer calories;
 
+    private Integer fatLevel;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="food_vitamines")
     private List<Vitamine> vitamines;
@@ -90,7 +92,17 @@ public class Food implements Serializable {
         return happiness;
     }
 
+    public Integer getFatLevel() {
+        return fatLevel;
+    }
+
+    public void setFatLevel(Integer fatLevel) {
+        this.fatLevel = fatLevel;
+    }
+
     public void setHappiness(Integer happiness) {
         this.happiness = happiness;
     }
+
+
 }
