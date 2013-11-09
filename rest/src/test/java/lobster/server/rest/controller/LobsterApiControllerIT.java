@@ -24,7 +24,7 @@ import static org.junit.Assert.assertThat;
  * Time: 22:30
  * To change this template use File | Settings | File Templates.
  */
-public class LobsterApiControllerTest {
+public class LobsterApiControllerIT {
 
     private RestTemplate restTemplate;
 

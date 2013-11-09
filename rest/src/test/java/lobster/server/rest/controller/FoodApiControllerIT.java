@@ -23,7 +23,7 @@ import static org.junit.Assert.assertThat;
  * Time: 22:30
  * To change this template use File | Settings | File Templates.
  */
-public class FoodApiControllerTest {
+public class FoodApiControllerIT {
 
     private RestTemplate restTemplate;
 
