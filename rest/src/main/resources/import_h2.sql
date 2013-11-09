@@ -1,8 +1,28 @@
-insert into vitamine (name, description, vitamineType, amount) values ('Vitamine A', 'Vitamine A desc.', 'VITAMINE_A', 50);
-insert into vitamine (name, description, vitamineType, amount) values ('Vitamine B', 'Vitamine B desc.', 'VITAMINE_B', 50);
-insert into vitamine (name, description, vitamineType, amount) values ('Vitamine C', 'Vitamine C desc.', 'VITAMINE_C', 50);
-insert into vitamine (name, description, vitamineType, amount) values ('Vitamine D', 'Vitamine D desc.', 'VITAMINE_D', 50);
-insert into vitamine (name, description, vitamineType, amount) values ('Calcium', 'Calcium desc.', 'CALCIUM', 50);
+insert into vitamine (name, description) values ('Vitamine A', 'Vitamine A desc.');
+insert into vitamine (name, description) values ('Vitamine B', 'Vitamine B desc.');
+insert into vitamine (name, description) values ('Vitamine C', 'Vitamine C desc.');
+insert into vitamine (name, description) values ('Vitamine D', 'Vitamine D desc.');
+insert into vitamine (name, description) values ('Calcium', 'Calcium desc.');
+
+insert into vitamineamount (vitamine_id, amount) values (1, 4);
+insert into vitamineamount (vitamine_id, amount) values (2, 23);
+insert into vitamineamount (vitamine_id, amount) values (3, 5);
+insert into vitamineamount (vitamine_id, amount) values (4, 7);
+
+insert into vitamineamount (vitamine_id, amount) values (1, 6);
+insert into vitamineamount (vitamine_id, amount) values (2, 45);
+insert into vitamineamount (vitamine_id, amount) values (3, 27);
+insert into vitamineamount (vitamine_id, amount) values (4, 1);
+
+insert into vitamineamount (vitamine_id, amount) values (1, 23);
+insert into vitamineamount (vitamine_id, amount) values (2, 41);
+insert into vitamineamount (vitamine_id, amount) values (3, 16);
+insert into vitamineamount (vitamine_id, amount) values (4, 29);
+
+insert into vitamineamount (vitamine_id, amount) values (1, 16);
+insert into vitamineamount (vitamine_id, amount) values (2, 14);
+insert into vitamineamount (vitamine_id, amount) values (3, 17);
+insert into vitamineamount (vitamine_id, amount) values (4, 21);
 
 insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('Sing', 'Sing desc.', 'PLAY', -1, 10, -5);
 insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('Run', 'Run desc.', 'RUN', -20, 10, -20);
@@ -18,22 +38,22 @@ insert into food (name, description, happiness, calories, foodType, fatLevel) va
 insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Cereals', 'Cereals', 70, 10, 'CEREAL',5 );
 insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Pizza', 'Pizza slice', 70, 10, 'CEREAL',10 );
 
-insert into food_vitamines (food_id, vitamines_id) values  (1, 1);
-insert into food_vitamines (food_id, vitamines_id) values  (1, 4);
-insert into food_vitamines (food_id, vitamines_id) values  (1, 3);
+insert into food_vitamines (food_id, vitamineamount_id) values  (1, 1);
+insert into food_vitamines (food_id, vitamineamount_id) values  (1, 4);
+insert into food_vitamines (food_id, vitamineamount_id) values  (1, 3);
 
-insert into food_vitamines (food_id, vitamines_id) values  (2, 1);
-insert into food_vitamines (food_id, vitamines_id) values  (2, 3);
-insert into food_vitamines (food_id, vitamines_id) values  (2, 2);
+insert into food_vitamines (food_id, vitamineamount_id) values  (2, 1);
+insert into food_vitamines (food_id, vitamineamount_id) values  (2, 3);
+insert into food_vitamines (food_id, vitamineamount_id) values  (2, 2);
 
-insert into food_vitamines (food_id, vitamines_id) values  (3, 1);
-insert into food_vitamines (food_id, vitamines_id) values  (3, 2);
+insert into food_vitamines (food_id, vitamineamount_id) values  (3, 1);
+insert into food_vitamines (food_id, vitamineamount_id) values  (3, 2);
 
-insert into food_vitamines (food_id, vitamines_id) values  (4, 1);
-insert into food_vitamines (food_id, vitamines_id) values  (4, 4);
+insert into food_vitamines (food_id, vitamineamount_id) values  (4, 1);
+insert into food_vitamines (food_id, vitamineamount_id) values  (4, 4);
 
-insert into food_vitamines (food_id, vitamines_id) values  (5, 2);
-insert into food_vitamines (food_id, vitamines_id) values  (6, 3);
+insert into food_vitamines (food_id, vitamineamount_id) values  (5, 2);
+insert into food_vitamines (food_id, vitamineamount_id) values  (6, 3);
 
 
 insert into lobster (name, password, email) values ('lobster1', 'pwd1', 'lob1@mail.com');
@@ -49,25 +69,7 @@ insert into status (fatLevel, happiness, lastEat)  values (75, 50, null) ;
 insert into status (fatLevel, happiness, lastEat)  values (30, 60, null) ;
 insert into status (fatLevel, happiness, lastEat)  values (50, 10, null) ;
 
-insert into statusvitamine (vitamine_id, amount) values (1, 100);
-insert into statusvitamine (vitamine_id, amount) values (2, 100);
-insert into statusvitamine (vitamine_id, amount) values (3, 100);
-insert into statusvitamine (vitamine_id, amount) values (4, 100);
 
-insert into statusvitamine (vitamine_id, amount) values (1, 100);
-insert into statusvitamine (vitamine_id, amount) values (2, 100);
-insert into statusvitamine (vitamine_id, amount) values (3, 100);
-insert into statusvitamine (vitamine_id, amount) values (4, 100);
-
-insert into statusvitamine (vitamine_id, amount) values (1, 100);
-insert into statusvitamine (vitamine_id, amount) values (2, 100);
-insert into statusvitamine (vitamine_id, amount) values (3, 100);
-insert into statusvitamine (vitamine_id, amount) values (4, 100);
-
-insert into statusvitamine (vitamine_id, amount) values (1, 100);
-insert into statusvitamine (vitamine_id, amount) values (2, 100);
-insert into statusvitamine (vitamine_id, amount) values (3, 100);
-insert into statusvitamine (vitamine_id, amount) values (4, 100);
 
 update lobster set status_id = 1 where name = 'lobster1';
 update lobster set status_id = 2 where name = 'lobster2';

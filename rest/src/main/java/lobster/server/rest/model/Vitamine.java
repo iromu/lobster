@@ -13,20 +13,13 @@ import java.io.Serializable;
 @Entity
 public class Vitamine implements Serializable {
 
-    enum VitamineType {VITAMINE_A, VITAMINE_B, VITAMINE_C, VITAMINE_D, CALCIUM }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
-    private VitamineType vitamineType;
-
     private String name;
 
     private String description;
-
-    private Integer amount;
 
     public Integer getId() {
         return id;
@@ -34,14 +27,6 @@ public class Vitamine implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public VitamineType getVitamineType() {
-        return vitamineType;
-    }
-
-    public void setVitamineType(VitamineType vitamineType) {
-        this.vitamineType = vitamineType;
     }
 
     public String getName() {
@@ -58,14 +43,6 @@ public class Vitamine implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
     }
 
     @Override

@@ -10,14 +10,11 @@ import javax.persistence.*;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-public class StatusVitamine {
+public class VitamineAmount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    //@ManyToOne(fetch = FetchType.EAGER)
-    //private Status status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Vitamine vitamine;
@@ -47,12 +44,4 @@ public class StatusVitamine {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
-
-    //public Status getStatus() {
-    //    return status;
-    //}
-
-   // public void setStatus(Status status) {
-   //     this.status = status;
-    //}
 }

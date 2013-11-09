@@ -4,14 +4,12 @@ import lobster.server.rest.model.*;
 import lobster.server.rest.persistence.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.dialect.H2Dialect;
-import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -88,7 +86,7 @@ public class ServicesConfiguration {
                 .addAnnotatedClasses(Activity.class)
                 .addAnnotatedClasses(Vitamine.class)
                 .addAnnotatedClasses(Food.class)
-                .addAnnotatedClasses(StatusVitamine.class)
+                .addAnnotatedClasses(VitamineAmount.class)
                 .addProperties(props)
                 .buildSessionFactory();
     }
