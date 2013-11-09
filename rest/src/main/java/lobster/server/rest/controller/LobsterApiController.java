@@ -91,6 +91,8 @@ public class LobsterApiController {
 
         updateCalories(status, food);
 
+        updateFatLevel(status, food);
+
         status.setLastEat(new Date());
         lobsterService.update(lobster);
 
@@ -127,6 +129,14 @@ public class LobsterApiController {
         totalCalories = totalCalories == null ? 0 : totalCalories;
         int calories = totalCalories + food.getCalories();
         status.setTotalCalories(calories < 100 ? calories : 100);
+    }
+
+    private void updateFatLevel(Status status, Food food){
+        Integer fatLevel = status.getFatLevel();
+        fatLevel = fatLevel == null ? 0 : fatLevel;
+        int foodFatLevel = food.getFatLevel();
+        int newFatLevel = fatLevel + foodFatLevel;
+        status.setFatLevel(newFatLevel < 100 ? newFatLevel : 100);
     }
 
     @ResponseBody

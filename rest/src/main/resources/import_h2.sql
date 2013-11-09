@@ -10,13 +10,13 @@ insert into activity (name, description, foodType, calories, happiness, fatLevel
 insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('TV', 'TV desc.', 'TV', 30, 5, 5);
 insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('Clean room', 'HOMEWORK desc.', 'HOMEWORK', 30, -5, -10);
 
-insert into food (name, description, happiness, calories, foodType) values ('Meat', 'Pig meat', 50, 20, 'MEAT' );
-insert into food (name, description, happiness, calories, foodType) values ('Fish', 'Fish', 30, 10, 'FISH' );
-insert into food (name, description, happiness, calories, foodType) values ('Legume', 'Legume', 10, 15, 'LEGUME' );
-insert into food (name, description, happiness, calories, foodType) values ('Banana', 'Banana', 30, 7, 'FRUIT' );
-insert into food (name, description, happiness, calories, foodType) values ('Candy', 'Candy', 100, 24, 'CANDY' );
-insert into food (name, description, happiness, calories, foodType) values ('Cereals', 'Cereals', 70, 10, 'CEREAL' );
-insert into food (name, description, happiness, calories, foodType) values ('Pizza', 'Pizza slice', 70, 10, 'CEREAL' );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Meat', 'Pig meat', 50, 20, 'MEAT',20 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Fish', 'Fish', 30, 10, 'FISH',5 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Legume', 'Legume', 10, 15, 'LEGUME',0 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Banana', 'Banana', 30, 7, 'FRUIT',0 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Candy', 'Candy', 100, 24, 'CANDY',10 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Cereals', 'Cereals', 70, 10, 'CEREAL',5 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Pizza', 'Pizza slice', 70, 10, 'CEREAL',10 );
 
 insert into food_vitamines (food_id, vitamines_id) values  (1, 1);
 insert into food_vitamines (food_id, vitamines_id) values  (1, 4);
