@@ -1,6 +1,8 @@
 package lobster.server.rest.controller;
 
+import lobster.server.rest.model.Food;
 import lobster.server.rest.model.Lobster;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
@@ -48,15 +50,16 @@ public class FoodApiControllerTest {
 
     }
 
-
-
     @Test
     public void getAll() {
 
-        List < Lobster > list;
+        List <Food> list;
         ResponseEntity<List> l;
-        l = restTemplate.getForEntity("http://localhost:8080/api/lobster/list", List.class);
+        Integer id = 1;
+        l = restTemplate.getForEntity("http://localhost:8080/api/lobster/getFood", List.class, id);
 
         System.out.println(l.toString());
+
+        Assert.assertEquals(1, l.getBody().size());
     }
 }
