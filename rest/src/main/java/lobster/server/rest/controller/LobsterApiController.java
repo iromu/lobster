@@ -1,10 +1,11 @@
 package lobster.server.rest.controller;
 
-import lobster.server.rest.model.Food;
-import lobster.server.rest.model.Lobster;
+import lobster.server.rest.model.*;
+import lobster.server.rest.persistence.FoodService;
 import lobster.server.rest.persistence.LobsterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,10 +21,15 @@ import java.util.List;
  */
 @RequestMapping("/lobster/")
 @Controller
+@Transactional
 public class LobsterApiController {
 
     @Autowired
     private LobsterService lobsterService;
+
+
+    @Autowired
+    private FoodService foodService;
 
     @ResponseBody
     @RequestMapping(value = "new", method = RequestMethod.POST)
@@ -53,5 +59,19 @@ public class LobsterApiController {
     @RequestMapping(value = "{id}/givefood/{foodId}", method = RequestMethod.POST)
     public void giveFood(@PathVariable("id") Integer id, @PathVariable("foodId") Integer foodId) {
 
+        Lobster lobster = lobsterService.getById(id);
+        Status status = lobster.getStatus();
+        List<StatusVitamine> statusVitamine = status.getStatusVitamine();
+
+        Food food = foodService.getById(id);
+
+        List<Vitamine> foodVitamines = food.getVitamines();
+
+        for (Vitamine foodVitamine : foodVitamines) {
+            int i = statusVitamine.indexOf(foodVitamine);
+            StatusVitamine statusVitamine1 = statusVitamine.get(i);
+            statusVitamine1.setAmount(statusVitamine1.getAmount() + 1);
+        }
+        lobsterService.update(lobster);
     }
 }

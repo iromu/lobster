@@ -4,6 +4,7 @@ import lobster.server.rest.model.Food;
 import lobster.server.rest.model.Lobster;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -32,5 +33,11 @@ public class FoodService {
     public List<Food> getAll(){
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(Food.class);
         return crit.list();
+    }
+
+    @Cacheable(FOOD_REGION)
+    @Transactional(readOnly = true)
+    public Food getById(Integer id) {
+        return (Food) sessionFactory.getCurrentSession().get(Food.class, id);
     }
 }

@@ -4,9 +4,7 @@ import lobster.server.rest.model.Activity;
 import lobster.server.rest.persistence.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,16 +18,14 @@ import java.util.List;
 @RequestMapping("/status/")
 @Controller
 public class StatusApiController {
+
     @Autowired
     private ActivityService activityService;
-
-
 
     @ResponseBody
     @RequestMapping(value = "getStatus", method = RequestMethod.GET)
     public List<Activity> getActivities(Integer lobsterID) {
         return activityService.getAll();
     }
-
 
 }

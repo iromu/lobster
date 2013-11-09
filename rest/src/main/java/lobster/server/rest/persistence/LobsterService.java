@@ -1,10 +1,14 @@
 package lobster.server.rest.persistence;
 
 import lobster.server.rest.model.Lobster;
+import lobster.server.rest.model.Status;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,9 +37,19 @@ public class LobsterService {
         return lobster;
     }
 
-    public List<Lobster> getAll()
-    {
+    public List<Lobster> getAll() {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(Lobster.class);
         return crit.list();
+    }
+
+    @Cacheable(LOBSTERS_REGION)
+    @Transactional(readOnly = true)
+    public Lobster getById(Integer id) {
+        return (Lobster) sessionFactory.getCurrentSession().get(Lobster.class, id);
+    }
+
+    @CacheEvict(value = LOBSTERS_REGION, key = "#id")
+    public void update(Lobster lobster) {
+        sessionFactory.getCurrentSession().update(lobster);
     }
 }
