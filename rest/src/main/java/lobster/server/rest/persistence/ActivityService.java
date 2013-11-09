@@ -15,7 +15,6 @@ import java.util.List;
  * Time: 02:59
  * To change this template use File | Settings | File Templates.
  */
-
 @Transactional
 public class ActivityService {
 

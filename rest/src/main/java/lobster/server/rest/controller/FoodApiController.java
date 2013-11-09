@@ -27,8 +27,8 @@ public class FoodApiController {
     private FoodService foodService;
 
     @ResponseBody
-    @RequestMapping(value = "getFood", method = RequestMethod.GET)
-    public List<Food> getFood(Integer lobsterID)
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public List<Food> getFood()
     {
         return foodService.getAll();
     }
