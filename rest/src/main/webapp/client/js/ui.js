@@ -37,6 +37,7 @@ function showFoodMenu()
 	if(player.state != "sleep")
 	{
 		player.state = "idle";
+		player.animation.gotoAndPlay("idle");
 	
 		foodMenu.visible = true;
 		foodMenu.x = stage.canvas.width*0.75;
@@ -74,6 +75,15 @@ function hideFoodMenu()
 	}
 	
 	player.state = "patrol";
+	
+	if(player.direction == "left")
+	{
+		player.animation.gotoAndPlay("left");
+	}
+	else
+	{
+		player.animation.gotoAndPlay("right");
+	}
 }
 
 function handleFoodPrev()
@@ -172,7 +182,7 @@ function requestFoodItems()
 					this.offset = {x:this.x-evt.stageX, y:this.y-evt.stageY};
 				});
 				element.bitmap.on("pressup", function(evt) {
-					distance = Math.sqrt(Math.pow(player.body.x-this.x, 2) + Math.pow(player.body.y-this.y, 2));
+					distance = Math.sqrt(Math.pow(player.animation.x-this.x, 2) + Math.pow(player.animation.y-this.y, 2));
 					
 					if(distance < 150)
 					{

@@ -74,7 +74,9 @@ public class LobsterApiController {
             int i = statusVitamineList.indexOf(foodVitamine);
             if (i != -1) {
                 StatusVitamine statusVitamine = statusVitamineList.get(i);
-                statusVitamine.setAmount(statusVitamine.getAmount() + 1);
+                Integer amount = statusVitamine.getAmount();
+                if (amount < 100)
+                    statusVitamine.setAmount(amount + 1);
             } else {
                 StatusVitamine statusVitamine = new StatusVitamine();
                 statusVitamine.setAmount(1);
@@ -84,7 +86,8 @@ public class LobsterApiController {
 
         Integer totalCalories = status.getTotalCalories();
         totalCalories = totalCalories == null ? 0 : totalCalories;
-        status.setTotalCalories(totalCalories + food.getCalories());
+        int calories = totalCalories + food.getCalories();
+        status.setTotalCalories(calories < 100 ? calories : 100);
 
         status.setLastEat(new Date());
         lobsterService.update(lobster);
