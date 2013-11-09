@@ -39,7 +39,18 @@ public class LobsterApiController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public List<Lobster> getLobsters()
     {
-        return lobsterService.getAll();
+        List<Lobster> lobsters = lobsterService.getAll();
+
+        List<Lobster> response = new ArrayList<Lobster>();
+        for (Lobster lobster : lobsters) {
+            Lobster simpleLobster = new Lobster();
+            simpleLobster.setId(lobster.getId());
+            simpleLobster.setName(lobster.getName());
+            response.add(simpleLobster);
+        }
+
+
+        return response;
     }
 
     @ResponseBody
