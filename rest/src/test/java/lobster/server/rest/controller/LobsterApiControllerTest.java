@@ -36,6 +36,8 @@ public class LobsterApiControllerTest {
 
         Integer id = restTemplate.postForObject("http://localhost:8080/api/lobsters", lobster, Integer.class);
         lobster.setId(id);
+        lobster.setEmail("email");
+        lobster.setStatus(null);
 
         System.out.println(id);
 
