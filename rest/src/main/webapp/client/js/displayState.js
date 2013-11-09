@@ -66,7 +66,7 @@ function updateState(data, textStatus, jqXHR)
 
     updateStatusLevelBarHorz(totalCaloriesStatusLevelBar,createStatusLevelBar, 30, 160, "Total Calories", state.totalCalories)
     updateStatusLevelBarHorz(fatStatusLevelBar, createStatusLevelBar, 30, 220, "Fat level", state.fatLevel);
-    updateStatusLevelBarHorz(happinessStatusLevelBar, createStatusLevelBar, 30, 280, "Happiness", state.idealCalories);
+    updateStatusLevelBarHorz(happinessStatusLevelBar, createStatusLevelBar, 30, 280, "Happiness", state.happiness);
     updateStatusLevelBarHorz(vitaminAStatusLevelBar,createStatusLevelBar, 30, 360, "Vit A", state.statusVitamineList[0].amount)
     updateStatusLevelBarHorz(vitaminBStatusLevelBar, createStatusLevelBar, 30, 420, "Vit B", state.statusVitamineList[1].amount);
     updateStatusLevelBarHorz(vitaminCStatusLevelBar, createStatusLevelBar, 30, 480, "Vit C", state.statusVitamineList[2].amount);
