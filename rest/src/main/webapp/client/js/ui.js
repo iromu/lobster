@@ -116,7 +116,7 @@ function requestFoodItems()
 {
 	$.ajax({
         type: "GET",
-        url: "/api/food/getFood",
+        url: "/api/food/list",
         dataType: "json",
         success: function(data)
 		{
