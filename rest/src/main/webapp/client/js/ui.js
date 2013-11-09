@@ -84,7 +84,7 @@ function handleFoodPrev()
 		
 		for(i=0; i < foodElements.length; i++)
 		{
-			foodElements[i].visible = (Math.ceil((i+1)/6) == foodCurrentPage);
+			foodElements[i].bitmap.visible = (Math.ceil((i+1)/6) == foodCurrentPage);
 		}
 		
 		checkArrows();
@@ -105,18 +105,23 @@ function handleFoodNext()
 		
 		for(i=0; i < foodElements.length; i++)
 		{
-			foodElements[i].visible = (Math.ceil((i+1)/6) == foodCurrentPage);
+			foodElements[i].bitmap.visible = (Math.ceil((i+1)/6) == foodCurrentPage);
 		}
 		
 		checkArrows();
 	} 
 }
 
+function eat(element)
+{
+	
+}
+
 function requestFoodItems()
 {
 	$.ajax({
         type: "GET",
-        url: "/api/food/getFood",
+        url: "/api/food/list",
         dataType: "json",
         success: function(data)
 		{
@@ -126,35 +131,64 @@ function requestFoodItems()
 			
 			i = 0;
 			
-			$.each(list, function(index, element)
+			$.each(data, function(index, item)
 			{
-				var sTitle = element.name;
-				var sImg = "img/food/"+element.id+".png";
+				var sTitle = item.name;
+				var sImg = "img/food/"+item.id+".png";
 				
-				element = new createjs.Bitmap(sImg);
+				var element = new function()
+				{
+					this.id = item.id;
+					this.name = item.name;
+					this.bitmap = new createjs.Bitmap(sImg);
+				}
 				
 				j = i % 6;
 				
 				if(j % 2 == 0)
 				{
-					element.x = stage.canvas.width*0.78;
-					element.y = stage.canvas.height * (0.10 + 0.25*j*0.5);
+					element.bitmap.x = stage.canvas.width*0.78;
+					element.bitmap.y = stage.canvas.height * (0.10 + 0.25*j*0.5);
 				}
 				else
 				{
-					element.x = stage.canvas.width*0.88;
-					element.y = stage.canvas.height * (0.10 + 0.25*(j-1)*0.5);
+					element.bitmap.x = stage.canvas.width*0.88;
+					element.bitmap.y = stage.canvas.height * (0.10 + 0.25*(j-1)*0.5);
 				}
 				
-				element.scaleX = 0.5;
-				element.scaleY = 0.5;
+				element.posX = element.bitmap.x;
+				element.posY = element.bitmap.y;
+				
+				element.bitmap.scaleX = 0.5;
+				element.bitmap.scaleY = 0.5;
 				
 				if(i > 5)
 				{
-					element.visible = false;
+					element.bitmap.visible = false;
 				}
 				
-				stage.addChild(element);
+				element.bitmap.on("mousedown", function(evt) {
+					this.parent.addChild(this);
+					this.offset = {x:this.x-evt.stageX, y:this.y-evt.stageY};
+				});
+				element.bitmap.on("pressup", function(evt) {
+					distance = Math.sqrt(Math.pow(player.body.x-this.x, 2) + Math.pow(player.body.y-this.y, 2));
+					
+					if(distance < 150)
+					{
+						eat(this);
+					}
+
+					this.x = element.posX;
+					this.y = element.posY;
+				});
+				element.bitmap.on("pressmove", function(evt) {
+					this.x = evt.stageX+ this.offset.x;
+					this.y = evt.stageY+ this.offset.y;
+					update = true;
+				});
+				
+				stage.addChild(element.bitmap);
 				
 				foodElements[i] = element;
 				i++;
