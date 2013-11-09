@@ -9,6 +9,15 @@ var FRAME_WIDTH = 200;
 var FRAME_HEIGHT = 30;
 var FRAME_BORDER = 5;
 
+var totalCaloriesStatusLevelBar = null;
+var fatStatusLevelBar = null;
+var happinessStatusLevelBar = null;
+var vitaminAStatusLevelBar = null;
+var vitaminBStatusLevelBar = null;
+var vitaminCStatusLevelBar = null;
+var vitaminDStatusLevelBar = null;
+var calciumStatusLevelBar = null;
+
 function createStatusLevelBar(basex, basey, attributeName,value)
 {
     // Draw the name of the attribute
@@ -20,18 +29,33 @@ function createStatusLevelBar(basex, basey, attributeName,value)
 
     // Draw the bar
     frame = new createjs.Shape();
-    // Draw the external frame
-    var framey = basey + 15;//text.getMeasuredHeight();
-    frame.graphics.beginFill("yellow").drawRect(basex,framey,FRAME_WIDTH, FRAME_HEIGHT);
-    // Draw the internal empty space
-    frame.graphics.beginFill("brown").drawRect(basex+FRAME_BORDER, framey+FRAME_BORDER,
-        FRAME_WIDTH - 2*FRAME_BORDER, FRAME_HEIGHT-2*FRAME_BORDER);
-    // Draw the filled bar
-    frame.graphics.beginFill("green").drawRect(basex+FRAME_BORDER, framey+FRAME_BORDER,
-        (FRAME_WIDTH - 2*FRAME_BORDER)*value/100, FRAME_HEIGHT-2*FRAME_BORDER);
 
     stage.addChild(frame);
+
+    return frame;
+}
+
+function updateStatusLevelBarHorz(barCtrl, func,basex, basey, attributeName,value)
+{
+    if (barCtrl === null)
+    {
+        barCtrl = func(basex, basey, attributeName, value);
+    }
+    // Draw the external frame
+    var framey = basey + 10;//text.getMeasuredHeight();
+    barCtrl.graphics.beginFill("yellow").drawRect(basex,framey,FRAME_WIDTH, FRAME_HEIGHT);
+    // Draw the internal empty space
+    barCtrl.graphics.beginFill("brown").drawRect(basex+FRAME_BORDER, framey+FRAME_BORDER,
+        FRAME_WIDTH - 2*FRAME_BORDER, FRAME_HEIGHT-2*FRAME_BORDER);
+    // Draw the filled bar
+    barCtrl.graphics.beginFill("green").drawRect(basex+FRAME_BORDER, framey+FRAME_BORDER,
+        (FRAME_WIDTH - 2*FRAME_BORDER)*value/100, FRAME_HEIGHT-2*FRAME_BORDER);
     stage.update();
+}
+
+function updateStatusLevelBarVert ()
+{
+
 }
 
 function updateState(data, textStatus, jqXHR)
@@ -40,16 +64,15 @@ function updateState(data, textStatus, jqXHR)
 
     var state = data;
 
-    createStatusLevelBar(30, 200, "Total Calories", state.totalCalories);
-    createStatusLevelBar(30, 280, "Ideal Calories", state.idealCalories);
-    createStatusLevelBar(30, 360, "Happiness", state.happiness);
-    var posy = 440;
-    for(var i = 0; i < state.statusVitamineList.length; i++)
-    {
-        var vitamine = state.statusVitamineList[i];
-        createStatusLevelBar(30, posy, vitamine.vitamine.name, vitamine.amount);
-        posy+=80;
-    }
+    updateStatusLevelBarHorz(totalCaloriesStatusLevelBar,createStatusLevelBar, 30, 160, "Total Calories", state.totalCalories)
+    updateStatusLevelBarHorz(fatStatusLevelBar, createStatusLevelBar, 30, 220, "Fat level", state.fatLevel);
+    updateStatusLevelBarHorz(happinessStatusLevelBar, createStatusLevelBar, 30, 280, "Happiness", state.idealCalories);
+    updateStatusLevelBarHorz(vitaminAStatusLevelBar,createStatusLevelBar, 30, 360, "Vit A", state.statusVitamineList[0].amount)
+    updateStatusLevelBarHorz(vitaminBStatusLevelBar, createStatusLevelBar, 30, 420, "Vit B", state.statusVitamineList[1].amount);
+    updateStatusLevelBarHorz(vitaminCStatusLevelBar, createStatusLevelBar, 30, 480, "Vit C", state.statusVitamineList[2].amount);
+    updateStatusLevelBarHorz(vitaminDStatusLevelBar,createStatusLevelBar, 30, 540, "Vit D", state.statusVitamineList[3].amount)
+    updateStatusLevelBarHorz(calciumStatusLevelBar, createStatusLevelBar, 30, 600, "Calcium", state.statusVitamineList[4].amount);
+
 
 }
 

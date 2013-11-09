@@ -22,7 +22,6 @@ function init() {
     createContent();
 
     createjs.Ticker.addEventListener("tick", handleTick);
-    queryState();
     setInterval(queryState, 10000);
 }
 
@@ -112,6 +111,8 @@ function createUI() {
     stage.addChild(gameMenu);
     stage.addChild(gameMenu2);
     stage.addChild(gameMenu3);
+
+    queryState();
 }
 
 function createPlayer() {
