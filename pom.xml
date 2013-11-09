@@ -5,7 +5,11 @@
     <groupId>lobster</groupId>
     <artifactId>lobster-server</artifactId>
     <packaging>pom</packaging>
+<<<<<<< HEAD
     <version>0.0.4</version>
+=======
+    <version>0.0.5</version>
+>>>>>>> refs/heads/release/0.0.5
     <modules>
         <module>rest</module>
     </modules>

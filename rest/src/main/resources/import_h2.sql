@@ -36,6 +36,7 @@ insert into food (name, description, happiness, calories, foodType, fatLevel) va
 insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Banana', 'Banana', 30, 7, 'FRUIT',0 );
 insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Candy', 'Candy', 100, 24, 'CANDY',10 );
 insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Cereals', 'Cereals', 70, 10, 'CEREAL',5 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Carrot', 'Carrot', 70, 10, 'VEGETABLE',5 );
 insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Pizza', 'Pizza slice', 70, 10, 'CEREAL',10 );
 
 insert into food_vitamines (food_id, vitamineamount_id) values  (1, 1);

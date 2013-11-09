@@ -91,10 +91,12 @@ function hideFoodMenu()
 		player.animation.gotoAndPlay("right");
 	}
 	
-	if(foodDescription!=undefined)
+	if(description!=undefined)
 	{
-		stage.removeChild(foodDescription);
-		foodDescription = undefined;
+		stage.removeChild(description);
+		stage.removeChild(text);
+		stage.removeChild(text2);
+		description = undefined;
 	}
 }
 
@@ -151,10 +153,12 @@ function hideGameMenu()
 		player.animation.gotoAndPlay("right");
 	}
 	
-	if(gameDescription!=undefined)
+	if(description!=undefined)
 	{
-		stage.removeChild(gameDescription);
-		gameDescription = undefined;
+		stage.removeChild(description);
+		stage.removeChild(text);
+		stage.removeChild(text2);
+		description = undefined;
 	}
 }
 
@@ -304,6 +308,7 @@ function requestFoodItems()
 				{
 					this.id = item.id;
 					this.name = item.name;
+					this.description = item.description;
 					this.bitmap = new createjs.Bitmap(sImg);
 				}
 				
@@ -350,7 +355,7 @@ function requestFoodItems()
 						
 						if(distance2 <= 10)
 						{
-							showFoodDescription(element);
+							showDescription(element.name, element.description);
 						}
 					}
 
@@ -400,6 +405,7 @@ function requestGameItems()
 				{
 					this.id = item.id;
 					this.name = item.name;
+					this.description = item.description;
 					this.bitmap = new createjs.Bitmap(sImg);
 				}
 				
@@ -446,7 +452,7 @@ function requestGameItems()
 						
 						if(distance2 <= 10)
 						{
-							showGameDescription(element);
+							showDescription(element.name, element.description);
 						}
 					}
 
@@ -473,15 +479,32 @@ function requestGameItems()
     });
 }
 
-function showFoodDescription(object)
+function showDescription(name, descr)
 {
-	foodDescription = new createjs.Shape();
-	foodDescription.graphics.beginFill("#00F").drawRect(stage.canvas.width*0.22, 0, stage.canvas.width*0.50, stage.canvas.height*0.47);
-	foodDescription.addEventListener("click", function(){stage.removeChild(foodDescription); foodDescription = undefined;});
-	stage.addChild(foodDescription);
-}
-
-function showGameDescription(object)
-{
+	if(description != undefined)
+	{
+		stage.removeChild(description);
+		stage.removeChild(text);
+		stage.removeChild(text2);
+	}
 	
+	description = new createjs.Bitmap("img/big_frame.png");
+	description.scaleX = 0.9;
+	description.scaleY = 0.8;
+	description.x = 0.25 * stage.canvas.width;
+	description.addEventListener("click", function(){stage.removeChild(description);stage.removeChild(text);stage.removeChild(text2); description = undefined;});
+	stage.addChild(description);
+	
+	text = new createjs.Text(name, "30px Arial", "#fff");
+	text.x = 0.27 * stage.canvas.width;
+	text.y = 0.07 * stage.canvas.height;
+	text.textBaseline = "alphabetic";
+	stage.addChild(text);
+
+	text2 = new createjs.Text(descr, "25px Arial", "#000");
+	text2.x = 0.27 * stage.canvas.width;
+	text2.y = 0.13 * stage.canvas.height;
+	text2.lineWidth = 0.40 * stage.canvas.width;
+	text2.textBaseline = "alphabetic";
+	stage.addChild(text2);
 }

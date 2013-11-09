@@ -30,7 +30,6 @@ public class PlayerTask {
 
             Status status = lob.getStatus();
 
-            Set<VitamineAmount> updated = new HashSet<VitamineAmount>();
             if (status != null) {
                 Set<VitamineAmount> vits = status.getVitamineAmountList();
                 for (VitamineAmount sv : vits) {
@@ -39,18 +38,9 @@ public class PlayerTask {
                         if (amount < 0)
                             amount = 0;
 
-                        VitamineAmount svit = new VitamineAmount();
-                        svit.setId(sv.getId());
-                        svit.setAmount(amount);
-
-                        svit.setVitamine(sv.getVitamine());
-
-                        updated.add(svit);
+                        sv.setAmount(amount);
                     }
-
                 }
-                if (updated != null && updated.size() > 0)
-                    status.setVitamineAmountList(updated);
 
                 int happiness = status.getHappiness() - 1;
                 if (happiness < 0)

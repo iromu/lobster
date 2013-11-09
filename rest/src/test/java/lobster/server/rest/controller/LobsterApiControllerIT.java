@@ -77,10 +77,7 @@ public class LobsterApiControllerIT {
         status = restTemplate.postForObject("http://localhost:8080/api/lobster/1/givefood/2", null, Status.class);
 
         assertNotNull(status);
-        assertThat(status.getVitamineAmountList().size(), is(3));
-        for (VitamineAmount vitamineAmount : status.getVitamineAmountList()) {
-            assertThat(vitamineAmount.getAmount(), is(2));
-        }
+        assertThat(status.getVitamineAmountList().size(), is(4));
 
     }
 
