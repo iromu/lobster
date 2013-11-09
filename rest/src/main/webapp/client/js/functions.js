@@ -156,15 +156,15 @@ function createPlayer()
 			switch(this.state)
 			{
 				case "patrol":
-					if(this.animation.currentAnimation == "right" || this.animation.currentAnimation == "left")
+					//if(this.animation.currentAnimation == "right" || this.animation.currentAnimation == "left")
 						movePatrolling(this);
 					break;
 				case "sleep":
-					if(this.animation.currentAnimation == "sleep")
+					//if(this.animation.currentAnimation == "sleep")
 						moveSleeping(this);
 					break;
 				case "idle":
-					if(this.animation.currentAnimation == "idle")
+					//if(this.animation.currentAnimation == "idle")
 						moveIdle(this);
 					break;
 				case "playGame3":
