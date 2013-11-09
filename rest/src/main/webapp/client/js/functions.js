@@ -3,7 +3,10 @@ var light;
 var food;
 var isDay;
 var foodMenu;
+var foodMenu2;
+var foodMenu3;
 var bg;
+var foodElements;
 
 function init()
 {
@@ -61,16 +64,26 @@ function createUI()
 	light.scaleY = 0.3;
 	light.y = 10;
 	
-	food = new createjs.Shape();
-	food.graphics.beginFill("white").drawCircle(5, 5, 10);
-	
-	food.x = stage.canvas.width - 10;
+	food = new createjs.Bitmap("img/fork.png");
+	food.scaleX = 0.3;
+	food.scaleY = 0.3;
+	food.y = 10;
+	food.x = stage.canvas.width - 70;
 	
 	light.addEventListener("click", handleLight);
 	food.addEventListener("click", handleFood);
 	
+	foodMenu = new createjs.Bitmap("img/popup_menu.png");
+	foodMenu2 = new createjs.Bitmap("img/button_01.png");
+	foodMenu3 = new createjs.Bitmap("img/button_02.png");
+	foodElements = new Array();
+	hideFoodMenu();
+	
 	stage.addChild(light);
 	stage.addChild(food);
+	stage.addChild(foodMenu);
+	stage.addChild(foodMenu2);
+	stage.addChild(foodMenu3);
 }
 
 function createPlayer()
@@ -160,6 +173,8 @@ function createPlayer()
 	}
 	
 	player.init();
+	
+	stage.update();
 }
 
 function createBackground()
