@@ -1,5 +1,6 @@
 package lobster.server.rest.controller;
 
+import lobster.server.rest.model.Food;
 import lobster.server.rest.model.Lobster;
 import lobster.server.rest.persistence.LobsterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,4 +42,10 @@ public class LobsterApiController {
         return lobsterService.getAll();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "getFood", method = RequestMethod.GET)
+    public List<Food> getFood(Integer lobsterID)
+    {
+        return new ArrayList<Food>();
+    }
 }
