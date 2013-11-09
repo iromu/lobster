@@ -91,7 +91,7 @@ public class Activity implements Serializable {
     }
 
     public Integer getFatLevel() {
-        return fatLevel;
+        return fatLevel!=null?fatLevel:0;
     }
 
     public void setFatLevel(Integer fatLevel) {
