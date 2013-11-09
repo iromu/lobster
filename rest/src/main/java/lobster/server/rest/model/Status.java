@@ -48,7 +48,7 @@ public class Status implements Serializable {
     }
 
     public Integer getTotalCalories() {
-        return totalCalories;
+        return totalCalories == null? 0 : totalCalories;
     }
 
     public void setTotalCalories(Integer totalCalories) {
