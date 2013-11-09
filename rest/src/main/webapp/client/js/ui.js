@@ -240,10 +240,6 @@ function handleFoodNext()
 }
 
 function eat(element) {
-	
-	player.state = "eat";
-	player.animation.gotoAndPlay("eat");
-
     createjs.Sound.play("Bite");
     // Use the Id provided to the page
     var id = getParameterByName("id");
@@ -252,7 +248,12 @@ function eat(element) {
         type: "POST",
         url: "/api/lobster/" + id + "/givefood/" + element.id,
         dataType: "json",
-        success: updateState,
+		success: function (data, textStatus, jqXHR)
+		{
+			this.state = "eat";
+			player.animation.gotoAndPlay("eat");
+			setTimeout(function(){player.animation.gotoAndPlay("idle");player.state = "idle";updateState();}, 2000);
+        },
         error: handleError
     });
 
@@ -275,8 +276,7 @@ function play(element)
 		{
 			this.state = "playGame"+element.id;
 			player.animation.gotoAndPlay("playGame"+element.id);
-			setTimeout(function(){player.animation.stop();player.animation.gotoAndPlay("idle");player.state = "idle";}, 2000);
-            queryState();
+			setTimeout(function(){player.animation.gotoAndPlay("idle");player.state = "idle";queryState();}, 2000);
         },
         error: function (jqXHR, textStatus, errorThrown)
 		{
