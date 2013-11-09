@@ -33,27 +33,40 @@ function showFoodMenu()
 {
 	if(player.state != "sleep")
 	{
-		//foodMenu = new createjs.Shape();
-		//foodMenu.graphics.beginFill("#fff").drawRect(stage.canvas.width*0.68,0,stage.canvas.width*0.33,stage.canvas.height);
-		
-		foodMenu = new createjs.Bitmap("img/popup_menu.png");
-		//foodMenu.snapToPixel =false;
+		foodMenu.visible = true;
+		foodMenu.x = stage.canvas.width*0.75;
+
 		foodMenu.scaleX = stage.canvas.width/foodMenu.image.width*0.25;
 		foodMenu.scaleY = stage.canvas.height/foodMenu.image.height;
-		console.trace(stage.canvas.height+" "+bg.image.height);
 		
-		foodMenu.x = stage.canvas.width*0.75;
-		
-		stage.addChild(foodMenu);
-		
+		foodMenu2.x = stage.canvas.width*0.765;
+		foodMenu2.y = stage.canvas.height*0.86;
+		foodMenu2.scaleX = stage.canvas.width/foodMenu2.image.width*0.11;
+		foodMenu2.scaleY = stage.canvas.height/foodMenu2.image.height*0.10;
+		foodMenu2.visible = true;
+			
+		foodMenu3.x = stage.canvas.width*0.875;
+		foodMenu3.y = stage.canvas.height*0.86;
+		foodMenu3.scaleX = stage.canvas.width/foodMenu3.image.width*0.11;
+		foodMenu3.scaleY = stage.canvas.height/foodMenu3.image.height*0.10;
+		foodMenu3.visible = true;
+
 		requestFoodItems();
+		
+		stage.update();
 	}
 }
 
 function hideFoodMenu()
 {
-	stage.removeChild(foodMenu);
-	foodMenu = undefined;
+	foodMenu.visible = false;
+	foodMenu2.visible = false;
+	foodMenu3.visible = false;
+	
+	for(i=0; i < foodElements.length; i++)
+	{
+		stage.removeChild(foodElements[i]);
+	}
 }
 
 function requestFoodItems()
@@ -63,13 +76,29 @@ function requestFoodItems()
         crossDomain: false,  //edit du 25/01 : cette propriété doit être passée à false. 
         url: "data/food.xml",
         dataType: "xml",
-        success: processFood
+        success: function(data)
+		{
+			foodElements = new Array();
+			
+			i = 0;
+			$(data).find('food').each(function()
+			{
+				var sTitle = $(this).find('title').text();
+				var sImg = $(this).find('img').text();
+				
+				element = new createjs.Bitmap(sImg);
+				element.x = stage.canvas.width*0.75;
+				
+				stage.addChild(element);
+				
+				foodElements[i] = element;
+				i++;
+			});
+		},
+		error: function() {
+			alert("An error occurred while processing XML file.");
+		}
     });
-}
-
-this.processFood = function(data)
-{
-    alert("pepe");         
 }
  
 
