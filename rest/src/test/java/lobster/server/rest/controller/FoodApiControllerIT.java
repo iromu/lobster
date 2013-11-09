@@ -4,6 +4,7 @@ import lobster.server.rest.model.Food;
 import lobster.server.rest.model.Lobster;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -36,6 +37,7 @@ public class FoodApiControllerIT {
     }
 
     @Test
+    @Ignore
     public void getAll() {
 
         List<Food> list;
