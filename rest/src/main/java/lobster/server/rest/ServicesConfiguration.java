@@ -14,6 +14,8 @@ import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
@@ -40,6 +42,7 @@ import java.util.Properties;
 @EnableCaching
 @EnableWebMvc
 @EnableTransactionManagement
+@ImportResource({"classpath:spring-quartz.xml"})
 public class ServicesConfiguration {
 
     @Bean
