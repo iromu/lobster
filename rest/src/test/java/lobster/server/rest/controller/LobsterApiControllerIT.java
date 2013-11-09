@@ -36,7 +36,7 @@ public class LobsterApiControllerIT {
 
     }
 
-    @org.junit.Test
+    @Test
     public void add() {
         Lobster lobster = new Lobster();
         lobster.setName("test");
@@ -46,20 +46,25 @@ public class LobsterApiControllerIT {
         lobster.setEmail("email");
         lobster.setStatus(null);
 
-        assertThat(id, is(1));
+        assertThat(id, is(8));
         System.out.println(id);
 
     }
 
-
-
-    @org.junit.Test
+    @Test
     public void getAll() {
 
-        List < Lobster > list;
+        List<Lobster> list;
         ResponseEntity<List> l;
         l = restTemplate.getForEntity("http://localhost:8080/api/lobster/list", List.class);
 
         System.out.println(l.toString());
     }
+
+
+    @Test
+    public void giveFood() {
+        restTemplate.postForLocation("http://localhost:8080/api/lobster/1/givefood/1",null);
+    }
+
 }

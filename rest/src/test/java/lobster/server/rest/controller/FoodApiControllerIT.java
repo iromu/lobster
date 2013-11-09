@@ -45,7 +45,7 @@ public class FoodApiControllerIT {
         lobster.setEmail("email");
         lobster.setStatus(null);
 
-        assertThat(id, is(1));
+        assertThat(id, is(7));
         System.out.println(id);
 
     }
@@ -56,10 +56,10 @@ public class FoodApiControllerIT {
         List <Food> list;
         ResponseEntity<List> l;
         Integer id = 1;
-        l = restTemplate.getForEntity("http://localhost:8080/api/lobster/getFood", List.class, id);
+        l = restTemplate.getForEntity("http://localhost:8080/api/lobster/list", List.class, id);
 
         System.out.println(l.toString());
 
-        Assert.assertEquals(1, l.getBody().size());
+        Assert.assertEquals(7, l.getBody().size());
     }
 }

@@ -48,7 +48,7 @@ public class LobsterService {
         return (Lobster) sessionFactory.getCurrentSession().get(Lobster.class, id);
     }
 
-    @CacheEvict(value = LOBSTERS_REGION, key = "#id")
+    @CacheEvict(value = LOBSTERS_REGION, key = "#lobster")
     public void update(Lobster lobster) {
         sessionFactory.getCurrentSession().update(lobster);
     }

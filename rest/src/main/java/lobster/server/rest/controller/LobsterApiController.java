@@ -68,9 +68,12 @@ public class LobsterApiController {
         List<Vitamine> foodVitamines = food.getVitamines();
 
         for (Vitamine foodVitamine : foodVitamines) {
+
             int i = statusVitamine.indexOf(foodVitamine);
-            StatusVitamine statusVitamine1 = statusVitamine.get(i);
-            statusVitamine1.setAmount(statusVitamine1.getAmount() + 1);
+            if (i != -1) {
+                StatusVitamine statusVitamine1 = statusVitamine.get(i);
+                statusVitamine1.setAmount(statusVitamine1.getAmount() + 1);
+            }
         }
         lobsterService.update(lobster);
     }
