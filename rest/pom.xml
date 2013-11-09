@@ -3,7 +3,7 @@
     <parent>
         <artifactId>lobster-server</artifactId>
         <groupId>lobster</groupId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.4-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -41,7 +41,7 @@
                 <version>6.1.26</version>
                 <configuration>
                     <contextPath>/</contextPath>
-                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
                     <stopPort>8005</stopPort>
                     <stopKey>STOP</stopKey>
                 </configuration>

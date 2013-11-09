@@ -24,7 +24,7 @@ function init()
 
 	createjs.Ticker.addEventListener("tick", handleTick);
     queryState();
-    setInterval(queryState, 5000);
+    setInterval(queryState, 10000);
 }
 
 function onResize()

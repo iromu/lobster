@@ -27,10 +27,9 @@ public class StatusApiController {
     private StatusService statusService;
 
 
-
     @ResponseBody
     @RequestMapping(value = "getStatus/{lobsterId}", method = RequestMethod.GET)
-    public Status getStatus(@PathVariable("lobsterId") Integer lobsterId){
+    public Status getStatus(@PathVariable("lobsterId") Integer lobsterId) {
         return statusService.get(lobsterId);
     }
 

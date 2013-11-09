@@ -239,14 +239,11 @@ function eat(element) {
         type: "POST",
         url: "/api/lobster/" + id + "/givefood/" + element.id,
         dataType: "json",
-        success: function (data, textStatus, jqXHR) {
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            // alert("An error occurred while processing XML file.");
-        }
+        success: updateState,
+        error: handleError
     });
 
-    queryState();
+    //queryState();
 }
 
 function play(element)

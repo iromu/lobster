@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,7 +30,7 @@ public class Status implements Serializable {
 
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<StatusVitamine> statusVitamineList;
+    private Set<StatusVitamine> statusVitamineList;
 
     public Status()
     {
@@ -48,7 +49,7 @@ public class Status implements Serializable {
     }
 
     public Integer getTotalCalories() {
-        return totalCalories;
+        return totalCalories == null? 0 : totalCalories;
     }
 
     public void setTotalCalories(Integer totalCalories) {
@@ -80,11 +81,11 @@ public class Status implements Serializable {
     }
 
 
-    public List<StatusVitamine> getStatusVitamineList() {
+    public Set<StatusVitamine> getStatusVitamineList() {
         return statusVitamineList;
     }
 
-    public void setStatusVitamineList(List<StatusVitamine> statusVitamineList) {
+    public void setStatusVitamineList(Set<StatusVitamine> statusVitamineList) {
         this.statusVitamineList = statusVitamineList;
     }
 }
