@@ -45,6 +45,6 @@ public class FoodApiControllerIT {
 
         System.out.println(l.toString());
 
-        Assert.assertEquals(6, l.getBody().size());
+        Assert.assertEquals(7, l.getBody().size());
     }
 }
