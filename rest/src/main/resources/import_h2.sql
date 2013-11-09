@@ -1,8 +1,8 @@
-insert into vitamine (name, description) values ('Vitamine A', 'Vitamine A desc.');
-insert into vitamine (name, description) values ('Vitamine B', 'Vitamine B desc.');
-insert into vitamine (name, description) values ('Vitamine C', 'Vitamine C desc.');
-insert into vitamine (name, description) values ('Vitamine D', 'Vitamine D desc.');
-insert into vitamine (name, description) values ('Calcium', 'Calcium desc.');
+insert into vitamine (name, description) values ('Vitamine A', 'La vitamina A tiene varias funciones importantes en el organismo como la resistencia a infecciones, la producción de anticuerpos, crecimiento óseo o fertilidad.');
+insert into vitamine (name, description) values ('Vitamine B', 'Esenciales para el metabolismo');
+insert into vitamine (name, description) values ('Vitamine C', 'Evitar el envejecimiento prematuro (proteger el tejido conectivo, la "piel" de los vasos sanguíneos)');
+insert into vitamine (name, description) values ('Vitamine D', 'Vitamin D is a group of fat-soluble secosteroids responsible for enhancing intestinal absorption of calcium and phosphate   ');
+insert into vitamine (name, description) values ('Calcium', '"Calcium plays an important role in building stronger, denser bones early in life and keeping bones strong and healthy later in life.');
 
 insert into vitamineamount (vitamine_id, amount) values (1, 4);
 insert into vitamineamount (vitamine_id, amount) values (2, 23);
@@ -30,14 +30,14 @@ insert into activity (name, description, foodType, calories, happiness, fatLevel
 insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('TV', 'TV desc.', 'TV', 30, 5, 5);
 insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('Clean room', 'HOMEWORK desc.', 'HOMEWORK', 30, -5, -10);
 
-insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Meat', 'Pig meat', 50, 20, 'MEAT',20 );
-insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Fish', 'Fish', 30, 10, 'FISH',5 );
-insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Legume', 'Legume', 10, 15, 'LEGUME',0 );
-insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Banana', 'Banana', 30, 7, 'FRUIT',0 );
-insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Candy', 'Candy', 100, 24, 'CANDY',10 );
-insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Cereals', 'Cereals', 70, 10, 'CEREAL',5 );
-insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Carrot', 'Carrot', 70, 10, 'VEGETABLE',5 );
-insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Pizza', 'Pizza slice', 70, 10, 'CEREAL',10 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Meat', 'It is one of the most commonly consumed meats worldwide, with evidence of pig husbandry dating back to 5000 BC. Nutrition: Its myoglobin content is lower than that of beef, but much higher than that of chicken', 50, 20, 'MEAT',20 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Fish', 'Fish is a meat consumed by many species, including humans. Fish provides a good source of high quality protein and contains many vitamins and minerals. ', 30, 10, 'FISH', 5 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Legume', 'Legumes are a type of vegetable that has a seed pod –- beans, lentils, peas, and even peanuts –- that can be cooked and eaten in curry, stew, soup, and salad. Beans have enough protein that they are often used as meat substitutes.', 10, 15, 'LEGUME', 0 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Banana', 'Wonderfully sweet with firm and creamy flesh, . The banana plant grows 10 to 26 feet and belongs to the Musaceae family of plants along with plantains.Source of potasium and fiber.', 30, 7, 'FRUIT', 0 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Candy', 'Most contain a substantial amount of sugar, and that’s it! . They will cause a rapid spike in blood sugar, but a short while later you might feel yourself crashing from lack of energy.', 100, 24, 'CANDY', 10 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Cereals', 'Besides carbohydrates cereals also provide proteins, calcium, iron, sodium, magnesium, fiber and B-complex vitamins. ', 70, 10, 'CEREAL', 5 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Carrot', 'Carrots are good for vitamin A', 70, 10, 'VEGETABLE',5 );
+insert into food (name, description, happiness, calories, foodType, fatLevel) values ('Pizza', 'Is not good', 70, 10, 'CEREAL',10 );
 
 insert into food_vitamines (food_id, vitamineamount_id) values  (1, 1);
 insert into food_vitamines (food_id, vitamineamount_id) values  (1, 4);
