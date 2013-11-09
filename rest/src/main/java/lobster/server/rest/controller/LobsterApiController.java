@@ -154,6 +154,14 @@ public class LobsterApiController {
         else
             status.setTotalCalories(cals);
 
+        int fat = status.getFatLevel() + activity.getFatLevel();
+        if (fat < 0)
+            status.setFatLevel(0);
+        else if (fat > 100)
+            status.setFatLevel(100);
+        else
+            status.setFatLevel(fat);
+
         lbs.setStatus(status);
         lobsterService.update(lbs);
         return true;
