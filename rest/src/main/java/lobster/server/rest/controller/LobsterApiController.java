@@ -62,10 +62,20 @@ public class LobsterApiController {
 
         Lobster lobster = lobsterService.getById(id);
         Status status = lobster.getStatus();
-        List<StatusVitamine> statusVitamineList = status.getStatusVitamineList();
+
 
         Food food = foodService.getById(foodId);
 
+        updateVitamines(status, food);
+
+        updateCalories(status, food);
+
+        status.setLastEat(new Date());
+        lobsterService.update(lobster);
+    }
+
+    private void updateVitamines(Status status, Food food) {
+        List<StatusVitamine> statusVitamineList = status.getStatusVitamineList();
         List<Vitamine> foodVitamines = food.getVitamines();
 
         assert (foodVitamines != null && foodVitamines.size() == 3);
@@ -83,15 +93,12 @@ public class LobsterApiController {
                 statusVitamineList.add(statusVitamine);
             }
         }
+    }
 
+    private void updateCalories(Status status, Food food) {
         Integer totalCalories = status.getTotalCalories();
         totalCalories = totalCalories == null ? 0 : totalCalories;
         int calories = totalCalories + food.getCalories();
         status.setTotalCalories(calories < 100 ? calories : 100);
-
-        status.setLastEat(new Date());
-        lobsterService.update(lobster);
-
-        assert (statusVitamineList != null && statusVitamineList.size() == 3);
     }
 }
