@@ -27,7 +27,7 @@ public class Food implements Serializable {
 
     private Integer calories;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="food_vitamines")
     private List<Vitamine> vitamines;
 
