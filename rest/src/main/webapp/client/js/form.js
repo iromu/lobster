@@ -33,6 +33,15 @@ $(function() {
         requestUsers();
         return false;
     });
+	
+	$("#nombre").focus(function() {
+		$("#nombre").val("");
+	});
+	
+	$("#nombre").focusout(function() {
+		if($("#nombre").val() == "")
+			$("#nombre").val("Name");
+	});
 });
 
 function requestUsers()
@@ -45,7 +54,7 @@ function requestUsers()
             {
 				carro = "";
 				$.each(list, function(index, element) {
-                    carro += "<a href='lobster.htm?id=" + element.id +"'>" + element.id + " - " + element.name+"</a><br>";
+                    carro += "<a style='text-decoration:none; color:black;' href='lobster.htm?id=" + element.id +"'>" + element.id + " - " + element.name+"</a><br>";
 				});
 				
 				$("#mensaje").html(carro);
