@@ -246,7 +246,7 @@ function createContent()
 		createUI();
 		
 		bg.image.onload = undefined;
-        bg.cache(bg.x, bg.y, bg.image.width, bg.image.height);
+        //bg.cache(bg.x, bg.y, bg.image.width, bg.image.height);
 	};
 	
 	bg.addEventListener("click", handleBackground);
@@ -265,7 +265,7 @@ function setBackground(day)
 		bg.image.src = "img/background_02.png";
 	}
 	
-    bg.cache(bg.x, bg.y, bg.image.width, bg.image.height);
+    //bg.cache(bg.x, bg.y, bg.image.width, bg.image.height);
 	isDay = day;
 }
 
