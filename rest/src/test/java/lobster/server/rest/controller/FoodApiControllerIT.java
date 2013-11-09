@@ -3,15 +3,12 @@ package lobster.server.rest.controller;
 import lobster.server.rest.model.Lobster;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -24,7 +21,7 @@ import static org.junit.Assert.assertThat;
  * Time: 22:30
  * To change this template use File | Settings | File Templates.
  */
-public class LobsterApiControllerTest {
+public class FoodApiControllerIT {
 
     private RestTemplate restTemplate;
 
@@ -36,7 +33,7 @@ public class LobsterApiControllerTest {
 
     }
 
-    @org.junit.Test
+    @Test
     public void add() {
         Lobster lobster = new Lobster();
         lobster.setName("test");
@@ -53,7 +50,7 @@ public class LobsterApiControllerTest {
 
 
 
-    @org.junit.Test
+    @Test
     public void getAll() {
 
         List < Lobster > list;
