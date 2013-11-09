@@ -28,7 +28,7 @@ public class Status implements Serializable {
     private Date lastEat;
 
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<StatusVitamine> statusVitamine;
 
 
