@@ -88,19 +88,22 @@ public class LobsterApiController {
 
         assert (foodVitamines != null && foodVitamines.size() == 3);
         for (Vitamine foodVitamine : foodVitamines) {
-
-            int i = statusVitamineList.indexOf(foodVitamine);
-            if (i != -1) {
-                StatusVitamine statusVitamine = statusVitamineList.get(i);
-                Integer amount = statusVitamine.getAmount();
-                if (amount < 100)
-                    statusVitamine.setAmount(amount + 1);
-            } else {
-                StatusVitamine statusVitamine = new StatusVitamine();
-                statusVitamine.setVitamine(foodVitamine);
-                statusVitamine.setStatus(status);
-                statusVitamine.setAmount(1);
-                statusVitamineList.add(statusVitamine);
+            boolean found = false;
+            for (StatusVitamine statusVitamine : statusVitamineList) {
+                if (statusVitamine.getVitamine().equals(foodVitamine)) {
+                    Integer amount = statusVitamine.getAmount();
+                    if (amount < 100)
+                        statusVitamine.setAmount(amount + 1);
+                    found=true;
+                    continue;
+                }
+            }
+            if (!found) {
+                StatusVitamine nstatusVitamine = new StatusVitamine();
+                nstatusVitamine.setVitamine(foodVitamine);
+                nstatusVitamine.setStatus(status);
+                nstatusVitamine.setAmount(1);
+                statusVitamineList.add(nstatusVitamine);
             }
         }
     }
@@ -122,15 +125,15 @@ public class LobsterApiController {
         System.out.println("Status happ ---->" + status.getHappiness());
         System.out.println("Activity happ ---->" + activity.getHappiness());
         int happiness = status.getHappiness() + activity.getHappiness();
-        if(happiness < 0)
+        if (happiness < 0)
             status.setHappiness(0);
-        else if(happiness >100)
+        else if (happiness > 100)
             status.setHappiness(100);
         else
             status.setHappiness(happiness);
 
         int cals = status.getTotalCalories() + activity.getCalories();
-        if(cals < 0)
+        if (cals < 0)
             status.setTotalCalories(0);
         else if (cals > 100)
             status.setTotalCalories(100);
