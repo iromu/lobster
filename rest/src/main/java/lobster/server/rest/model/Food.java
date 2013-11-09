@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,9 +28,13 @@ public class Food implements Serializable {
 
     private Integer calories;
 
+    private Integer fatLevel;
+
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="food_vitamines")
-    private List<Vitamine> vitamines;
+    @JoinTable(name="food_vitamines",
+    joinColumns = {@JoinColumn(name = "food_id", referencedColumnName = "id")},
+    inverseJoinColumns = {@JoinColumn(name = "vitamineamount_id", referencedColumnName = "id")})
+    private Set<VitamineAmount> vitamines;
 
     @NotNull
     private String name;
@@ -62,11 +67,11 @@ public class Food implements Serializable {
         this.calories = calories;
     }
 
-    public List<Vitamine> getVitamines() {
+    public Set<VitamineAmount> getVitamines() {
         return vitamines;
     }
 
-    public void setVitamines(List<Vitamine> vitamines) {
+    public void setVitamines(Set<VitamineAmount> vitamines) {
         this.vitamines = vitamines;
     }
 
@@ -90,7 +95,17 @@ public class Food implements Serializable {
         return happiness;
     }
 
+    public Integer getFatLevel() {
+        return fatLevel;
+    }
+
+    public void setFatLevel(Integer fatLevel) {
+        this.fatLevel = fatLevel;
+    }
+
     public void setHappiness(Integer happiness) {
         this.happiness = happiness;
     }
+
+
 }

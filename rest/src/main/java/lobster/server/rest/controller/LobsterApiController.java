@@ -45,19 +45,17 @@ public class LobsterApiController {
         // Fill the list of StatusVitamin of Status
         List<Vitamine> vitamines = vitaminService.getAll();
         Iterator<Vitamine> it = vitamines.iterator();
-        while (it.hasNext())
-        {
+        while (it.hasNext()) {
             Vitamine vit = it.next();
-            StatusVitamine statusVitamine = new StatusVitamine();
-            statusVitamine.setVitamine(vit);
-            statusVitamine.setAmount(50);
-            lobster.getStatus().getStatusVitamineList().add(statusVitamine);
+            VitamineAmount vitamineAmount = new VitamineAmount();
+            vitamineAmount.setVitamine(vit);
+            vitamineAmount.setAmount(50);
+            lobster.getStatus().getVitamineAmountList().add(vitamineAmount);
         }
 
         lobster = lobsterService.create(lobster);
         return lobster.getId();
     }
-
 
 
     @ResponseBody
@@ -91,6 +89,8 @@ public class LobsterApiController {
 
         updateCalories(status, food);
 
+        updateFatLevel(status, food);
+
         status.setLastEat(new Date());
         lobsterService.update(lobster);
 
@@ -98,26 +98,27 @@ public class LobsterApiController {
     }
 
     private void updateVitamines(Status status, Food food) {
-        Set<StatusVitamine> statusVitamineList = status.getStatusVitamineList();
-        List<Vitamine> foodVitamines = food.getVitamines();
+        Set<VitamineAmount> vitamineAmountList = status.getVitamineAmountList();
+        Set<VitamineAmount> foodVitamines = food.getVitamines();
 
-        assert (foodVitamines != null && foodVitamines.size() == 3);
-        for (Vitamine foodVitamine : foodVitamines) {
+        for (VitamineAmount foodVitamine : foodVitamines) {
             boolean found = false;
-            for (StatusVitamine statusVitamine : statusVitamineList) {
-                if (statusVitamine.getVitamine().equals(foodVitamine)) {
-                    Integer amount = statusVitamine.getAmount();
-                    if (amount < 100)
-                        statusVitamine.setAmount(amount + 1);
-                    found=true;
+            for (VitamineAmount vitamineAmount : vitamineAmountList) {
+                if (vitamineAmount.getVitamine().equals(foodVitamine.getVitamine())) {
+                    Integer amount = vitamineAmount.getAmount();
+
+                    int i = amount + foodVitamine.getAmount();
+                    vitamineAmount.setAmount(i>100?100:i);
+
+                    found = true;
                     continue;
                 }
             }
             if (!found) {
-                StatusVitamine nstatusVitamine = new StatusVitamine();
-                nstatusVitamine.setVitamine(foodVitamine);
-                nstatusVitamine.setAmount(1);
-                statusVitamineList.add(nstatusVitamine);
+                VitamineAmount nstatusVitamineAmount = new VitamineAmount();
+                nstatusVitamineAmount.setVitamine(foodVitamine.getVitamine());
+                nstatusVitamineAmount.setAmount(foodVitamine.getAmount());
+                vitamineAmountList.add(nstatusVitamineAmount);
             }
         }
     }
@@ -127,6 +128,14 @@ public class LobsterApiController {
         totalCalories = totalCalories == null ? 0 : totalCalories;
         int calories = totalCalories + food.getCalories();
         status.setTotalCalories(calories < 100 ? calories : 100);
+    }
+
+    private void updateFatLevel(Status status, Food food){
+        Integer fatLevel = status.getFatLevel();
+        fatLevel = fatLevel == null ? 0 : fatLevel;
+        int foodFatLevel = food.getFatLevel();
+        int newFatLevel = fatLevel + foodFatLevel;
+        status.setFatLevel(newFatLevel < 100 ? newFatLevel : 100);
     }
 
     @ResponseBody

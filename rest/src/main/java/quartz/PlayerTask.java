@@ -27,19 +27,19 @@ public class PlayerTask {
 
         List<Lobster> list = lobsterService.getAll();
         for (Lobster lob : list) {
-            System.out.println("Lobster ID: " +  lob.getId());
+
             Status status = lob.getStatus();
 
-            Set<StatusVitamine> updated = new HashSet<StatusVitamine>();
+            Set<VitamineAmount> updated = new HashSet<VitamineAmount>();
             if (status != null) {
-                Set<StatusVitamine> vits = status.getStatusVitamineList();
-                for (StatusVitamine sv : vits) {
+                Set<VitamineAmount> vits = status.getVitamineAmountList();
+                for (VitamineAmount sv : vits) {
                     if (sv.getAmount() != null) {
                         int amount = sv.getAmount() - 1;
                         if (amount < 0)
                             amount = 0;
 
-                        StatusVitamine svit = new StatusVitamine();
+                        VitamineAmount svit = new VitamineAmount();
                         svit.setId(sv.getId());
                         svit.setAmount(amount);
 
@@ -50,7 +50,7 @@ public class PlayerTask {
 
                 }
                 if (updated != null && updated.size() > 0)
-                    status.setStatusVitamineList(updated);
+                    status.setVitamineAmountList(updated);
 
                 int happiness = status.getHappiness() - 1;
                 if (happiness < 0)

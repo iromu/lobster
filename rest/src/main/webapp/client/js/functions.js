@@ -130,7 +130,7 @@ function createPlayer()
 		this.state = "patrol";
 		this.direction = "right";
 		this.animation = undefined;
-		
+
 		loadAnimation(this, "img/guy.png");
 		
 		this.init = function ()

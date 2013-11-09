@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,8 +29,9 @@ public class Status implements Serializable {
     private Date lastEat;
 
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<StatusVitamine> statusVitamineList;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name="status_vitamines")
+    private Set<VitamineAmount> vitamineAmountList;
 
     public Status()
     {
@@ -39,7 +39,7 @@ public class Status implements Serializable {
         fatLevel = new Integer(50);
         happiness  =new Integer(50);
         lastEat = new Date();
-        statusVitamineList = new HashSet<StatusVitamine>();
+        vitamineAmountList = new HashSet<VitamineAmount>();
     }
 
     public Integer getId() {
@@ -83,11 +83,11 @@ public class Status implements Serializable {
     }
 
 
-    public Set<StatusVitamine> getStatusVitamineList() {
-        return statusVitamineList;
+    public Set<VitamineAmount> getVitamineAmountList() {
+        return vitamineAmountList;
     }
 
-    public void setStatusVitamineList(Set<StatusVitamine> statusVitamineList) {
-        this.statusVitamineList = statusVitamineList;
+    public void setVitamineAmountList(Set<VitamineAmount> vitamineAmountList) {
+        this.vitamineAmountList = vitamineAmountList;
     }
 }
