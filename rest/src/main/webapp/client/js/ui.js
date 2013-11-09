@@ -122,10 +122,22 @@ function handleFoodNext()
 	} 
 }
 
-function eat(element)
-{
-	
+function eat(element) {
+    // TMP: For now we will always query the 1st element
+    var id = 1;
+
+    $.ajax({
+        type: "POST",
+        url: "/api/lobster/" + id + "/givefood/" + element.id,
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // alert("An error occurred while processing XML file.");
+        }
+    });
 }
+
 
 function requestFoodItems()
 {
@@ -186,7 +198,7 @@ function requestFoodItems()
 					
 					if(distance < 150)
 					{
-						eat(this);
+						eat(element);
 					}
 
 					this.x = element.posX;
