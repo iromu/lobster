@@ -139,6 +139,8 @@ function eat(element) {
             // alert("An error occurred while processing XML file.");
         }
     });
+
+    queryState();
 }
 
 
