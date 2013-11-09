@@ -116,9 +116,8 @@ function requestFoodItems()
 {
 	$.ajax({
         type: "GET",
-        crossDomain: false,  //edit du 25/01 : cette propriété doit être passée à false. 
-        url: "data/food.xml",
-        dataType: "xml",
+        url: "/api/food/getFood",
+        dataType: "json",
         success: function(data)
 		{
 			foodElements = new Array();
@@ -126,10 +125,11 @@ function requestFoodItems()
 			foodCurrentPage = 1;
 			
 			i = 0;
-			$(data).find('food').each(function()
+			
+			$.each(list, function(index, element)
 			{
-				var sTitle = $(this).find('title').text();
-				var sImg = $(this).find('img').text();
+				var sTitle = element.name;
+				var sImg = "img/food/"+element.id+".png";
 				
 				element = new createjs.Bitmap(sImg);
 				
