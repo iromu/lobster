@@ -136,8 +136,6 @@ public class LobsterApiController {
         Status status = lbs.getStatus();
         Activity activity = activityService.getActivity(actvtId);
 
-        System.out.println("Status happ ---->" + status.getHappiness());
-        System.out.println("Activity happ ---->" + activity.getHappiness());
         int happiness = status.getHappiness() + activity.getHappiness();
         if (happiness < 0)
             status.setHappiness(0);
