@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Entity
 public class Activity implements Serializable {
 
-    enum ActivityType {SLEEP, RUN, PLAY, TV }
+    enum ActivityType {SLEEP, RUN, PLAY, TV, HOMEWORK }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

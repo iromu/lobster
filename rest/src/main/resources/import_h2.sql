@@ -3,10 +3,11 @@ insert into vitamine (name, description, vitamineType, amount) values ('Vitamine
 insert into vitamine (name, description, vitamineType, amount) values ('Vitamine C', 'Vitamine C desc.', 'VITAMINE_C', 50);
 insert into vitamine (name, description, vitamineType, amount) values ('Calcium', 'Calcium desc.', 'CALCIUM', 50);
 
-insert into activity (name, description, foodType, calories) values ('Sleep', 'Sleep desc.', 'SLEEP', 20);
-insert into activity (name, description, foodType, calories) values ('Run', 'Run desc.', 'RUN', 100);
-insert into activity (name, description, foodType, calories) values ('Play', 'Play desc.', 'PLAY', 50);
-insert into activity (name, description, foodType, calories) values ('TV', 'TV desc.', 'TV', 30);
+insert into activity (name, description, foodType, calories, happiness) values ('Sleep', 'Sleep desc.', 'SLEEP', 20, 0);
+insert into activity (name, description, foodType, calories, happiness) values ('Run', 'Run desc.', 'RUN', 100, 10);
+insert into activity (name, description, foodType, calories, happiness) values ('Play', 'Play desc.', 'PLAY', 50, 30);
+insert into activity (name, description, foodType, calories, happiness) values ('TV', 'TV desc.', 'TV', 30, 5);
+insert into activity (name, description, foodType, calories, happiness) values ('Clean room', 'HOMEWORK desc.', 'HOMEWORK', 30, 5);
 
 insert into food (name, description, happiness, calories, foodType) values ('Meat', 'Pig meat', 50, 200, 'MEAT' );
 insert into food (name, description, happiness, calories, foodType) values ('Fish', 'Fish', 30, 100, 'FISH' );
@@ -39,10 +40,10 @@ insert into lobster (name, password, email) values ('lobster5', 'pwd5', 'lob5@ma
 insert into lobster (name, password, email) values ('lobster6', 'pwd6', 'lob6@mail.com');
 
 
-insert into status (idealCalories, happiness, lastEat)  values (300, 200, null) ;
-insert into status (idealCalories, happiness, lastEat)  values (300, 200, null) ;
-insert into status (idealCalories, happiness, lastEat)  values (300, 200, null) ;
-insert into status (idealCalories, happiness, lastEat)  values (300, 200, null) ;
+insert into status (idealCalories, happiness, lastEat)  values (50, 80, null) ;
+insert into status (idealCalories, happiness, lastEat)  values (75, 50, null) ;
+insert into status (idealCalories, happiness, lastEat)  values (30, 60, null) ;
+insert into status (idealCalories, happiness, lastEat)  values (50, 10, null) ;
 
 insert into statusvitamine (vitamine_id, amount, status_id) values (1, 100, 1);
 insert into statusvitamine (vitamine_id, amount, status_id) values (2, 100, 1);
