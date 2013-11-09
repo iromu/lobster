@@ -1,7 +1,6 @@
 package lobster.server.rest;
 
-import lobster.server.rest.model.Lobster;
-import lobster.server.rest.model.Status;
+import lobster.server.rest.model.*;
 import lobster.server.rest.persistence.LobsterService;
 import org.hibernate.SessionFactory;
 import org.hibernate.dialect.H2Dialect;
@@ -61,8 +60,11 @@ public class ServicesConfiguration {
             props.setProperty(k, propsMap.get(k));
 
         return new LocalSessionFactoryBuilder(dataSource())
-              //  .addAnnotatedClasses(Lobster.class)
-              //  .addAnnotatedClasses(Status.class)
+                .addAnnotatedClasses(Lobster.class)
+                .addAnnotatedClasses(Status.class)
+                .addAnnotatedClasses(Activity.class)
+                .addAnnotatedClasses(Vitamine.class)
+                .addAnnotatedClasses(Food.class)
                 .addProperties(props)
                 .buildSessionFactory();
     }
