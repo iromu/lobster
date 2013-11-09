@@ -156,14 +156,16 @@ function createPlayer()
 			switch(this.state)
 			{
 				case "patrol":
-					
-					movePatrolling(this);
+					if(this.animation.currentAnimation == "right" || this.animation.currentAnimation == "left")
+						movePatrolling(this);
 					break;
 				case "sleep":
-					moveSleeping(this);
+					if(this.animation.currentAnimation == "sleep")
+						moveSleeping(this);
 					break;
 				case "idle":
-					moveIdle(this);
+					if(this.animation.currentAnimation == "idle")
+						moveIdle(this);
 					break;
 				case "playGame3":
 					movePlayGame3(this);
@@ -177,15 +179,15 @@ function createPlayer()
 		this.sleep = function ()
 		{
 			this.state = "sleep";
-			this.animation.stop();
 			this.animation.gotoAndPlay("sleep");
+			stage.update();
 		};
 		
 		this.wakeUp = function ()
 		{
 			this.state = "patrol";
-			this.animation.stop();
 			this.animation.gotoAndPlay("patrol");
+			stage.update();
 		};
 	}
 	
@@ -325,5 +327,5 @@ function handleTick()
 		player.move();
 	}
 	
-	stage.update();	
+	stage.update();
 }
