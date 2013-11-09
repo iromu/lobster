@@ -85,6 +85,16 @@ function updateStatusLevelBarVert (barCtrl, img,basex, basey, attributeName,valu
 
 }
 
+function searchVitamin(vitaminList, vitaminName)
+{
+   for (var i = 0; i< vitaminList.length; i++)
+   {
+       if (vitaminList[i].vitamine.name == vitaminName)
+       {
+           return vitaminList[i];
+       }
+   }
+}
 function updateState(data, textStatus, jqXHR)
 {
     //alert("updateState");
@@ -94,11 +104,11 @@ function updateState(data, textStatus, jqXHR)
     updateStatusLevelBarHorz(totalCaloriesStatusLevelBar,createStatusLevelBar, 30, 160, "Total Calories", state.totalCalories)
     updateStatusLevelBarHorz(fatStatusLevelBar, createStatusLevelBar, 30, 220, "Fat level", state.fatLevel);
     updateStatusLevelBarHorz(happinessStatusLevelBar, createStatusLevelBar, 30, 280, "Happiness", state.happiness);
-    updateStatusLevelBarVert(vitaminAStatusLevelBar,"A.png", 30, 360, "Vit A", state.statusVitamineList[0].amount)
-    updateStatusLevelBarVert(vitaminBStatusLevelBar, "B.png", 130, 360, "Vit B", state.statusVitamineList[1].amount);
-    updateStatusLevelBarVert(vitaminCStatusLevelBar, "C.png", 230, 360, "Vit C", state.statusVitamineList[2].amount);
-    updateStatusLevelBarVert(vitaminDStatusLevelBar,"D.png", 30, 480, "Vit D", state.statusVitamineList[3].amount)
-    updateStatusLevelBarVert(calciumStatusLevelBar, "calcium.png", 130, 480, "Calcium", state.statusVitamineList[4].amount);
+    updateStatusLevelBarVert(vitaminAStatusLevelBar,"A.png", 30, 360, "Vit A", searchVitamin(state.statusVitamineList,"Vitamine A").amount)
+    updateStatusLevelBarVert(vitaminBStatusLevelBar, "B.png", 130, 360, "Vit B", searchVitamin(state.statusVitamineList,"Vitamine B").amount);
+    updateStatusLevelBarVert(vitaminCStatusLevelBar, "C.png", 230, 360, "Vit C", searchVitamin(state.statusVitamineList,"Vitamine C").amount);
+    updateStatusLevelBarVert(vitaminDStatusLevelBar,"D.png", 30, 480, "Vit D", searchVitamin(state.statusVitamineList,"Vitamine D").amount)
+    updateStatusLevelBarVert(calciumStatusLevelBar, "calcium.png", 130, 480, "Calcium", searchVitamin(state.statusVitamineList,"Calcium").amount);
 
 
 }
