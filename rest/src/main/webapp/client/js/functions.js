@@ -93,15 +93,6 @@ function createUI()
 function createPlayer()
 {
 	player = new function() {
-		this.eye1 = new createjs.Shape();
-		this.eye2 = new createjs.Shape();
-		this.eye1in = new createjs.Shape();
-		this.eye2in = new createjs.Shape();
-		this.head = new createjs.Shape();
-		this.mouth = new createjs.Shape();
-		this.body = new createjs.Shape();
-		this.leg1 = new createjs.Shape();
-		this.leg2 = new createjs.Shape();
 		this.state = "patrol";
 		this.direction = "right";
 		this.sleepDirection = "open";
@@ -118,44 +109,14 @@ function createPlayer()
 		this.init = function ()
 		{
 			basePosX = stage.canvas.width * 0.5;
-			basePosY = stage.canvas.height * 0.75;
+			basePosY = stage.canvas.height * 0.6;
 			
-			this.eye1.graphics.beginFill("white").drawCircle(0, 0, 10);
-			this.eye1.x = basePosX - 15;
-			this.eye1.y = basePosY - 40;
+			this.animation.x = basePosX;
+			this.animation.y = basePosY;
 			
-			this.eye1in.graphics.beginFill("black").drawEllipse(-5, -5, 10, 10);
-			this.eye1in.x = basePosX - 15;
-			this.eye1in.y = basePosY - 40;
-			
-			this.eye2.graphics.beginFill("white").drawCircle(0, 0, 10);
-			this.eye2.x = basePosX + 15;
-			this.eye2.y = basePosY - 40;
-			
-			this.eye2in.graphics.beginFill("black").drawEllipse(-5, -5, 10, 10);
-			this.eye2in.x = basePosX + 15;
-			this.eye2in.y = basePosY - 40;
-			
-			this.body.graphics.beginFill("red").drawCircle(0, 0, 40);
-			this.body.x = basePosX;
-			this.body.y = basePosY;
-			
-			this.mouth.graphics.beginFill("white").drawEllipse(0, 0, 20,10);
-			this.mouth.x = basePosX - 10;
-			this.mouth.y = basePosY;
-			
-			this.body.shadow = new createjs.Shadow("#000000", 0, 10, 10);
+			//this.animation.shadow = new createjs.Shadow("#000000", 0, 10, 10);
 			
 			stage.addChild(this.animation);
-			stage.addChild(this.body);
-			stage.addChild(this.head);
-			stage.addChild(this.mouth);
-			stage.addChild(this.eye1);
-			stage.addChild(this.eye1in);
-			stage.addChild(this.eye2);
-			stage.addChild(this.eye2in);
-			stage.addChild(this.leg1);
-			stage.addChild(this.leg2);
 		};
 		
 		this.move = function ()
