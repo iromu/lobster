@@ -31,6 +31,13 @@ public class Status implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<StatusVitamine> statusVitamineList;
 
+    public Status()
+    {
+        totalCalories = new Integer(50);
+        idealCalories = new Integer(50);
+        happiness  =new Integer(50);
+        lastEat = new Date();
+    }
 
     public Integer getId() {
         return id;

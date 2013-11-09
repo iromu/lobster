@@ -16,8 +16,8 @@ public class StatusVitamine {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Status status;
+    //@ManyToOne(fetch = FetchType.EAGER)
+    //private Status status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Vitamine vitamine;
@@ -48,11 +48,11 @@ public class StatusVitamine {
         this.amount = amount;
     }
 
-    public Status getStatus() {
-        return status;
-    }
+    //public Status getStatus() {
+    //    return status;
+    //}
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+   // public void setStatus(Status status) {
+   //     this.status = status;
+    //}
 }

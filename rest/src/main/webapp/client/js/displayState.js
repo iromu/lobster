@@ -40,10 +40,16 @@ function updateState(data, textStatus, jqXHR)
 
     var state = data;
 
-    createStatusLevelBar(30, 400, "Total Calories", state.totalCalories);
-    createStatusLevelBar(30, 480, "Ideal Calories", state.idealCalories);
-    createStatusLevelBar(30, 560, "Happiness", state.happiness);
-    //createStatusLevelBar(30, 550, "Vitamin A", state.statusVitamineList[0].status)
+    createStatusLevelBar(30, 200, "Total Calories", state.totalCalories);
+    createStatusLevelBar(30, 280, "Ideal Calories", state.idealCalories);
+    createStatusLevelBar(30, 360, "Happiness", state.happiness);
+    var posy = 440;
+    for(var i = 0; i < state.statusVitamineList.length; i++)
+    {
+        var vitamine = state.statusVitamineList[i];
+        createStatusLevelBar(30, posy, vitamine.vitamine.name, vitamine.amount);
+        posy+=80;
+    }
 
 }
 
@@ -56,8 +62,8 @@ function queryState( )
 {
     //alert("queryState");
 
-    // TMP: For now we will always query the 1st element
-    var id = 1;
+    // Use the Id provided to the page
+    var id = getParameterByName("id");
 
     // Use AJAX to query the Status from the server
     var state;

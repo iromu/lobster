@@ -127,8 +127,9 @@ function eat(element) {
 	
 	player.state = "eat";
 	player.animation.gotoAndPlay("eat");
-    // TMP: For now we will always query the 1st element
-    var id = 1;
+
+    // Use the Id provided to the page
+    var id = getParameterByName("id");
 
     $.ajax({
         type: "POST",
@@ -140,6 +141,8 @@ function eat(element) {
             // alert("An error occurred while processing XML file.");
         }
     });
+
+    queryState();
 }
 
 
