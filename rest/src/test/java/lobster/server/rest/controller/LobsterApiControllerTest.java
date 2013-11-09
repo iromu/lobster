@@ -2,14 +2,17 @@ package lobster.server.rest.controller;
 
 import lobster.server.rest.model.Lobster;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +30,7 @@ public class LobsterApiControllerTest {
         this.restTemplate = new RestTemplate();
         restTemplate.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(new MappingJacksonHttpMessageConverter()));
 
+
     }
 
     @org.junit.Test
@@ -41,5 +45,15 @@ public class LobsterApiControllerTest {
 
         System.out.println(id);
 
+    }
+
+    @org.junit.Test
+    public void getAll() {
+
+        List < Lobster > list;
+        ResponseEntity<List> l;
+        l = restTemplate.getForEntity("http://localhost:8080/api/lobsters", List.class);
+
+        System.out.println(l.toString());
     }
 }
