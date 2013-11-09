@@ -97,6 +97,8 @@ public class LobsterApiController {
                     statusVitamine.setAmount(amount + 1);
             } else {
                 StatusVitamine statusVitamine = new StatusVitamine();
+                statusVitamine.setVitamine(foodVitamine);
+                statusVitamine.setStatus(status);
                 statusVitamine.setAmount(1);
                 statusVitamineList.add(statusVitamine);
             }
