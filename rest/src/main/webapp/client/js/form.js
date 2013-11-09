@@ -45,7 +45,7 @@ function requestUsers()
             {
 				carro = "";
 				$.each(list, function(index, element) {
-					carro += element.id + " - " + element.name+"<br>";
+                    carro += "<a href='lobster.htm?id=" + element.id +"'>" + element.id + " - " + element.name+"</a><br>";
 				});
 				
 				$("#mensaje").html(carro);
