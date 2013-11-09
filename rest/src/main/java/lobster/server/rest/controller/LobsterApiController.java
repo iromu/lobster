@@ -43,6 +43,7 @@ public class LobsterApiController {
     @ResponseBody
     @RequestMapping(value = "new", method = RequestMethod.POST)
     public Integer addLobster(@Valid @RequestBody Lobster lobster) {
+        lobster.setStatus(new Status());
         lobster = lobsterService.create(lobster);
         return lobster.getId();
     }
@@ -101,7 +102,6 @@ public class LobsterApiController {
             if (!found) {
                 StatusVitamine nstatusVitamine = new StatusVitamine();
                 nstatusVitamine.setVitamine(foodVitamine);
-                nstatusVitamine.setStatus(status);
                 nstatusVitamine.setAmount(1);
                 statusVitamineList.add(nstatusVitamine);
             }

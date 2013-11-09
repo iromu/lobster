@@ -62,7 +62,7 @@ function queryState( )
 {
     //alert("queryState");
 
-    // TMP: For now we will always query the 1st element
+    // Use the Id provided to the page
     var id = getParameterByName("id");
 
     // Use AJAX to query the Status from the server
