@@ -4,11 +4,11 @@ insert into vitamine (name, description, vitamineType, amount) values ('Vitamine
 insert into vitamine (name, description, vitamineType, amount) values ('Vitamine D', 'Vitamine D desc.', 'VITAMINE_D', 50);
 insert into vitamine (name, description, vitamineType, amount) values ('Calcium', 'Calcium desc.', 'CALCIUM', 50);
 
-insert into activity (name, description, foodType, calories, happiness) values ('Sleep', 'Sleep desc.', 'SLEEP', 20, 0);
-insert into activity (name, description, foodType, calories, happiness) values ('Run', 'Run desc.', 'RUN', 100, 10);
-insert into activity (name, description, foodType, calories, happiness) values ('Play', 'Play desc.', 'PLAY', 50, 30);
-insert into activity (name, description, foodType, calories, happiness) values ('TV', 'TV desc.', 'TV', 30, 5);
-insert into activity (name, description, foodType, calories, happiness) values ('Clean room', 'HOMEWORK desc.', 'HOMEWORK', 30, 5);
+insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('Sing', 'Sing desc.', 'PLAY', -1, 10, -5);
+insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('Run', 'Run desc.', 'RUN', -20, 10, -20);
+insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('Play', 'Play desc.', 'PLAY', -10, 30, -10);
+insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('TV', 'TV desc.', 'TV', 30, 5, 5);
+insert into activity (name, description, foodType, calories, happiness, fatLevel) values ('Clean room', 'HOMEWORK desc.', 'HOMEWORK', 30, -5, -10);
 
 insert into food (name, description, happiness, calories, foodType) values ('Meat', 'Pig meat', 50, 20, 'MEAT' );
 insert into food (name, description, happiness, calories, foodType) values ('Fish', 'Fish', 30, 10, 'FISH' );
@@ -16,9 +16,10 @@ insert into food (name, description, happiness, calories, foodType) values ('Leg
 insert into food (name, description, happiness, calories, foodType) values ('Banana', 'Banana', 30, 7, 'FRUIT' );
 insert into food (name, description, happiness, calories, foodType) values ('Candy', 'Candy', 100, 24, 'CANDY' );
 insert into food (name, description, happiness, calories, foodType) values ('Cereals', 'Cereals', 70, 10, 'CEREAL' );
+insert into food (name, description, happiness, calories, foodType) values ('Pizza', 'Pizza slice', 70, 10, 'CEREAL' );
 
-insert into food_vitamines (food_id, vitamines_id) values (1, 1);
-insert into food_vitamines (food_id, vitamines_id) values (1, 2);
+insert into food_vitamines (food_id, vitamines_id) values  (1, 1);
+insert into food_vitamines (food_id, vitamines_id) values  (1, 4);
 insert into food_vitamines (food_id, vitamines_id) values  (1, 3);
 
 insert into food_vitamines (food_id, vitamines_id) values  (2, 1);
@@ -28,7 +29,9 @@ insert into food_vitamines (food_id, vitamines_id) values  (2, 2);
 insert into food_vitamines (food_id, vitamines_id) values  (3, 1);
 insert into food_vitamines (food_id, vitamines_id) values  (3, 2);
 
+insert into food_vitamines (food_id, vitamines_id) values  (4, 1);
 insert into food_vitamines (food_id, vitamines_id) values  (4, 4);
+
 insert into food_vitamines (food_id, vitamines_id) values  (5, 2);
 insert into food_vitamines (food_id, vitamines_id) values  (6, 3);
 
@@ -41,10 +44,10 @@ insert into lobster (name, password, email) values ('lobster5', 'pwd5', 'lob5@ma
 insert into lobster (name, password, email) values ('lobster6', 'pwd6', 'lob6@mail.com');
 
 
-insert into status (idealCalories, happiness, lastEat)  values (50, 80, null) ;
-insert into status (idealCalories, happiness, lastEat)  values (75, 50, null) ;
-insert into status (idealCalories, happiness, lastEat)  values (30, 60, null) ;
-insert into status (idealCalories, happiness, lastEat)  values (50, 10, null) ;
+insert into status (fatLevel, happiness, lastEat)  values (50, 80, null) ;
+insert into status (fatLevel, happiness, lastEat)  values (75, 50, null) ;
+insert into status (fatLevel, happiness, lastEat)  values (30, 60, null) ;
+insert into status (fatLevel, happiness, lastEat)  values (50, 10, null) ;
 
 insert into statusvitamine (vitamine_id, amount) values (1, 100);
 insert into statusvitamine (vitamine_id, amount) values (2, 100);

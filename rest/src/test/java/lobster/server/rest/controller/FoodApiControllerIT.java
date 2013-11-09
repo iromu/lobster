@@ -36,30 +36,15 @@ public class FoodApiControllerIT {
     }
 
     @Test
-    public void add() {
-        Lobster lobster = new Lobster();
-        lobster.setName("test");
-
-        Integer id = restTemplate.postForObject("http://localhost:8080/api/lobster/new", lobster, Integer.class);
-        lobster.setId(id);
-        lobster.setEmail("email");
-        lobster.setStatus(null);
-
-        assertThat(id, is(7));
-        System.out.println(id);
-
-    }
-
-    @Test
     public void getAll() {
 
-        List <Food> list;
+        List<Food> list;
         ResponseEntity<List> l;
         Integer id = 1;
-        l = restTemplate.getForEntity("http://localhost:8080/api/lobster/list", List.class, id);
+        l = restTemplate.getForEntity("http://localhost:8080/api/food/list", List.class, id);
 
         System.out.println(l.toString());
 
-        Assert.assertEquals(7, l.getBody().size());
+        Assert.assertEquals(6, l.getBody().size());
     }
 }
