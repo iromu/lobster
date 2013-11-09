@@ -415,7 +415,9 @@ function requestGameItems()
 					
 					if(distance < 150)
 					{
-						play(element);
+                        element.bitmap.alpha = 0;
+                        play(element);
+                        createjs.Tween.get(element.bitmap).to({alpha: 1}, 3000).set({visible: true});
 					}
 
 					this.x = element.posX;
