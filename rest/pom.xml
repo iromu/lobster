@@ -3,11 +3,7 @@
     <parent>
         <artifactId>lobster-server</artifactId>
         <groupId>lobster</groupId>
-<<<<<<< HEAD
-        <version>0.0.4</version>
-=======
         <version>0.0.5</version>
->>>>>>> refs/heads/release/0.0.5
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
