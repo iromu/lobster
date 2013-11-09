@@ -244,6 +244,7 @@ function eat(element) {
 	player.state = "eat";
 	player.animation.gotoAndPlay("eat");
 
+    createjs.Sound.play("Bite");
     // Use the Id provided to the page
     var id = getParameterByName("id");
 
@@ -275,6 +276,7 @@ function play(element)
 			this.state = "playGame"+element.id;
 			player.animation.gotoAndPlay("playGame"+element.id);
 			setTimeout(function(){player.animation.stop();player.animation.gotoAndPlay("idle");player.state = "idle";}, 2000);
+            queryState();
         },
         error: function (jqXHR, textStatus, errorThrown)
 		{
@@ -282,7 +284,7 @@ function play(element)
         }
     });
 
-    queryState();
+
 }
 
 function requestFoodItems()
