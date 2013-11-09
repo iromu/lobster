@@ -1,6 +1,8 @@
 package lobster.server.rest;
 
 import lobster.server.rest.model.*;
+import lobster.server.rest.persistence.ActivityService;
+import lobster.server.rest.persistence.FoodService;
 import lobster.server.rest.persistence.LobsterService;
 import org.hibernate.SessionFactory;
 import org.hibernate.dialect.H2Dialect;
@@ -42,6 +44,16 @@ public class ServicesConfiguration {
     @Bean
     public LobsterService lobsterService() throws Exception {
         return new LobsterService(this.sessionFactory());
+    }
+
+    @Bean
+    public FoodService foodService() throws Exception {
+        return new FoodService(this.sessionFactory());
+    }
+
+    @Bean
+    public ActivityService activityService() throws Exception {
+        return new ActivityService(this.sessionFactory());
     }
 
     @Bean
