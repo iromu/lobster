@@ -1,0 +1,19 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	background-image:url('../img/form.jpg');
+	font-family:verdana,helvetica,arial,sans-serif;
+	font-weight:bold;
+	color:white;
+}
+
+#content{
+    width:380px;
+    height:40px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-20px 0 0 -190px;
+	/*background:red;*/
+}
