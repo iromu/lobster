@@ -316,8 +316,8 @@ function setPlayerName()
 
 function resize()
 {
-	stage.canvas.width = window.innerWidth - 5;
-	stage.canvas.height = window.innerHeight - 5;
+	stage.canvas.width = window.innerWidth ;
+	stage.canvas.height = window.innerHeight - 4.1;
 }
 
 function handleTick()
