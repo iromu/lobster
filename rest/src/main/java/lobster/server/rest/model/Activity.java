@@ -24,6 +24,8 @@ public class Activity implements Serializable {
 
     private Integer calories;
 
+    private Integer fatLevel;
+
     private String name;
 
     private String description;
@@ -81,14 +83,18 @@ public class Activity implements Serializable {
     }
 
     public Integer getHappiness() {
-        return happiness;
+        return happiness!=null?happiness:0;
     }
 
     public void setHappiness(Integer happiness) {
         this.happiness = happiness;
     }
 
+    public Integer getFatLevel() {
+        return fatLevel!=null?fatLevel:0;
+    }
 
-
-
+    public void setFatLevel(Integer fatLevel) {
+        this.fatLevel = fatLevel;
+    }
 }

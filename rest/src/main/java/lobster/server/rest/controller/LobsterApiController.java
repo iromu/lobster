@@ -1,20 +1,14 @@
 package lobster.server.rest.controller;
 
 import lobster.server.rest.model.*;
-import lobster.server.rest.persistence.ActivityService;
-import lobster.server.rest.persistence.FoodService;
-import lobster.server.rest.persistence.LobsterService;
-import lobster.server.rest.persistence.StatusService;
+import lobster.server.rest.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -41,14 +35,27 @@ public class LobsterApiController {
     @Autowired
     private StatusService statusService;
 
+    @Autowired
+    private VitaminService vitaminService;
+
     @ResponseBody
     @RequestMapping(value = "new", method = RequestMethod.POST)
     public Integer addLobster(@Valid @RequestBody Lobster lobster) {
         lobster.setStatus(new Status());
+        // Fill the list of StatusVitamin of Status
+        List<Vitamine> vitamines = vitaminService.getAll();
+        Iterator<Vitamine> it = vitamines.iterator();
+        while (it.hasNext()) {
+            Vitamine vit = it.next();
+            VitamineAmount vitamineAmount = new VitamineAmount();
+            vitamineAmount.setVitamine(vit);
+            vitamineAmount.setAmount(50);
+            lobster.getStatus().getVitamineAmountList().add(vitamineAmount);
+        }
+
         lobster = lobsterService.create(lobster);
         return lobster.getId();
     }
-
 
 
     @ResponseBody
@@ -82,6 +89,8 @@ public class LobsterApiController {
 
         updateCalories(status, food);
 
+        updateFatLevel(status, food);
+
         status.setLastEat(new Date());
         lobsterService.update(lobster);
 
@@ -89,26 +98,27 @@ public class LobsterApiController {
     }
 
     private void updateVitamines(Status status, Food food) {
-        Set<StatusVitamine> statusVitamineList = status.getStatusVitamineList();
-        List<Vitamine> foodVitamines = food.getVitamines();
+        Set<VitamineAmount> vitamineAmountList = status.getVitamineAmountList();
+        Set<VitamineAmount> foodVitamines = food.getVitamines();
 
-        assert (foodVitamines != null && foodVitamines.size() == 3);
-        for (Vitamine foodVitamine : foodVitamines) {
+        for (VitamineAmount foodVitamine : foodVitamines) {
             boolean found = false;
-            for (StatusVitamine statusVitamine : statusVitamineList) {
-                if (statusVitamine.getVitamine().equals(foodVitamine)) {
-                    Integer amount = statusVitamine.getAmount();
-                    if (amount < 100)
-                        statusVitamine.setAmount(amount + 1);
-                    found=true;
+            for (VitamineAmount vitamineAmount : vitamineAmountList) {
+                if (vitamineAmount.getVitamine().equals(foodVitamine.getVitamine())) {
+                    Integer amount = vitamineAmount.getAmount();
+
+                    int i = amount + foodVitamine.getAmount();
+                    vitamineAmount.setAmount(i>100?100:i);
+
+                    found = true;
                     continue;
                 }
             }
             if (!found) {
-                StatusVitamine nstatusVitamine = new StatusVitamine();
-                nstatusVitamine.setVitamine(foodVitamine);
-                nstatusVitamine.setAmount(1);
-                statusVitamineList.add(nstatusVitamine);
+                VitamineAmount nstatusVitamineAmount = new VitamineAmount();
+                nstatusVitamineAmount.setVitamine(foodVitamine.getVitamine());
+                nstatusVitamineAmount.setAmount(foodVitamine.getAmount());
+                vitamineAmountList.add(nstatusVitamineAmount);
             }
         }
     }
@@ -120,15 +130,21 @@ public class LobsterApiController {
         status.setTotalCalories(calories < 100 ? calories : 100);
     }
 
+    private void updateFatLevel(Status status, Food food){
+        Integer fatLevel = status.getFatLevel();
+        fatLevel = fatLevel == null ? 0 : fatLevel;
+        int foodFatLevel = food.getFatLevel();
+        int newFatLevel = fatLevel + foodFatLevel;
+        status.setFatLevel(newFatLevel < 100 ? newFatLevel : 100);
+    }
+
     @ResponseBody
     @RequestMapping(value = "{id}/doActivity/{actvtId}", method = RequestMethod.POST)
-    public void doActivity(@PathVariable("id") Integer id, @PathVariable("actvtId") Integer actvtId) {
+    public boolean doActivity(@PathVariable("id") Integer id, @PathVariable("actvtId") Integer actvtId) {
         Lobster lbs = lobsterService.getById(id);
         Status status = lbs.getStatus();
         Activity activity = activityService.getActivity(actvtId);
 
-        System.out.println("Status happ ---->" + status.getHappiness());
-        System.out.println("Activity happ ---->" + activity.getHappiness());
         int happiness = status.getHappiness() + activity.getHappiness();
         if (happiness < 0)
             status.setHappiness(0);
@@ -145,7 +161,16 @@ public class LobsterApiController {
         else
             status.setTotalCalories(cals);
 
+        int fat = status.getFatLevel() + activity.getFatLevel();
+        if (fat < 0)
+            status.setFatLevel(0);
+        else if (fat > 100)
+            status.setFatLevel(100);
+        else
+            status.setFatLevel(fat);
+
         lbs.setStatus(status);
         lobsterService.update(lbs);
+        return true;
     }
 }

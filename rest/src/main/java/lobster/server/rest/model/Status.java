@@ -3,7 +3,7 @@ package lobster.server.rest.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -22,22 +22,24 @@ public class Status implements Serializable {
 
     private Integer totalCalories;
 
-    private Integer idealCalories;
+    private Integer fatLevel;
 
     private Integer happiness;
 
     private Date lastEat;
 
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<StatusVitamine> statusVitamineList;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name="status_vitamines")
+    private Set<VitamineAmount> vitamineAmountList;
 
     public Status()
     {
         totalCalories = new Integer(50);
-        idealCalories = new Integer(50);
+        fatLevel = new Integer(50);
         happiness  =new Integer(50);
         lastEat = new Date();
+        vitamineAmountList = new HashSet<VitamineAmount>();
     }
 
     public Integer getId() {
@@ -56,16 +58,16 @@ public class Status implements Serializable {
         this.totalCalories = totalCalories;
     }
 
-    public Integer getIdealCalories() {
-        return idealCalories;
+    public Integer getFatLevel() {
+        return fatLevel!=null?fatLevel:0;
     }
 
-    public void setIdealCalories(Integer idealCalories) {
-        this.idealCalories = idealCalories;
+    public void setFatLevel(Integer fatLevel) {
+        this.fatLevel = fatLevel;
     }
 
     public Integer getHappiness() {
-        return happiness;
+        return happiness!=null?happiness:0;
     }
 
     public void setHappiness(Integer happiness) {
@@ -81,11 +83,11 @@ public class Status implements Serializable {
     }
 
 
-    public Set<StatusVitamine> getStatusVitamineList() {
-        return statusVitamineList;
+    public Set<VitamineAmount> getVitamineAmountList() {
+        return vitamineAmountList;
     }
 
-    public void setStatusVitamineList(Set<StatusVitamine> statusVitamineList) {
-        this.statusVitamineList = statusVitamineList;
+    public void setVitamineAmountList(Set<VitamineAmount> vitamineAmountList) {
+        this.vitamineAmountList = vitamineAmountList;
     }
 }

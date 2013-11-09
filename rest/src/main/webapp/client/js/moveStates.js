@@ -31,3 +31,13 @@ function moveSleeping(player)
 {
 	
 }
+
+function movePlayGame3(player)
+{
+	
+}
+
+function movePlayGame5(player)
+{
+	
+}

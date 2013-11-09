@@ -1,13 +1,16 @@
 var player;
 var light;
 var food;
+var game;
 var isDay;
 var foodMenu;
 var foodMenu2;
 var foodMenu3;
+var foodDescription;
 var gameMenu;
 var gameMenu2;
 var gameMenu3;
+var gameDescription;
 var bg;
 var foodElements;
 var gameElements;
@@ -23,7 +26,6 @@ function init()
 	createContent();
 
 	createjs.Ticker.addEventListener("tick", handleTick);
-    queryState();
     setInterval(queryState, 10000);
 }
 
@@ -117,6 +119,8 @@ function createUI()
 	stage.addChild(gameMenu);
 	stage.addChild(gameMenu2);
 	stage.addChild(gameMenu3);
+
+    queryState();
 }
 
 function createPlayer()
@@ -124,32 +128,12 @@ function createPlayer()
 	player = new function() {
 		this.state = "patrol";
 		this.direction = "right";
-		
-		this.data = {
-			images: ["img/guy.png"],
-			frames: {width:110, height:186},
-			animations: {	right:[16,23,"right",0.4], 
-							idle:[0,1,"idle",0.1], 
-							left:[30,37,"left",0.4], 
-							eat:[2,5,"idle",0.4], 
-							open:[6,6,"open",0.1],
-							sleep:[70,71,"sleep",0.1]}
-		};
-		
-		this.spriteSheet = new createjs.SpriteSheet(this.data);
-		this.animation = new createjs.Sprite(this.spriteSheet, "right");
+		this.animation = undefined;
+
+		loadAnimation(this, "img/guy.png");
 		
 		this.init = function ()
 		{
-			basePosX = stage.canvas.width * 0.5;
-			basePosY = stage.canvas.height * 0.6;
-			
-			this.animation.x = basePosX;
-			this.animation.y = basePosY;
-			
-			//this.animation.shadow = new createjs.Shadow("#000000", 0, 10, 10);
-			
-			stage.addChild(this.animation);
 		};
 		
 		this.move = function ()
@@ -165,25 +149,80 @@ function createPlayer()
 				case "idle":
 					moveIdle(this);
 					break;
+				case "playGame3":
+					movePlayGame3(this);
+					break;
+				case "playGame5":
+					movePlayGame5(this);
+					break;
 			}
 		};
 		
 		this.sleep = function ()
 		{
 			this.state = "sleep";
-			player.animation.gotoAndPlay("sleep");
+			this.animation.stop();
+			this.animation.gotoAndPlay("sleep");
 		};
 		
 		this.wakeUp = function ()
 		{
 			this.state = "patrol";
-			player.animation.gotoAndPlay("patrol");
+			this.animation.stop();
+			this.animation.gotoAndPlay("patrol");
 		};
 	}
 	
 	player.init();
 	
 	stage.update();
+}
+
+function loadAnimation(playerTemp, ruta)
+{
+	if(playerTemp.animation!=undefined)
+	{
+		stage.removeChild(playerTemp.animation);
+	}
+	
+	data = {
+		images: [ruta],
+		frames: {width:110, height:186},
+		animations: {	right:[16,23,"right",0.4], 
+						idle:[0,1,"idle",0.1], 
+						left:[30,37,"left",0.4], 
+						eat:[2,5,"idle",0.4], 
+						open:[6,6,"open",0.1],
+						sleep:[70,71,"sleep",0.1],
+						playGame3:[58,59,"playGame3",0.1],
+						playGame5:[60,61,"playGame5",0.1]}
+	};
+	
+	newAnimation = "";
+	
+	switch(playerTemp.state)
+	{
+		case "patrol":
+			newAnimation = playerTemp.direction;
+			break;
+		case "sleep":
+			newAnimation = "sleep";
+			break;
+		case "idle":
+			newAnimation = "idle";
+			break;
+	}
+	
+	playerTemp.spriteSheet = new createjs.SpriteSheet(data);
+	playerTemp.animation = new createjs.Sprite(playerTemp.spriteSheet, newAnimation);
+	
+	basePosX = stage.canvas.width * 0.5;
+	basePosY = stage.canvas.height * 0.6;
+	
+	playerTemp.animation.x = basePosX;
+	playerTemp.animation.y = basePosY;
+	
+	stage.addChild(playerTemp.animation);
 }
 
 function getParameterByName(name)
@@ -210,6 +249,7 @@ function createContent()
 		createUI();
 		
 		bg.image.onload = undefined;
+        //bg.cache(bg.x, bg.y, bg.image.width, bg.image.height);
 	};
 	
 	bg.addEventListener("click", handleBackground);
@@ -228,6 +268,7 @@ function setBackground(day)
 		bg.image.src = "img/background_02.png";
 	}
 	
+    //bg.cache(bg.x, bg.y, bg.image.width, bg.image.height);
 	isDay = day;
 }
 
@@ -239,7 +280,10 @@ function resize()
 
 function handleTick()
 {
-	player.move();
+    if (player != undefined)
+	{
+		player.move();
+	}
 	
 	stage.update();	
 }

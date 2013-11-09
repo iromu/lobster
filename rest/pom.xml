@@ -3,7 +3,7 @@
     <parent>
         <artifactId>lobster-server</artifactId>
         <groupId>lobster</groupId>
-        <version>0.0.3</version>
+        <version>0.0.4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -84,6 +84,12 @@
     </build>
 
     <dependencies>
+        <!-- Quartz API -->
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>quartz</artifactId>
+            <version>1.6.3</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>

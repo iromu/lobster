@@ -9,10 +9,21 @@ var FRAME_WIDTH = 200;
 var FRAME_HEIGHT = 30;
 var FRAME_BORDER = 5;
 
+var totalCaloriesStatusLevelBar = null;
+var fatStatusLevelBar = null;
+var happinessStatusLevelBar = null;
+var vitaminAStatusLevelBar = null;
+var vitaminBStatusLevelBar = null;
+var vitaminCStatusLevelBar = null;
+var vitaminDStatusLevelBar = null;
+var calciumStatusLevelBar = null;
+
+var fatness = 1;
+
 function createStatusLevelBar(basex, basey, attributeName,value)
 {
     // Draw the name of the attribute
-    var text = new createjs.Text(attributeName, "20px Arial", "#ffbb55");
+    var text = new createjs.Text(attributeName, "20px Arial", "#000000");
     text.x = basex;
     text.y = basey;
     text.textBaseline = "alphabetic";
@@ -20,42 +31,114 @@ function createStatusLevelBar(basex, basey, attributeName,value)
 
     // Draw the bar
     frame = new createjs.Shape();
+
+    // Create the image
+    var bitmap = new createjs.Bitmap("img/frame.png");
+    bitmap.x = basex-5;
+    bitmap.y = basey+5;
+
+    bitmap.visible = true;
+    stage.addChild(bitmap);
+    stage.addChild(frame);
+    return frame;
+}
+
+function updateStatusLevelBarHorz(barCtrl, func,basex, basey, attributeName,value)
+{
+    if (barCtrl === null)
+    {
+        barCtrl = func(basex, basey, attributeName, value);
+    }
     // Draw the external frame
-    var framey = basey + 15;//text.getMeasuredHeight();
-    frame.graphics.beginFill("yellow").drawRect(basex,framey,FRAME_WIDTH, FRAME_HEIGHT);
+
+    //barCtrl.graphics.beginFill("yellow").drawRect(basex,framey,FRAME_WIDTH, FRAME_HEIGHT);
+    var framey = basey + 10;//text.getMeasuredHeight();
     // Draw the internal empty space
-    frame.graphics.beginFill("brown").drawRect(basex+FRAME_BORDER, framey+FRAME_BORDER,
+    barCtrl.graphics.beginFill("brown").drawRect(basex+FRAME_BORDER, framey+FRAME_BORDER,
         FRAME_WIDTH - 2*FRAME_BORDER, FRAME_HEIGHT-2*FRAME_BORDER);
     // Draw the filled bar
-    frame.graphics.beginFill("green").drawRect(basex+FRAME_BORDER, framey+FRAME_BORDER,
+    barCtrl.graphics.beginFill("green").drawRect(basex+FRAME_BORDER, framey+FRAME_BORDER,
         (FRAME_WIDTH - 2*FRAME_BORDER)*value/100, FRAME_HEIGHT-2*FRAME_BORDER);
-
-    stage.addChild(frame);
     stage.update();
 }
 
+function updateStatusLevelBarVert (barCtrl, img,basex, basey, attributeName,value)
+{
+    // Check if the shape has been created
+    if ( barCtrl === null)
+    {
+        // Create it
+        frame = new createjs.Shape();
+        // Create the image
+        var bitmap = new createjs.Bitmap("img/vitamin/"+img);
+        bitmap.x = basex;
+        bitmap.y = basey;
+        bitmap.scaleX = 0.25;
+        bitmap.scaleY = 0.25;
+        bitmap.visible = true;
+        stage.addChild(bitmap);
+        stage.addChild(frame);
+        barCtrl = frame;
+    }
+    // Draw the bar frame
+    barCtrl.graphics.beginFill("white").drawRect(basex+58, basey-2,
+        24, 74 );
+    // Draw the bar
+    var length = 70 * value/100;
+    var bary = basey + 70 - length;
+    var barx = basex + 60;
+    // Draw the filled bar
+    barCtrl.graphics.beginFill("green").drawRect(barx, bary,
+        20, length );
+    stage.update();
+
+}
+
+function searchVitamin(vitaminList, vitaminName)
+{
+   for (var i = 0; i< vitaminList.length; i++)
+   {
+       if (vitaminList[i].vitamine.name == vitaminName)
+       {
+           return vitaminList[i];
+       }
+   }
+}
 function updateState(data, textStatus, jqXHR)
 {
     //alert("updateState");
 
     var state = data;
 
-    createStatusLevelBar(30, 200, "Total Calories", state.totalCalories);
-    createStatusLevelBar(30, 280, "Ideal Calories", state.idealCalories);
-    createStatusLevelBar(30, 360, "Happiness", state.happiness);
-    var posy = 440;
-    for(var i = 0; i < state.statusVitamineList.length; i++)
+    updateStatusLevelBarHorz(totalCaloriesStatusLevelBar,createStatusLevelBar, 30, 150, "Total Calories", state.totalCalories)
+    updateStatusLevelBarHorz(fatStatusLevelBar, createStatusLevelBar, 30, 220, "Fat level", state.fatLevel);
+    updateStatusLevelBarHorz(happinessStatusLevelBar, createStatusLevelBar, 30, 290, "Happiness", state.happiness);
+    updateStatusLevelBarVert(vitaminAStatusLevelBar,"A.png", 30, 360, "Vit A", searchVitamin(state.vitamineAmountList,"Vitamine A").amount)
+    updateStatusLevelBarVert(vitaminBStatusLevelBar, "B.png", 130, 360, "Vit B", searchVitamin(state.vitamineAmountList,"Vitamine B").amount);
+    updateStatusLevelBarVert(vitaminCStatusLevelBar, "C.png", 230, 360, "Vit C", searchVitamin(state.vitamineAmountList,"Vitamine C").amount);
+    updateStatusLevelBarVert(vitaminDStatusLevelBar,"D.png", 30, 480, "Vit D", searchVitamin(state.vitamineAmountList,"Vitamine D").amount)
+    updateStatusLevelBarVert(calciumStatusLevelBar, "calcium.png", 130, 480, "Calcium", searchVitamin(state.vitamineAmountList,"Calcium").amount);
+
+    var playerImg;
+    if (state.fatLevel<25)
     {
-        var vitamine = state.statusVitamineList[i];
-        createStatusLevelBar(30, posy, vitamine.vitamine.name, vitamine.amount);
-        posy+=80;
+        playerImg = "img/guy.png";
+    }
+    else if (state.fatLevel>75)
+    {
+        playerImg = "img/fat_guy.png";
+    }
+    else
+    {
+        playerImg = "img/guy.png";
     }
 
+    loadAnimation(player, playerImg);
 }
 
 function handleError(  jqXHR,  textStatus,  errorThrown)
 {
-   // alert("queryState - Failed: " + textStatus + ":" + errorThrown);
+   window.location="index.htm";
 }
 
 function queryState( )

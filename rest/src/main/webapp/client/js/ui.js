@@ -90,6 +90,12 @@ function hideFoodMenu()
 	{
 		player.animation.gotoAndPlay("right");
 	}
+	
+	if(foodDescription!=undefined)
+	{
+		stage.removeChild(foodDescription);
+		foodDescription = undefined;
+	}
 }
 
 function showGameMenu()
@@ -144,6 +150,12 @@ function hideGameMenu()
 	{
 		player.animation.gotoAndPlay("right");
 	}
+	
+	if(gameDescription!=undefined)
+	{
+		stage.removeChild(gameDescription);
+		gameDescription = undefined;
+	}
 }
 
 function handleGamePrev()
@@ -186,10 +198,6 @@ function handleGameNext()
 		checkGameArrows();
 	} 
 }
-
-
-
-
 
 function handleFoodPrev()
 {
@@ -258,10 +266,15 @@ function play(element)
         type: "POST",
         url: "/api/lobster/" + id + "/doActivity/" + element.id,
         dataType: "json",
-        success: function (data, textStatus, jqXHR) {
+        success: function (data, textStatus, jqXHR)
+		{
+			this.state = "playGame"+element.id;
+			player.animation.gotoAndPlay("playGame"+element.id);
+			setTimeout(function(){player.animation.stop();player.animation.gotoAndPlay("idle");player.state = "idle";}, 2000);
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-            // alert("An error occurred while processing XML file.");
+        error: function (jqXHR, textStatus, errorThrown)
+		{
+			
         }
     });
 
@@ -327,7 +340,18 @@ function requestFoodItems()
 					
 					if(distance < 150)
 					{
+                        element.bitmap.alpha = 0;
 						eat(element);
+                        createjs.Tween.get(element.bitmap).to({alpha: 1}, 3000).set({visible: true});
+					}
+					else
+					{
+						distance2 = Math.sqrt(Math.pow(element.posX-this.x, 2) + Math.pow(element.posY-this.y, 2));
+						
+						if(distance2 <= 10)
+						{
+							showFoodDescription(element);
+						}
 					}
 
 					this.x = element.posX;
@@ -409,10 +433,21 @@ function requestGameItems()
 				});
 				element.bitmap.on("pressup", function(evt) {
 					distance = Math.sqrt(Math.pow(player.animation.x-this.x, 2) + Math.pow(player.animation.y-this.y, 2));
-					
+
 					if(distance < 150)
 					{
-						play(element);
+                        element.bitmap.alpha = 0;
+                        play(element);
+                        createjs.Tween.get(element.bitmap).to({alpha: 1}, 3000).set({visible: true});
+					}
+					else
+					{
+						distance2 = Math.sqrt(Math.pow(element.posX-this.x, 2) + Math.pow(element.posY-this.y, 2));
+						
+						if(distance2 <= 10)
+						{
+							showGameDescription(element);
+						}
 					}
 
 					this.x = element.posX;
@@ -438,5 +473,15 @@ function requestGameItems()
     });
 }
 
+function showFoodDescription(object)
+{
+	foodDescription = new createjs.Shape();
+	foodDescription.graphics.beginFill("#00F").drawRect(stage.canvas.width*0.22, 0, stage.canvas.width*0.50, stage.canvas.height*0.47);
+	foodDescription.addEventListener("click", function(){stage.removeChild(foodDescription); foodDescription = undefined;});
+	stage.addChild(foodDescription);
+}
 
-
+function showGameDescription(object)
+{
+	
+}
