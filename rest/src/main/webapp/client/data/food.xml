@@ -1,6 +1,30 @@
 <menu>
     <food>
-        <title>Zanahoria</title>
-        <img>img/food/zanahoria.png</img>
+        <title>Pig</title>
+        <img>img/food/1.png</img>
+    </food>
+	 <food>
+        <title>Fish</title>
+        <img>img/food/2.png</img>
+    </food>
+	 <food>
+        <title>Legume</title>
+        <img>img/food/3.png</img>
+    </food>
+	 <food>
+        <title>Banana</title>
+        <img>img/food/4.png</img>
+    </food>
+	 <food>
+        <title>Candy</title>
+        <img>img/food/5.png</img>
+    </food>
+	 <food>
+        <title>Cereal</title>
+        <img>img/food/6.png</img>
+    </food>
+	 <food>
+        <title>Carrot</title>
+        <img>img/food/7.png</img>
     </food>
 </menu>
