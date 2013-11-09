@@ -9,12 +9,12 @@ insert into activity (name, description, foodType, calories, happiness) values (
 insert into activity (name, description, foodType, calories, happiness) values ('TV', 'TV desc.', 'TV', 30, 5);
 insert into activity (name, description, foodType, calories, happiness) values ('Clean room', 'HOMEWORK desc.', 'HOMEWORK', 30, 5);
 
-insert into food (name, description, happiness, calories, foodType) values ('Meat', 'Pig meat', 50, 200, 'MEAT' );
-insert into food (name, description, happiness, calories, foodType) values ('Fish', 'Fish', 30, 100, 'FISH' );
-insert into food (name, description, happiness, calories, foodType) values ('Legume', 'Legume', 10, 150, 'LEGUME' );
-insert into food (name, description, happiness, calories, foodType) values ('Banana', 'Banana', 30, 70, 'FRUIT' );
-insert into food (name, description, happiness, calories, foodType) values ('Candy', 'Candy', 100, 240, 'CANDY' );
-insert into food (name, description, happiness, calories, foodType) values ('Cereals', 'Cereals', 70, 100, 'CEREAL' );
+insert into food (name, description, happiness, calories, foodType) values ('Meat', 'Pig meat', 50, 20, 'MEAT' );
+insert into food (name, description, happiness, calories, foodType) values ('Fish', 'Fish', 30, 10, 'FISH' );
+insert into food (name, description, happiness, calories, foodType) values ('Legume', 'Legume', 10, 15, 'LEGUME' );
+insert into food (name, description, happiness, calories, foodType) values ('Banana', 'Banana', 30, 7, 'FRUIT' );
+insert into food (name, description, happiness, calories, foodType) values ('Candy', 'Candy', 100, 24, 'CANDY' );
+insert into food (name, description, happiness, calories, foodType) values ('Cereals', 'Cereals', 70, 10, 'CEREAL' );
 
 insert into food_vitamines (food_id, vitamines_id) values (1, 1);
 insert into food_vitamines (food_id, vitamines_id) values (1, 2);
