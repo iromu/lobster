@@ -18,9 +18,22 @@ $(function() {
 		}
 		else
 		{
-			$("#mensaje").html("¡Pon nombre a tu langosta!");
+			$("#mensaje").html("Â¡Pon nombre a tu langosta!");
 		}
 		
 		return false;
-  });  
+  });
+
+    $("#view").click(function() {
+        $.ajax({
+            type: "GET",
+            url: "/api/lobsters",
+            success: function()
+            {
+                alert("epep");
+            }
+        });
+
+        return false;
+    });
 });

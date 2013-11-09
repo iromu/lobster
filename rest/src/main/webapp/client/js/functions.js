@@ -56,11 +56,10 @@ function onResize()
 
 function createUI()
 {
-	// light = new createjs.bitmap("img/light_on.png");
-	// light.scalex = 0.3;
-	// light.scaley = 0.3;
-	light = new createjs.Shape();
-	light.graphics.beginFill("white").drawCircle(5, 5, 10);
+	light = new createjs.Bitmap("img/light_on.png");
+	light.scaleX = 0.3;
+	light.scaleY = 0.3;
+	light.y = 10;
 	
 	food = new createjs.Shape();
 	food.graphics.beginFill("white").drawCircle(5, 5, 10);
@@ -176,8 +175,6 @@ function createBackground()
 
 function setBackground(day)
 {
-	//bg.graphics.clear();
-	
 	if(day)
 	{
 		bg.image.src = "img/background_01.png";
@@ -185,6 +182,7 @@ function setBackground(day)
 	else
 	{
 		bg.image.src = "img/background_02.png";
+		light.image.src = "img/light_off.png";
 	}
 	
 	isDay = day;

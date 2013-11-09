@@ -5,10 +5,12 @@ function handleLight()
 	if(isDay)
 	{
 		player.wakeUp();
+		light.image.src = "img/light_on.png";
 	}
 	else
 	{
 		player.sleep();
+		light.image.src = "img/light_off.png";
 	}
 	
 	setBackground(isDay);
@@ -35,10 +37,12 @@ function showFoodMenu()
 		//foodMenu.graphics.beginFill("#fff").drawRect(stage.canvas.width*0.68,0,stage.canvas.width*0.33,stage.canvas.height);
 		
 		foodMenu = new createjs.Bitmap("img/popup_menu.png");
-		foodMenu.scaleX = stage.canvas.width/bg.image.width*0.33;
-		foodMenu.scaleY = stage.canvas.height/bg.image.height;
+		//foodMenu.snapToPixel =false;
+		foodMenu.scaleX = stage.canvas.width/foodMenu.image.width*0.25;
+		foodMenu.scaleY = stage.canvas.height/foodMenu.image.height;
+		console.trace(stage.canvas.height+" "+bg.image.height);
 		
-		foodMenu.x = stage.canvas.width*0.66;
+		foodMenu.x = stage.canvas.width*0.75;
 		
 		stage.addChild(foodMenu);
 		
