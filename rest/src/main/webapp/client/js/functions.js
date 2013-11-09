@@ -102,7 +102,7 @@ function createPlayer()
 		this.data = {
 			images: ["img/guy.png"],
 			frames: {width:110, height:186},
-			animations: {right:[16,21,"right",0.1], idle:[0,1,"idle",0.1], left:[31,36,"left",0.1], eat:[2,5,"eat",0.1]}
+			animations: {right:[16,23,"right",0.4], idle:[0,1,"idle",0.1], left:[30,37,"left",0.4], eat:[2,5,"idle",0.4], open:[6,6,"open",0.1]}
 		};
 		
 		this.spriteSheet = new createjs.SpriteSheet(this.data);

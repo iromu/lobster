@@ -2,7 +2,7 @@ function movePatrolling(player)
 {
 	if(player.direction == "right")
 	{
-		player.animation.x += 2;
+		player.animation.x += 4;
 	
 		if (player.animation.x > stage.canvas.width * 0.55) 
 		{ 
@@ -12,7 +12,7 @@ function movePatrolling(player)
 	}
 	else
 	{
-		player.animation.x -= 2;
+		player.animation.x -= 4;
 	
 		if (player.animation.x < stage.canvas.width * 0.44) 
 		{ 

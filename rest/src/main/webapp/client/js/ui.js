@@ -71,7 +71,7 @@ function hideFoodMenu()
 	
 	for(i=0; i < foodElements.length; i++)
 	{
-		stage.removeChild(foodElements[i]);
+		stage.removeChild(foodElements[i].bitmap);
 	}
 	
 	player.state = "patrol";
@@ -123,6 +123,9 @@ function handleFoodNext()
 }
 
 function eat(element) {
+	
+	player.state = "eat";
+	player.animation.gotoAndPlay("eat");
     // TMP: For now we will always query the 1st element
     var id = 1;
 
