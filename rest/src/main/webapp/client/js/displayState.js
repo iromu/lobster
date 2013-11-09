@@ -55,7 +55,7 @@ function updateState(data, textStatus, jqXHR)
 
 function handleError(  jqXHR,  textStatus,  errorThrown)
 {
-   // alert("queryState - Failed: " + textStatus + ":" + errorThrown);
+   window.location="index.htm";
 }
 
 function queryState( )
