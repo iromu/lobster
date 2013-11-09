@@ -67,7 +67,7 @@ public class Status implements Serializable {
     }
 
     public Integer getHappiness() {
-        return happiness;
+        return happiness!=null?happiness:0;
     }
 
     public void setHappiness(Integer happiness) {
