@@ -11,6 +11,9 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Ferni
@@ -34,6 +37,6 @@ public class StatusApiControllerIT {
        // ResponseEntity<Status> status;
         Status status = restTemplate.getForObject("http://localhost:8080/api/status/getStatus/{lobsterId}", Status.class, lobsterId);
 
-        System.out.println(status.getId().toString());
+        assertThat(status.getId(), is(1));
     }
 }
