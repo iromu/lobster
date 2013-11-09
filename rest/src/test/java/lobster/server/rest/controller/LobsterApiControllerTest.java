@@ -14,6 +14,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 /**
  * Created with IntelliJ IDEA.
  * User: wantez
@@ -34,7 +37,7 @@ public class LobsterApiControllerTest {
     }
 
     @org.junit.Test
-    public void addCustomer() {
+    public void add() {
         Lobster lobster = new Lobster();
         lobster.setName("test");
 
@@ -43,9 +46,12 @@ public class LobsterApiControllerTest {
         lobster.setEmail("email");
         lobster.setStatus(null);
 
+        assertThat(id, is(1));
         System.out.println(id);
 
     }
+
+
 
     @org.junit.Test
     public void getAll() {
