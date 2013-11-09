@@ -173,4 +173,12 @@ public class LobsterApiController {
         lobsterService.update(lbs);
         return true;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "getName/{lobsterId}", method = RequestMethod.GET)
+    public String getName(@PathVariable("lobsterId") Integer lobsterId) {
+        Lobster l = lobsterService.getById(lobsterId);
+
+        return l.getName();
+    }
 }

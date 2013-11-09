@@ -139,7 +139,7 @@ function createPlayer()
 		this.state = "patrol";
 		this.direction = "right";
 		this.animation = undefined;
-
+		this.name = "unknown";
 		loadAnimation(this, "img/guy.png");
 		
 		this.init = function ()
@@ -151,6 +151,7 @@ function createPlayer()
 			switch(this.state)
 			{
 				case "patrol":
+					
 					movePatrolling(this);
 					break;
 				case "sleep":
@@ -184,6 +185,8 @@ function createPlayer()
 	}
 	
 	player.init();
+	
+	setPlayerName();
 	
 	stage.update();
 }
@@ -280,6 +283,27 @@ function setBackground(day)
 	
     //bg.cache(bg.x, bg.y, bg.image.width, bg.image.height);
 	isDay = day;
+}
+
+function setPlayerName()
+{
+	$.ajax({
+        type: "GET",
+        url: "/api/lobster/getName/"+getParameterByName("id"),
+        success: function(data)
+		{
+			player.name = data;
+			
+			playerText = new createjs.Text(player.name, "30px Arial", "#000");
+			playerText.x = 0.50 * stage.canvas.width;
+			playerText.y = 0.10 * stage.canvas.height;
+			playerText.textBaseline = "alphabetic";
+			stage.addChild(playerText);
+		},
+		error: function() {
+			alert("An error occurred while processing XML file.");
+		}
+    });
 }
 
 function resize()
