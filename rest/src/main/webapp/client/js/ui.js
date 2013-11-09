@@ -37,6 +37,7 @@ function showFoodMenu()
 	if(player.state != "sleep")
 	{
 		player.state = "idle";
+		player.animation.gotoAndPlay("idle");
 	
 		foodMenu.visible = true;
 		foodMenu.x = stage.canvas.width*0.75;
@@ -70,10 +71,19 @@ function hideFoodMenu()
 	
 	for(i=0; i < foodElements.length; i++)
 	{
-		stage.removeChild(foodElements[i]);
+		stage.removeChild(foodElements[i].bitmap);
 	}
 	
 	player.state = "patrol";
+	
+	if(player.direction == "left")
+	{
+		player.animation.gotoAndPlay("left");
+	}
+	else
+	{
+		player.animation.gotoAndPlay("right");
+	}
 }
 
 function handleFoodPrev()
@@ -112,10 +122,25 @@ function handleFoodNext()
 	} 
 }
 
-function eat(element)
-{
+function eat(element) {
 	
+	player.state = "eat";
+	player.animation.gotoAndPlay("eat");
+    // TMP: For now we will always query the 1st element
+    var id = 1;
+
+    $.ajax({
+        type: "POST",
+        url: "/api/lobster/" + id + "/givefood/" + element.id,
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // alert("An error occurred while processing XML file.");
+        }
+    });
 }
+
 
 function requestFoodItems()
 {
@@ -172,11 +197,11 @@ function requestFoodItems()
 					this.offset = {x:this.x-evt.stageX, y:this.y-evt.stageY};
 				});
 				element.bitmap.on("pressup", function(evt) {
-					distance = Math.sqrt(Math.pow(player.body.x-this.x, 2) + Math.pow(player.body.y-this.y, 2));
+					distance = Math.sqrt(Math.pow(player.animation.x-this.x, 2) + Math.pow(player.animation.y-this.y, 2));
 					
 					if(distance < 150)
 					{
-						eat(this);
+						eat(element);
 					}
 
 					this.x = element.posX;

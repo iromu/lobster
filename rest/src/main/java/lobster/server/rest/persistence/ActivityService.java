@@ -4,6 +4,7 @@ import lobster.server.rest.model.Activity;
 import lobster.server.rest.model.Lobster;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -34,9 +35,15 @@ public class ActivityService {
         return activity;
     }
 
-    public List<Activity> getAll()
-    {
+    public List<Activity> getAll(){
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(Activity.class);
         return crit.list();
     }
+
+    public Activity getActivity(Integer id){
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(Activity.class);
+        return (Activity)crit.add(Restrictions.naturalId()
+                .set("id", id)).uniqueResult();
+    }
+
 }

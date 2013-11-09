@@ -6,15 +6,18 @@ $(function() {
 		{
 			var dataString = {"name" : name};
 			
+			$("#submit").hide();
+			$("#view").hide();
+			
 			$.ajax({  
 			  type: "POST",  
 			  url: "/api/lobster/new", 
 			  contentType: "application/json; charset=utf-8",			  
 			  data: JSON.stringify(dataString),  
 			  datatype: 'json',  
-			  success: function()
-			  {  
-				requestUsers();
+			  success: function(data)
+			  {
+				window.location.href = "lobster.htm?id="+data;
 			  }  
 			}); 
 		}
