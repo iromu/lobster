@@ -27,7 +27,7 @@ public class PlayerTask {
 
         List<Lobster> list = lobsterService.getAll();
         for (Lobster lob : list) {
-            System.out.println("Lobster ID: " +  lob.getId());
+
             Status status = lob.getStatus();
 
             Set<StatusVitamine> updated = new HashSet<StatusVitamine>();
