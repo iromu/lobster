@@ -21,7 +21,7 @@ var calciumStatusLevelBar = null;
 function createStatusLevelBar(basex, basey, attributeName,value)
 {
     // Draw the name of the attribute
-    var text = new createjs.Text(attributeName, "20px Arial", "#ffbb55");
+    var text = new createjs.Text(attributeName, "20px Arial", "#000000");
     text.x = basex;
     text.y = basey;
     text.textBaseline = "alphabetic";
@@ -30,8 +30,14 @@ function createStatusLevelBar(basex, basey, attributeName,value)
     // Draw the bar
     frame = new createjs.Shape();
 
-    stage.addChild(frame);
+    // Create the image
+    var bitmap = new createjs.Bitmap("img/frame.png");
+    bitmap.x = basex-5;
+    bitmap.y = basey+5;
 
+    bitmap.visible = true;
+    stage.addChild(bitmap);
+    stage.addChild(frame);
     return frame;
 }
 
@@ -42,8 +48,9 @@ function updateStatusLevelBarHorz(barCtrl, func,basex, basey, attributeName,valu
         barCtrl = func(basex, basey, attributeName, value);
     }
     // Draw the external frame
+
+    //barCtrl.graphics.beginFill("yellow").drawRect(basex,framey,FRAME_WIDTH, FRAME_HEIGHT);
     var framey = basey + 10;//text.getMeasuredHeight();
-    barCtrl.graphics.beginFill("yellow").drawRect(basex,framey,FRAME_WIDTH, FRAME_HEIGHT);
     // Draw the internal empty space
     barCtrl.graphics.beginFill("brown").drawRect(basex+FRAME_BORDER, framey+FRAME_BORDER,
         FRAME_WIDTH - 2*FRAME_BORDER, FRAME_HEIGHT-2*FRAME_BORDER);
@@ -72,7 +79,7 @@ function updateStatusLevelBarVert (barCtrl, img,basex, basey, attributeName,valu
         barCtrl = frame;
     }
     // Draw the bar frame
-    barCtrl.graphics.beginFill("yellow").drawRect(basex+58, basey-2,
+    barCtrl.graphics.beginFill("white").drawRect(basex+58, basey-2,
         24, 74 );
     // Draw the bar
     var length = 70 * value/100;
@@ -101,9 +108,9 @@ function updateState(data, textStatus, jqXHR)
 
     var state = data;
 
-    updateStatusLevelBarHorz(totalCaloriesStatusLevelBar,createStatusLevelBar, 30, 160, "Total Calories", state.totalCalories)
+    updateStatusLevelBarHorz(totalCaloriesStatusLevelBar,createStatusLevelBar, 30, 150, "Total Calories", state.totalCalories)
     updateStatusLevelBarHorz(fatStatusLevelBar, createStatusLevelBar, 30, 220, "Fat level", state.fatLevel);
-    updateStatusLevelBarHorz(happinessStatusLevelBar, createStatusLevelBar, 30, 280, "Happiness", state.happiness);
+    updateStatusLevelBarHorz(happinessStatusLevelBar, createStatusLevelBar, 30, 290, "Happiness", state.happiness);
     updateStatusLevelBarVert(vitaminAStatusLevelBar,"A.png", 30, 360, "Vit A", searchVitamin(state.statusVitamineList,"Vitamine A").amount)
     updateStatusLevelBarVert(vitaminBStatusLevelBar, "B.png", 130, 360, "Vit B", searchVitamin(state.statusVitamineList,"Vitamine B").amount);
     updateStatusLevelBarVert(vitaminCStatusLevelBar, "C.png", 230, 360, "Vit C", searchVitamin(state.statusVitamineList,"Vitamine C").amount);
