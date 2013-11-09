@@ -111,8 +111,6 @@ function createUI() {
     stage.addChild(gameMenu);
     stage.addChild(gameMenu2);
     stage.addChild(gameMenu3);
-
-    queryState();
 }
 
 function createPlayer() {
