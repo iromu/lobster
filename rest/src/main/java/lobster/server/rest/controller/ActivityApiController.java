@@ -18,7 +18,6 @@ import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
- * User: spawn
  * Date: 09/11/13
  * Time: 03:04
  * To change this template use File | Settings | File Templates.
@@ -34,7 +33,8 @@ public class ActivityApiController {
 
     @ResponseBody
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public List<Activity> getActivities() {
+    public List<Activity> getActivities()
+    {
         return activityService.getAll();
     }
 

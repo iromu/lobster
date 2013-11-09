@@ -104,8 +104,7 @@ public class ServicesConfiguration {
     @Bean
     public CacheManager cacheManager() throws Exception {
         SimpleCacheManager scm = new SimpleCacheManager();
-        Cache cache = new ConcurrentMapCache("lobsters");
-        scm.setCaches(Arrays.asList(cache));
+        scm.setCaches(Arrays.asList(new ConcurrentMapCache("lobsters"), new ConcurrentMapCache("food")));
         return scm;
     }
 

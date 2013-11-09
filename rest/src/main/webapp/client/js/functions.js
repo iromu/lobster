@@ -7,6 +7,7 @@ var foodMenu2;
 var foodMenu3;
 var bg;
 var foodElements;
+var foodCurrentPage;
 
 function init()
 {
@@ -78,6 +79,9 @@ function createUI()
 	foodMenu3 = new createjs.Bitmap("img/button_02.png");
 	foodElements = new Array();
 	hideFoodMenu();
+	
+	foodMenu2.addEventListener("click", handleFoodPrev);
+	foodMenu3.addEventListener("click", handleFoodNext);
 	
 	stage.addChild(light);
 	stage.addChild(food);
@@ -153,6 +157,9 @@ function createPlayer()
 				case "sleep":
 					moveSleeping(this);
 					break;
+				case "idle":
+					moveIdle(this);
+					break;
 			}
 		};
 		
@@ -185,7 +192,7 @@ function createBackground()
 	bg.scaleY = stage.canvas.height/bg.image.height;
 	stage.addChild(bg);
 	
-	setBackground(true);
+	isDay = true;
 }
 
 function setBackground(day)
@@ -197,7 +204,6 @@ function setBackground(day)
 	else
 	{
 		bg.image.src = "img/background_02.png";
-		light.image.src = "img/light_off.png";
 	}
 	
 	isDay = day;

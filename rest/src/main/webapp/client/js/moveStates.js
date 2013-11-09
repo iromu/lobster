@@ -36,6 +36,11 @@ function movePatrolling(player)
 	}
 }
 
+function moveIdle(player)
+{
+	
+}
+
 function moveSleeping(player)
 {
 	if(player.sleepDirection == "open")

@@ -18,9 +18,12 @@ function handleLight()
 
 function handleBackground()
 {
-	if(foodMenu != undefined)
+	if(player.state != "sleep")
 	{
-		hideFoodMenu();
+		if(foodMenu != undefined)
+		{
+			hideFoodMenu();
+		}
 	}
 }
 
@@ -33,6 +36,8 @@ function showFoodMenu()
 {
 	if(player.state != "sleep")
 	{
+		player.state = "idle";
+	
 		foodMenu.visible = true;
 		foodMenu.x = stage.canvas.width*0.75;
 
@@ -67,33 +72,95 @@ function hideFoodMenu()
 	{
 		stage.removeChild(foodElements[i]);
 	}
+	
+	player.state = "patrol";
+}
+
+function handleFoodPrev()
+{
+	if(foodCurrentPage>1)
+	{
+		foodCurrentPage--;
+		
+		for(i=0; i < foodElements.length; i++)
+		{
+			foodElements[i].visible = (Math.ceil((i+1)/6) == foodCurrentPage);
+		}
+		
+		checkArrows();
+	}
+}
+
+function checkArrows()
+{
+	foodMenu3.visible = foodElements.length/6 > foodCurrentPage;
+	foodMenu2.visible = foodCurrentPage > 1;
+}
+
+function handleFoodNext()
+{
+	if(foodElements.length/6 > foodCurrentPage)
+	{
+		foodCurrentPage++;
+		
+		for(i=0; i < foodElements.length; i++)
+		{
+			foodElements[i].visible = (Math.ceil((i+1)/6) == foodCurrentPage);
+		}
+		
+		checkArrows();
+	} 
 }
 
 function requestFoodItems()
 {
 	$.ajax({
         type: "GET",
-        crossDomain: false,  //edit du 25/01 : cette propriété doit être passée à false. 
-        url: "data/food.xml",
-        dataType: "xml",
+        url: "/api/food/getFood",
+        dataType: "json",
         success: function(data)
 		{
 			foodElements = new Array();
 			
+			foodCurrentPage = 1;
+			
 			i = 0;
-			$(data).find('food').each(function()
+			
+			$.each(list, function(index, element)
 			{
-				var sTitle = $(this).find('title').text();
-				var sImg = $(this).find('img').text();
+				var sTitle = element.name;
+				var sImg = "img/food/"+element.id+".png";
 				
 				element = new createjs.Bitmap(sImg);
-				element.x = stage.canvas.width*0.75;
+				
+				j = i % 6;
+				
+				if(j % 2 == 0)
+				{
+					element.x = stage.canvas.width*0.78;
+					element.y = stage.canvas.height * (0.10 + 0.25*j*0.5);
+				}
+				else
+				{
+					element.x = stage.canvas.width*0.88;
+					element.y = stage.canvas.height * (0.10 + 0.25*(j-1)*0.5);
+				}
+				
+				element.scaleX = 0.5;
+				element.scaleY = 0.5;
+				
+				if(i > 5)
+				{
+					element.visible = false;
+				}
 				
 				stage.addChild(element);
 				
 				foodElements[i] = element;
 				i++;
 			});
+			
+			checkArrows();
 		},
 		error: function() {
 			alert("An error occurred while processing XML file.");
