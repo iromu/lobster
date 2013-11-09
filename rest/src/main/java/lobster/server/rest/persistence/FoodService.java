@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,7 +34,17 @@ public class FoodService {
 
     public List<Food> getAll(){
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(Food.class);
-        return crit.list();
+        List<Food> aux = crit.list();
+        HashMap<Integer, Food> map = new HashMap<Integer, Food>();
+
+        for(Food f : aux){
+            if(!map.keySet().contains(f.getId())){
+                map.put(f.getId(), f);
+            }
+        }
+        List<Food> total = new ArrayList<Food>(map.values());
+
+        return total;
     }
 
     @Cacheable(FOOD_REGION)
