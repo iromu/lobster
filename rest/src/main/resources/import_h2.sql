@@ -45,25 +45,25 @@ insert into status (idealCalories, happiness, lastEat)  values (75, 50, null) ;
 insert into status (idealCalories, happiness, lastEat)  values (30, 60, null) ;
 insert into status (idealCalories, happiness, lastEat)  values (50, 10, null) ;
 
-insert into statusvitamine (vitamine_id, amount, status_id) values (1, 100, 1);
-insert into statusvitamine (vitamine_id, amount, status_id) values (2, 100, 1);
-insert into statusvitamine (vitamine_id, amount, status_id) values (3, 100, 1);
-insert into statusvitamine (vitamine_id, amount, status_id) values (4, 100, 1);
+insert into statusvitamine (vitamine_id, amount) values (1, 100);
+insert into statusvitamine (vitamine_id, amount) values (2, 100);
+insert into statusvitamine (vitamine_id, amount) values (3, 100);
+insert into statusvitamine (vitamine_id, amount) values (4, 100);
 
-insert into statusvitamine (vitamine_id, amount, status_id) values (1, 100, 2);
-insert into statusvitamine (vitamine_id, amount, status_id) values (2, 100, 2);
-insert into statusvitamine (vitamine_id, amount, status_id) values (3, 100, 2);
-insert into statusvitamine (vitamine_id, amount, status_id) values (4, 100, 2);
+insert into statusvitamine (vitamine_id, amount) values (1, 100);
+insert into statusvitamine (vitamine_id, amount) values (2, 100);
+insert into statusvitamine (vitamine_id, amount) values (3, 100);
+insert into statusvitamine (vitamine_id, amount) values (4, 100);
 
-insert into statusvitamine (vitamine_id, amount, status_id) values (1, 100, 3);
-insert into statusvitamine (vitamine_id, amount, status_id) values (2, 100, 3);
-insert into statusvitamine (vitamine_id, amount, status_id) values (3, 100, 3);
-insert into statusvitamine (vitamine_id, amount, status_id) values (4, 100, 3);
+insert into statusvitamine (vitamine_id, amount) values (1, 100);
+insert into statusvitamine (vitamine_id, amount) values (2, 100);
+insert into statusvitamine (vitamine_id, amount) values (3, 100);
+insert into statusvitamine (vitamine_id, amount) values (4, 100);
 
-insert into statusvitamine (vitamine_id, amount, status_id) values (1, 100, 4);
-insert into statusvitamine (vitamine_id, amount, status_id) values (2, 100, 4);
-insert into statusvitamine (vitamine_id, amount, status_id) values (3, 100, 4);
-insert into statusvitamine (vitamine_id, amount, status_id) values (4, 100, 4);
+insert into statusvitamine (vitamine_id, amount) values (1, 100);
+insert into statusvitamine (vitamine_id, amount) values (2, 100);
+insert into statusvitamine (vitamine_id, amount) values (3, 100);
+insert into statusvitamine (vitamine_id, amount) values (4, 100);
 
 update lobster set status_id = 1 where name = 'lobster1';
 update lobster set status_id = 2 where name = 'lobster2';

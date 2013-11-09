@@ -25,6 +25,11 @@ function handleBackground()
 		{
 			hideFoodMenu();
 		}
+		
+		if(gameMenu != undefined)
+		{
+			hideGameMenu();
+		}
 	}
 }
 
@@ -87,6 +92,105 @@ function hideFoodMenu()
 	}
 }
 
+function showGameMenu()
+{
+	if(player.state != "sleep")
+	{
+		player.state = "idle";
+		player.animation.gotoAndPlay("idle");
+	
+		gameMenu.visible = true;
+		gameMenu.x = stage.canvas.width*0.75;
+
+		gameMenu.scaleX = stage.canvas.width/gameMenu.image.width*0.25;
+		gameMenu.scaleY = stage.canvas.height/gameMenu.image.height;
+		
+		gameMenu2.x = stage.canvas.width*0.765;
+		gameMenu2.y = stage.canvas.height*0.86;
+		gameMenu2.scaleX = stage.canvas.width/gameMenu2.image.width*0.11;
+		gameMenu2.scaleY = stage.canvas.height/gameMenu2.image.height*0.10;
+		gameMenu2.visible = true;
+			
+		gameMenu3.x = stage.canvas.width*0.875;
+		gameMenu3.y = stage.canvas.height*0.86;
+		gameMenu3.scaleX = stage.canvas.width/gameMenu3.image.width*0.11;
+		gameMenu3.scaleY = stage.canvas.height/gameMenu3.image.height*0.10;
+		gameMenu3.visible = true;
+
+		requestGameItems();
+		
+		stage.update();
+	}
+}
+
+function hideGameMenu()
+{
+	gameMenu.visible = false;
+	gameMenu2.visible = false;
+	gameMenu3.visible = false;
+	
+	for(i=0; i < gameElements.length; i++)
+	{
+		stage.removeChild(gameElements[i].bitmap);
+	}
+	
+	player.state = "patrol";
+	
+	if(player.direction == "left")
+	{
+		player.animation.gotoAndPlay("left");
+	}
+	else
+	{
+		player.animation.gotoAndPlay("right");
+	}
+}
+
+function handleGamePrev()
+{
+	if(gameCurrentPage>1)
+	{
+		gameCurrentPage--;
+		
+		for(i=0; i < gameElements.length; i++)
+		{
+			gameElements[i].bitmap.visible = (Math.ceil((i+1)/6) == gameCurrentPage);
+		}
+		
+		checkGameArrows();
+	}
+}
+
+function handleGame()
+{
+	showGameMenu();
+}
+
+function checkGameArrows()
+{
+	gameMenu3.visible = gameElements.length/6 > gameCurrentPage;
+	gameMenu2.visible = gameCurrentPage > 1;
+}
+
+function handleGameNext()
+{
+	if(gameElements.length/6 > gameCurrentPage)
+	{
+		gameCurrentPage++;
+		
+		for(i=0; i < gameElements.length; i++)
+		{
+			gameElements[i].bitmap.visible = (Math.ceil((i+1)/6) == gameCurrentPage);
+		}
+		
+		checkGameArrows();
+	} 
+}
+
+
+
+
+
 function handleFoodPrev()
 {
 	if(foodCurrentPage>1)
@@ -98,11 +202,11 @@ function handleFoodPrev()
 			foodElements[i].bitmap.visible = (Math.ceil((i+1)/6) == foodCurrentPage);
 		}
 		
-		checkArrows();
+		checkFoodArrows();
 	}
 }
 
-function checkArrows()
+function checkFoodArrows()
 {
 	foodMenu3.visible = foodElements.length/6 > foodCurrentPage;
 	foodMenu2.visible = foodCurrentPage > 1;
@@ -119,7 +223,7 @@ function handleFoodNext()
 			foodElements[i].bitmap.visible = (Math.ceil((i+1)/6) == foodCurrentPage);
 		}
 		
-		checkArrows();
+		checkFoodArrows();
 	} 
 }
 
@@ -135,6 +239,25 @@ function eat(element) {
         type: "POST",
         url: "/api/lobster/" + id + "/givefood/" + element.id,
         dataType: "json",
+        success: updateState,
+        error: handleError
+    });
+
+    //queryState();
+}
+
+function play(element)
+{
+	player.state = "play";
+	player.animation.gotoAndPlay("play");
+
+    // Use the Id provided to the page
+    var id = getParameterByName("id");
+
+    $.ajax({
+        type: "POST",
+        url: "/api/lobster/" + id + "/doActivity/" + element.id,
+        dataType: "json",
         success: function (data, textStatus, jqXHR) {
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -144,7 +267,6 @@ function eat(element) {
 
     queryState();
 }
-
 
 function requestFoodItems()
 {
@@ -223,7 +345,7 @@ function requestFoodItems()
 				i++;
 			});
 			
-			checkArrows();
+			checkFoodArrows();
 		},
 		error: function() {
 			alert("An error occurred while processing XML file.");
@@ -231,7 +353,90 @@ function requestFoodItems()
     });
 }
  
+function requestGameItems()
+{
+	$.ajax({
+        type: "GET",
+        url: "/api/activity/list",
+        dataType: "json",
+        success: function(data)
+		{
+			gameElements = new Array();
+			
+			gameCurrentPage = 1;
+			
+			i = 0;
+			
+			$.each(data, function(index, item)
+			{
+				var sTitle = item.name;
+				var sImg = "img/game/"+item.id+".png";
+				
+				var element = new function()
+				{
+					this.id = item.id;
+					this.name = item.name;
+					this.bitmap = new createjs.Bitmap(sImg);
+				}
+				
+				j = i % 6;
+				
+				if(j % 2 == 0)
+				{
+					element.bitmap.x = stage.canvas.width*0.78;
+					element.bitmap.y = stage.canvas.height * (0.10 + 0.25*j*0.5);
+				}
+				else
+				{
+					element.bitmap.x = stage.canvas.width*0.88;
+					element.bitmap.y = stage.canvas.height * (0.10 + 0.25*(j-1)*0.5);
+				}
+				
+				element.posX = element.bitmap.x;
+				element.posY = element.bitmap.y;
+				
+				element.bitmap.scaleX = 0.5;
+				element.bitmap.scaleY = 0.5;
+				
+				if(i > 5)
+				{
+					element.bitmap.visible = false;
+				}
+				
+				element.bitmap.on("mousedown", function(evt) {
+					this.parent.addChild(this);
+					this.offset = {x:this.x-evt.stageX, y:this.y-evt.stageY};
+				});
+				element.bitmap.on("pressup", function(evt) {
+					distance = Math.sqrt(Math.pow(player.animation.x-this.x, 2) + Math.pow(player.animation.y-this.y, 2));
+					
+					if(distance < 150)
+					{
+						play(element);
+					}
 
+					this.x = element.posX;
+					this.y = element.posY;
+				});
+				element.bitmap.on("pressmove", function(evt) {
+					this.x = evt.stageX+ this.offset.x;
+					this.y = evt.stageY+ this.offset.y;
+					update = true;
+				});
+				
+				stage.addChild(element.bitmap);
+				
+				gameElements[i] = element;
+				i++;
+			});
+			
+			checkGameArrows();
+		},
+		error: function() {
+			alert("An error occurred while processing XML file.");
+		}
+    });
+}
 
 
 

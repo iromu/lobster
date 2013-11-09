@@ -5,9 +5,14 @@ var isDay;
 var foodMenu;
 var foodMenu2;
 var foodMenu3;
+var gameMenu;
+var gameMenu2;
+var gameMenu3;
 var bg;
 var foodElements;
+var gameElements;
 var foodCurrentPage;
+var gameCurrentPage;
 
 function init()
 {
@@ -19,7 +24,7 @@ function init()
 
 	createjs.Ticker.addEventListener("tick", handleTick);
     queryState();
-    setInterval(queryState, 5000);
+    setInterval(queryState, 10000);
 }
 
 function onResize()
@@ -64,14 +69,25 @@ function createUI()
 	light.scaleX = 0.3;
 	light.scaleY = 0.3;
 	light.y = 10;
+	
+	light.addEventListener("click", handleLight);
+	
+	stage.addChild(light);
+	
 	food = new createjs.Bitmap("img/fork.png");
 	food.scaleX = 0.3;
 	food.scaleY = 0.3;
 	food.y = 10;
 	food.x = stage.canvas.width - 70;
-	
-	light.addEventListener("click", handleLight);
 	food.addEventListener("click", handleFood);
+	
+	game = new createjs.Bitmap("img/games.png");
+	game.scaleX = 0.3;
+	game.scaleY = 0.3;
+	game.y = 120;
+	game.x = stage.canvas.width - 70;
+	
+	game.addEventListener("click", handleGame);
 	
 	foodMenu = new createjs.Bitmap("img/popup_menu.png");
 	foodMenu2 = new createjs.Bitmap("img/button_01.png");
@@ -82,11 +98,25 @@ function createUI()
 	foodMenu2.addEventListener("click", handleFoodPrev);
 	foodMenu3.addEventListener("click", handleFoodNext);
 	
-	stage.addChild(light);
 	stage.addChild(food);
+	stage.addChild(game);
+	
 	stage.addChild(foodMenu);
 	stage.addChild(foodMenu2);
 	stage.addChild(foodMenu3);
+	
+	gameMenu = new createjs.Bitmap("img/popup_menu_pink.png");
+	gameMenu2 = new createjs.Bitmap("img/button_01_pink.png");
+	gameMenu3 = new createjs.Bitmap("img/button_02_pink.png");
+	gameElements = new Array();
+	hideGameMenu();
+	
+	gameMenu2.addEventListener("click", handleGamePrev);
+	gameMenu3.addEventListener("click", handleGameNext);
+	
+	stage.addChild(gameMenu);
+	stage.addChild(gameMenu2);
+	stage.addChild(gameMenu3);
 }
 
 function createPlayer()

@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -48,6 +49,8 @@ public class LobsterApiController {
         return lobster.getId();
     }
 
+
+
     @ResponseBody
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public List<Lobster> getLobsters() {
@@ -67,7 +70,7 @@ public class LobsterApiController {
 
     @ResponseBody
     @RequestMapping(value = "{id}/givefood/{foodId}", method = RequestMethod.POST)
-    public void giveFood(@PathVariable("id") Integer id, @PathVariable("foodId") Integer foodId) {
+    public Status giveFood(@PathVariable("id") Integer id, @PathVariable("foodId") Integer foodId) {
 
         Lobster lobster = lobsterService.getById(id);
         Status status = lobster.getStatus();
@@ -81,10 +84,12 @@ public class LobsterApiController {
 
         status.setLastEat(new Date());
         lobsterService.update(lobster);
+
+        return status;
     }
 
     private void updateVitamines(Status status, Food food) {
-        List<StatusVitamine> statusVitamineList = status.getStatusVitamineList();
+        Set<StatusVitamine> statusVitamineList = status.getStatusVitamineList();
         List<Vitamine> foodVitamines = food.getVitamines();
 
         assert (foodVitamines != null && foodVitamines.size() == 3);
