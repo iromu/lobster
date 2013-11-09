@@ -105,6 +105,16 @@ function createPlayer()
 		this.state = "patrol";
 		this.direction = "right";
 		this.sleepDirection = "open";
+		
+		this.data = {
+			images: ["img/guy.png"],
+			frames: {width:110, height:186},
+			animations: {right:[16,21,"right",0.1], idle:[0,1,"idle",0.1], left:[31,36,"left",0.1], eat:[2,5,"eat",0.1]}
+		};
+		
+		this.spriteSheet = new createjs.SpriteSheet(this.data);
+		this.animation = new createjs.Sprite(this.spriteSheet, "right");
+		
 		this.init = function ()
 		{
 			basePosX = stage.canvas.width * 0.5;
@@ -136,6 +146,7 @@ function createPlayer()
 			
 			this.body.shadow = new createjs.Shadow("#000000", 0, 10, 10);
 			
+			stage.addChild(this.animation);
 			stage.addChild(this.body);
 			stage.addChild(this.head);
 			stage.addChild(this.mouth);
