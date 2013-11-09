@@ -65,6 +65,7 @@ public class ServicesConfiguration {
                 .addAnnotatedClasses(Activity.class)
                 .addAnnotatedClasses(Vitamine.class)
                 .addAnnotatedClasses(Food.class)
+                .addAnnotatedClasses(StatusVitamine.class)
                 .addProperties(props)
                 .buildSessionFactory();
     }

@@ -1,7 +1,9 @@
 package lobster.server.rest.controller;
 
+import lobster.server.rest.model.Activity;
 import lobster.server.rest.model.Food;
 import lobster.server.rest.model.Lobster;
+import lobster.server.rest.persistence.ActivityService;
 import lobster.server.rest.persistence.LobsterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,36 +18,26 @@ import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
- * User: wantez
- * Date: 08/11/13
- * Time: 21:59
+ * User: spawn
+ * Date: 09/11/13
+ * Time: 03:04
  * To change this template use File | Settings | File Templates.
  */
-@RequestMapping("/lobster/")
+
+@RequestMapping("/activity/")
 @Controller
-public class LobsterApiController {
+public class ActivityApiController {
 
     @Autowired
-    private LobsterService lobsterService;
+    private ActivityService activityService;
 
-    @ResponseBody
-    @RequestMapping(value = "new", method = RequestMethod.POST)
-    public Integer addLobster(@Valid @RequestBody Lobster lobster) {
-        lobster = lobsterService.create(lobster);
-        return lobster.getId();
-    }
 
     @ResponseBody
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public List<Lobster> getLobsters()
-    {
-        return lobsterService.getAll();
+    public List<Activity> getActivities() {
+        return activityService.getAll();
     }
 
-    @ResponseBody
-    @RequestMapping(value = "getFood", method = RequestMethod.GET)
-    public List<Food> getFood(Integer lobsterID)
-    {
-        return new ArrayList<Food>();
-    }
+
+
 }

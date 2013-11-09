@@ -27,7 +27,8 @@ public class Food implements Serializable {
 
     private Integer calories;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name="food_vitamines")
     private List<Vitamine> vitamines;
 
     @NotNull
