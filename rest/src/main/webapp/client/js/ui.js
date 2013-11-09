@@ -90,6 +90,12 @@ function hideFoodMenu()
 	{
 		player.animation.gotoAndPlay("right");
 	}
+	
+	if(foodDescription!=undefined)
+	{
+		stage.removeChild(foodDescription);
+		foodDescription = undefined;
+	}
 }
 
 function showGameMenu()
@@ -143,6 +149,12 @@ function hideGameMenu()
 	else
 	{
 		player.animation.gotoAndPlay("right");
+	}
+	
+	if(gameDescription!=undefined)
+	{
+		stage.removeChild(gameDescription);
+		gameDescription = undefined;
 	}
 }
 
@@ -332,6 +344,15 @@ function requestFoodItems()
 						eat(element);
                         createjs.Tween.get(element.bitmap).to({alpha: 1}, 3000).set({visible: true});
 					}
+					else
+					{
+						distance2 = Math.sqrt(Math.pow(element.posX-this.x, 2) + Math.pow(element.posY-this.y, 2));
+						
+						if(distance2 <= 10)
+						{
+							showFoodDescription(element);
+						}
+					}
 
 					this.x = element.posX;
 					this.y = element.posY;
@@ -412,12 +433,21 @@ function requestGameItems()
 				});
 				element.bitmap.on("pressup", function(evt) {
 					distance = Math.sqrt(Math.pow(player.animation.x-this.x, 2) + Math.pow(player.animation.y-this.y, 2));
-					
+
 					if(distance < 150)
 					{
                         element.bitmap.alpha = 0;
                         play(element);
                         createjs.Tween.get(element.bitmap).to({alpha: 1}, 3000).set({visible: true});
+					}
+					else
+					{
+						distance2 = Math.sqrt(Math.pow(element.posX-this.x, 2) + Math.pow(element.posY-this.y, 2));
+						
+						if(distance2 <= 10)
+						{
+							showGameDescription(element);
+						}
 					}
 
 					this.x = element.posX;
@@ -443,5 +473,15 @@ function requestGameItems()
     });
 }
 
+function showFoodDescription(object)
+{
+	foodDescription = new createjs.Shape();
+	foodDescription.graphics.beginFill("#00F").drawRect(stage.canvas.width*0.22, 0, stage.canvas.width*0.50, stage.canvas.height*0.47);
+	foodDescription.addEventListener("click", function(){stage.removeChild(foodDescription); foodDescription = undefined;});
+	stage.addChild(foodDescription);
+}
 
-
+function showGameDescription(object)
+{
+	
+}
