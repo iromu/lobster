@@ -18,6 +18,8 @@ var vitaminCStatusLevelBar = null;
 var vitaminDStatusLevelBar = null;
 var calciumStatusLevelBar = null;
 
+var fatness = 1;
+
 function createStatusLevelBar(basex, basey, attributeName,value)
 {
     // Draw the name of the attribute
@@ -117,7 +119,21 @@ function updateState(data, textStatus, jqXHR)
     updateStatusLevelBarVert(vitaminDStatusLevelBar,"D.png", 30, 480, "Vit D", searchVitamin(state.statusVitamineList,"Vitamine D").amount)
     updateStatusLevelBarVert(calciumStatusLevelBar, "calcium.png", 130, 480, "Calcium", searchVitamin(state.statusVitamineList,"Calcium").amount);
 
+    var playerImg;
+    if (state.fatLevel<25)
+    {
+        playerImg = "img/guy.png";
+    }
+    else if (state.fatLevel>75)
+    {
+        playerImg = "img/fat_guy.png";
+    }
+    else
+    {
+        playerImg = "img/guy.png";
+    }
 
+    loadAnimation(player, playerImg);
 }
 
 function handleError(  jqXHR,  textStatus,  errorThrown)
