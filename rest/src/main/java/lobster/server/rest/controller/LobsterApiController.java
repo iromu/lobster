@@ -131,7 +131,7 @@ public class LobsterApiController {
 
     @ResponseBody
     @RequestMapping(value = "{id}/doActivity/{actvtId}", method = RequestMethod.POST)
-    public void doActivity(@PathVariable("id") Integer id, @PathVariable("actvtId") Integer actvtId) {
+    public boolean doActivity(@PathVariable("id") Integer id, @PathVariable("actvtId") Integer actvtId) {
         Lobster lbs = lobsterService.getById(id);
         Status status = lbs.getStatus();
         Activity activity = activityService.getActivity(actvtId);
@@ -156,5 +156,6 @@ public class LobsterApiController {
 
         lbs.setStatus(status);
         lobsterService.update(lbs);
+        return true;
     }
 }

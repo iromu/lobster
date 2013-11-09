@@ -187,10 +187,6 @@ function handleGameNext()
 	} 
 }
 
-
-
-
-
 function handleFoodPrev()
 {
 	if(foodCurrentPage>1)
@@ -258,10 +254,14 @@ function play(element)
         type: "POST",
         url: "/api/lobster/" + id + "/doActivity/" + element.id,
         dataType: "json",
-        success: function (data, textStatus, jqXHR) {
+        success: function (data, textStatus, jqXHR)
+		{
+			this.state = "playGame"+element.id;
+			player.animation.gotoAndPlay("playGame"+element.id);
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-            // alert("An error occurred while processing XML file.");
+        error: function (jqXHR, textStatus, errorThrown)
+		{
+			alert(errorThrown);
         }
     });
 
