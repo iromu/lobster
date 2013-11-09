@@ -258,10 +258,11 @@ function play(element)
 		{
 			this.state = "playGame"+element.id;
 			player.animation.gotoAndPlay("playGame"+element.id);
+			setTimeout(function(){player.animation.stop();player.animation.gotoAndPlay("idle");player.state = "idle";}, 2000);
         },
         error: function (jqXHR, textStatus, errorThrown)
 		{
-			alert(errorThrown);
+			
         }
     });
 
