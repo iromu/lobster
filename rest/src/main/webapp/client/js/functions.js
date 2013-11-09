@@ -18,6 +18,11 @@ var gameElements;
 var foodCurrentPage;
 var gameCurrentPage;
 
+var audioPath = "sounds/";
+var manifest = [
+    {id:"Bite", src:audioPath+"bite.mp3"}
+];
+
 function init()
 {
 	//Create a stage by getting a reference to the canvas
@@ -28,6 +33,10 @@ function init()
 
 	createjs.Ticker.addEventListener("tick", handleTick);
     setInterval(queryState, 10000);
+
+    // create a manifest (above)
+    //createjs.Sound.addEventListener("loadComplete", handleLoad);
+    createjs.Sound.registerManifest(manifest);
 }
 
 function onResize()
