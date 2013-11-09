@@ -15,13 +15,11 @@ function init()
 	stage = new createjs.Stage("demoCanvas");
 	
 	resize();
-	createBackground();
-	createPlayer();
-	createUI();
+	createContent();
 
 	createjs.Ticker.addEventListener("tick", handleTick);
     queryState();
-    setInterval(queryState,5000);
+    setInterval(queryState, 5000);
 }
 
 function onResize()
@@ -139,16 +137,11 @@ function createPlayer()
 		
 		this.sleep = function ()
 		{
-			this.eye1in.scaleY = 0.3;
-			this.eye2in.scaleY = 0.3;
 			this.state = "sleep";
 		};
 		
 		this.wakeUp = function ()
 		{
-			this.eye1in.scaleY = 1;
-			this.eye2in.scaleY = 1;
-			player.mouth.scaleY = 1;
 			this.state = "patrol";
 		};
 	}
@@ -158,13 +151,19 @@ function createPlayer()
 	stage.update();
 }
 
-function createBackground()
+function createContent()
 {
 	bg = new createjs.Bitmap("img/background_01.png");
-	bg.addEventListener("click", handleBackground);
-	bg.scaleX = stage.canvas.width/bg.image.width;
-	bg.scaleY = stage.canvas.height/bg.image.height;
-	stage.addChild(bg);
+	bg.image.onload = function()
+	{
+		bg.addEventListener("click", handleBackground);
+		bg.scaleX = stage.canvas.width/bg.image.width;
+		bg.scaleY = stage.canvas.height/bg.image.height;
+		stage.addChild(bg);
+		
+		createPlayer();
+		createUI();
+	};
 	
 	isDay = true;
 }
