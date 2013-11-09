@@ -64,7 +64,7 @@ public class LobsterApiController {
         Status status = lobster.getStatus();
         List<StatusVitamine> statusVitamineList = status.getStatusVitamineList();
 
-        Food food = foodService.getById(id);
+        Food food = foodService.getById(foodId);
 
         List<Vitamine> foodVitamines = food.getVitamines();
 
