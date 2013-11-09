@@ -4,6 +4,7 @@ import lobster.server.rest.model.*;
 import lobster.server.rest.persistence.ActivityService;
 import lobster.server.rest.persistence.FoodService;
 import lobster.server.rest.persistence.LobsterService;
+import lobster.server.rest.persistence.StatusService;
 import org.hibernate.SessionFactory;
 import org.hibernate.dialect.H2Dialect;
 import org.springframework.cache.Cache;
@@ -54,6 +55,11 @@ public class ServicesConfiguration {
     @Bean
     public ActivityService activityService() throws Exception {
         return new ActivityService(this.sessionFactory());
+    }
+
+    @Bean
+    public StatusService statusService() throws Exception {
+        return new StatusService(this.sessionFactory());
     }
 
     @Bean
