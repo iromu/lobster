@@ -41,7 +41,7 @@
                 <version>6.1.26</version>
                 <configuration>
                     <contextPath>/</contextPath>
-                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
                     <stopPort>8005</stopPort>
                     <stopKey>STOP</stopKey>
                 </configuration>

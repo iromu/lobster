@@ -2,6 +2,8 @@ package lobster.server.rest.controller;
 
 import lobster.server.rest.model.Activity;
 import lobster.server.rest.model.Lobster;
+import lobster.server.rest.model.Status;
+import lobster.server.rest.model.StatusVitamine;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -65,12 +68,20 @@ public class LobsterApiControllerIT {
 
     @Test
     public void giveFood() {
-        restTemplate.postForLocation("http://localhost:8080/api/lobster/1/givefood/1",null);
+        Status status = restTemplate.postForObject("http://localhost:8080/api/lobster/1/givefood/1", null, Status.class);
+        status = restTemplate.postForObject("http://localhost:8080/api/lobster/1/givefood/2", null, Status.class);
+
+        assertNotNull(status);
+        assertThat(status.getStatusVitamineList().size(), is(3));
+        for (StatusVitamine statusVitamine : status.getStatusVitamineList()) {
+            assertThat(statusVitamine.getAmount(), is(2));
+        }
+
     }
 
     @Test
-    public void doActivity(){
-        restTemplate.postForLocation("http://localhost:8080/api/lobster/1/doActivity/1",null);
+    public void doActivity() {
+        restTemplate.postForLocation("http://localhost:8080/api/lobster/1/doActivity/1", null);
     }
 
 }
