@@ -32,7 +32,7 @@ function init()
 	createContent();
 
 	createjs.Ticker.addEventListener("tick", handleTick);
-    setInterval(queryState, 10000);
+    setInterval(queryState, 1000);
 
     // create a manifest (above)
     //createjs.Sound.addEventListener("loadComplete", handleLoad);
@@ -144,6 +144,11 @@ function createPlayer()
 		
 		this.init = function ()
 		{
+            basePosX = stage.canvas.width * 0.5;
+            basePosY = stage.canvas.height * 0.6;
+
+            this.animation.x = basePosX;
+            this.animation.y = basePosY;
 		};
 		
 		this.move = function ()
@@ -193,26 +198,31 @@ function createPlayer()
 
 function loadAnimation(playerTemp, ruta)
 {
+    playerTemp.playerImg = ruta;
+
+    var oldx, oldy;
 	if(playerTemp.animation!=undefined)
 	{
+        oldx = playerTemp.animation.x;
+        oldy = playerTemp.animation.y;
 		stage.removeChild(playerTemp.animation);
 	}
-	
+
 	data = {
 		images: [ruta],
 		frames: {width:110, height:186},
-		animations: {	right:[16,23,"right",0.4], 
-						idle:[0,1,"idle",0.1], 
-						left:[30,37,"left",0.4], 
-						eat:[2,5,"idle",0.4], 
+		animations: {	right:[16,23,"right",0.4],
+						idle:[0,1,"idle",0.1],
+						left:[30,37,"left",0.4],
+						eat:[2,5,"idle",0.4],
 						open:[6,6,"open",0.1],
 						sleep:[70,71,"sleep",0.1],
 						playGame3:[58,59,"playGame3",0.1],
 						playGame5:[60,61,"playGame5",0.1]}
 	};
-	
+
 	newAnimation = "";
-	
+
 	switch(playerTemp.state)
 	{
 		case "patrol":
@@ -225,16 +235,12 @@ function loadAnimation(playerTemp, ruta)
 			newAnimation = "idle";
 			break;
 	}
-	
+
 	playerTemp.spriteSheet = new createjs.SpriteSheet(data);
 	playerTemp.animation = new createjs.Sprite(playerTemp.spriteSheet, newAnimation);
-	
-	basePosX = stage.canvas.width * 0.5;
-	basePosY = stage.canvas.height * 0.6;
-	
-	playerTemp.animation.x = basePosX;
-	playerTemp.animation.y = basePosY;
-	
+
+    playerTemp.animation.x = oldx;
+    playerTemp.animation.y = oldy;
 	stage.addChild(playerTemp.animation);
 }
 
