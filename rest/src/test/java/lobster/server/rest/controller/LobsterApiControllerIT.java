@@ -46,7 +46,7 @@ public class LobsterApiControllerIT {
         lobster.setEmail("email");
         lobster.setStatus(null);
 
-        assertThat(id, is(8));
+        assertThat(id, is(7));
         System.out.println(id);
 
     }
