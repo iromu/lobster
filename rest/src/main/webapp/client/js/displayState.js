@@ -53,8 +53,35 @@ function updateStatusLevelBarHorz(barCtrl, func,basex, basey, attributeName,valu
     stage.update();
 }
 
-function updateStatusLevelBarVert ()
+function updateStatusLevelBarVert (barCtrl, img,basex, basey, attributeName,value)
 {
+    // Check if the shape has been created
+    if ( barCtrl === null)
+    {
+        // Create it
+        frame = new createjs.Shape();
+        // Create the image
+        var bitmap = new createjs.Bitmap("img/vitamin/"+img);
+        bitmap.x = basex;
+        bitmap.y = basey;
+        bitmap.scaleX = 0.25;
+        bitmap.scaleY = 0.25;
+        bitmap.visible = true;
+        stage.addChild(bitmap);
+        stage.addChild(frame);
+        barCtrl = frame;
+    }
+    // Draw the bar frame
+    barCtrl.graphics.beginFill("yellow").drawRect(basex+58, basey-2,
+        24, 74 );
+    // Draw the bar
+    var length = 70 * value/100;
+    var bary = basey + 70 - length;
+    var barx = basex + 60;
+    // Draw the filled bar
+    barCtrl.graphics.beginFill("green").drawRect(barx, bary,
+        20, length );
+    stage.update();
 
 }
 
@@ -67,11 +94,11 @@ function updateState(data, textStatus, jqXHR)
     updateStatusLevelBarHorz(totalCaloriesStatusLevelBar,createStatusLevelBar, 30, 160, "Total Calories", state.totalCalories)
     updateStatusLevelBarHorz(fatStatusLevelBar, createStatusLevelBar, 30, 220, "Fat level", state.fatLevel);
     updateStatusLevelBarHorz(happinessStatusLevelBar, createStatusLevelBar, 30, 280, "Happiness", state.happiness);
-    updateStatusLevelBarHorz(vitaminAStatusLevelBar,createStatusLevelBar, 30, 360, "Vit A", state.statusVitamineList[0].amount)
-    updateStatusLevelBarHorz(vitaminBStatusLevelBar, createStatusLevelBar, 30, 420, "Vit B", state.statusVitamineList[1].amount);
-    updateStatusLevelBarHorz(vitaminCStatusLevelBar, createStatusLevelBar, 30, 480, "Vit C", state.statusVitamineList[2].amount);
-    updateStatusLevelBarHorz(vitaminDStatusLevelBar,createStatusLevelBar, 30, 540, "Vit D", state.statusVitamineList[3].amount)
-    updateStatusLevelBarHorz(calciumStatusLevelBar, createStatusLevelBar, 30, 600, "Calcium", state.statusVitamineList[4].amount);
+    updateStatusLevelBarVert(vitaminAStatusLevelBar,"A.png", 30, 360, "Vit A", state.statusVitamineList[0].amount)
+    updateStatusLevelBarVert(vitaminBStatusLevelBar, "B.png", 130, 360, "Vit B", state.statusVitamineList[1].amount);
+    updateStatusLevelBarVert(vitaminCStatusLevelBar, "C.png", 230, 360, "Vit C", state.statusVitamineList[2].amount);
+    updateStatusLevelBarVert(vitaminDStatusLevelBar,"D.png", 30, 480, "Vit D", state.statusVitamineList[3].amount)
+    updateStatusLevelBarVert(calciumStatusLevelBar, "calcium.png", 130, 480, "Calcium", state.statusVitamineList[4].amount);
 
 
 }
