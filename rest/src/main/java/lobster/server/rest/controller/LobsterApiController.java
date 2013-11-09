@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,20 +62,33 @@ public class LobsterApiController {
 
         Lobster lobster = lobsterService.getById(id);
         Status status = lobster.getStatus();
-        List<StatusVitamine> statusVitamine = status.getStatusVitamineList();
+        List<StatusVitamine> statusVitamineList = status.getStatusVitamineList();
 
-        Food food = foodService.getById(id);
+        Food food = foodService.getById(foodId);
 
         List<Vitamine> foodVitamines = food.getVitamines();
 
+        assert (foodVitamines != null && foodVitamines.size() == 3);
         for (Vitamine foodVitamine : foodVitamines) {
 
-            int i = statusVitamine.indexOf(foodVitamine);
+            int i = statusVitamineList.indexOf(foodVitamine);
             if (i != -1) {
-                StatusVitamine statusVitamine1 = statusVitamine.get(i);
-                statusVitamine1.setAmount(statusVitamine1.getAmount() + 1);
+                StatusVitamine statusVitamine = statusVitamineList.get(i);
+                statusVitamine.setAmount(statusVitamine.getAmount() + 1);
+            } else {
+                StatusVitamine statusVitamine = new StatusVitamine();
+                statusVitamine.setAmount(1);
+                statusVitamineList.add(statusVitamine);
             }
         }
+
+        Integer totalCalories = status.getTotalCalories();
+        totalCalories = totalCalories == null ? 0 : totalCalories;
+        status.setTotalCalories(totalCalories + food.getCalories());
+
+        status.setLastEat(new Date());
         lobsterService.update(lobster);
+
+        assert (statusVitamineList != null && statusVitamineList.size() == 3);
     }
 }
