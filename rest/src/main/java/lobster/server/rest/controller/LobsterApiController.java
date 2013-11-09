@@ -5,10 +5,7 @@ import lobster.server.rest.model.Lobster;
 import lobster.server.rest.persistence.LobsterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -37,16 +34,24 @@ public class LobsterApiController {
 
     @ResponseBody
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public List<Lobster> getLobsters()
-    {
-        return lobsterService.getAll();
+    public List<Lobster> getLobsters() {
+        List<Lobster> lobsters = lobsterService.getAll();
+
+        List<Lobster> response = new ArrayList<Lobster>();
+        for (Lobster lobster : lobsters) {
+            Lobster simpleLobster = new Lobster();
+            simpleLobster.setId(lobster.getId());
+            simpleLobster.setName(lobster.getName());
+            response.add(simpleLobster);
+        }
+
+
+        return response;
     }
 
     @ResponseBody
-    @RequestMapping(value = "getFood", method = RequestMethod.GET)
-    public List<Food> getFood(Integer lobsterID)
-    {
+    @RequestMapping(value = "{id}/givefood/{foodId}", method = RequestMethod.POST)
+    public void giveFood(@PathVariable("id") Integer id, @PathVariable("foodId") Integer foodId) {
 
-        return new ArrayList<Food>();
     }
 }
