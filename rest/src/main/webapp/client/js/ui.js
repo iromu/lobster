@@ -327,7 +327,9 @@ function requestFoodItems()
 					
 					if(distance < 150)
 					{
+                        element.bitmap.alpha = 0;
 						eat(element);
+                        createjs.Tween.get(element.bitmap).to({alpha: 1}, 3000).set({visible: true});
 					}
 
 					this.x = element.posX;
