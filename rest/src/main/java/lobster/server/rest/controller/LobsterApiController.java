@@ -1,20 +1,14 @@
 package lobster.server.rest.controller;
 
 import lobster.server.rest.model.*;
-import lobster.server.rest.persistence.ActivityService;
-import lobster.server.rest.persistence.FoodService;
-import lobster.server.rest.persistence.LobsterService;
-import lobster.server.rest.persistence.StatusService;
+import lobster.server.rest.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -41,10 +35,25 @@ public class LobsterApiController {
     @Autowired
     private StatusService statusService;
 
+    @Autowired
+    private VitaminService vitaminService;
+
     @ResponseBody
     @RequestMapping(value = "new", method = RequestMethod.POST)
     public Integer addLobster(@Valid @RequestBody Lobster lobster) {
         lobster.setStatus(new Status());
+        // Fill the list of StatusVitamin of Status
+        List<Vitamine> vitamines = vitaminService.getAll();
+        Iterator<Vitamine> it = vitamines.iterator();
+        while (it.hasNext())
+        {
+            Vitamine vit = it.next();
+            StatusVitamine statusVitamine = new StatusVitamine();
+            statusVitamine.setVitamine(vit);
+            statusVitamine.setAmount(50);
+            lobster.getStatus().getStatusVitamineList().add(statusVitamine);
+        }
+
         lobster = lobsterService.create(lobster);
         return lobster.getId();
     }

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Entity
 public class Vitamine implements Serializable {
 
-    enum VitamineType {VITAMINE_A, VITAMINE_B, VITAMINE_C, CALCIUM }
+    enum VitamineType {VITAMINE_A, VITAMINE_B, VITAMINE_C, VITAMINE_D, CALCIUM }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

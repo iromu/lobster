@@ -1,6 +1,7 @@
 insert into vitamine (name, description, vitamineType, amount) values ('Vitamine A', 'Vitamine A desc.', 'VITAMINE_A', 50);
 insert into vitamine (name, description, vitamineType, amount) values ('Vitamine B', 'Vitamine B desc.', 'VITAMINE_B', 50);
 insert into vitamine (name, description, vitamineType, amount) values ('Vitamine C', 'Vitamine C desc.', 'VITAMINE_C', 50);
+insert into vitamine (name, description, vitamineType, amount) values ('Vitamine D', 'Vitamine D desc.', 'VITAMINE_D', 50);
 insert into vitamine (name, description, vitamineType, amount) values ('Calcium', 'Calcium desc.', 'CALCIUM', 50);
 
 insert into activity (name, description, foodType, calories, happiness) values ('Sleep', 'Sleep desc.', 'SLEEP', 20, 0);

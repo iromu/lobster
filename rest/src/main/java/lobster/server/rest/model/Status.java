@@ -3,6 +3,7 @@ package lobster.server.rest.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -38,6 +39,7 @@ public class Status implements Serializable {
         idealCalories = new Integer(50);
         happiness  =new Integer(50);
         lastEat = new Date();
+        statusVitamineList = new HashSet<StatusVitamine>();
     }
 
     public Integer getId() {
