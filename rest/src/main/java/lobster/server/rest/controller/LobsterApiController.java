@@ -37,8 +37,7 @@ public class LobsterApiController {
 
     @ResponseBody
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public List<Lobster> getLobsters()
-    {
+    public List<Lobster> getLobsters() {
         List<Lobster> lobsters = lobsterService.getAll();
 
         List<Lobster> response = new ArrayList<Lobster>();
@@ -53,11 +52,4 @@ public class LobsterApiController {
         return response;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "getFood", method = RequestMethod.GET)
-    public List<Food> getFood(Integer lobsterID)
-    {
-
-        return new ArrayList<Food>();
-    }
 }
