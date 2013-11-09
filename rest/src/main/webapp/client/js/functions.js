@@ -276,8 +276,11 @@ function resize()
 }
 
 function handleTick()
-    if (player !== undefined)
-	player.move();
+{
+    if (player != undefined)
+	{
+		player.move();
+	}
 	
 	stage.update();	
 }
