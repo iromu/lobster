@@ -20,6 +20,8 @@ function init()
 	createUI();
 
 	createjs.Ticker.addEventListener("tick", handleTick);
+    queryState();
+    setInterval(queryState,5000);
 }
 
 function onResize()
