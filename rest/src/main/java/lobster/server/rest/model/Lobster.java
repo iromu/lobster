@@ -26,7 +26,7 @@ public class Lobster implements Serializable {
 
     private String email;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Status status;
 
     public Integer getId() {

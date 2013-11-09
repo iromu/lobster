@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -75,6 +76,12 @@ public class LobsterApiController {
                 statusVitamine1.setAmount(statusVitamine1.getAmount() + 1);
             }
         }
+
+        Integer totalCalories = status.getTotalCalories();
+        totalCalories = totalCalories == null ? 0 : totalCalories;
+        status.setTotalCalories(totalCalories + food.getCalories());
+
+        status.setLastEat(new Date());
         lobsterService.update(lobster);
     }
 }
