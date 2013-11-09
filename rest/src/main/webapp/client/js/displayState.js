@@ -62,7 +62,15 @@ function updateStatusLevelBarHorz(barCtrl, func,basex, basey, attributeName,valu
     stage.update();
 }
 
-function updateStatusLevelBarVert (barCtrl, img,basex, basey, attributeName,value)
+function showVitaminDescription(event)
+{
+    //alert(event.toString());
+    var description = event.target.description;
+    var name = event.target.name;
+    showDescription(name, description);
+}
+
+function updateStatusLevelBarVert (barCtrl, img,basex, basey, attributeName,vitamin)
 {
     // Check if the shape has been created
     if ( barCtrl === null)
@@ -76,10 +84,14 @@ function updateStatusLevelBarVert (barCtrl, img,basex, basey, attributeName,valu
         bitmap.scaleX = 0.25;
         bitmap.scaleY = 0.25;
         bitmap.visible = true;
+        bitmap.description = vitamin.vitamine.description;
+        bitmap.name = vitamin.vitamine.name;
         stage.addChild(bitmap);
         stage.addChild(frame);
         barCtrl = frame;
+        bitmap.on("click", showVitaminDescription);
     }
+    value = vitamin.amount;
     // Draw the bar frame
     barCtrl.graphics.beginFill("white").drawRect(basex+58, basey-2,
         24, 74 );
@@ -113,11 +125,11 @@ function updateState(data, textStatus, jqXHR)
     updateStatusLevelBarHorz(totalCaloriesStatusLevelBar,createStatusLevelBar, 30, 150, "Total Calories", state.totalCalories)
     updateStatusLevelBarHorz(fatStatusLevelBar, createStatusLevelBar, 30, 220, "Fat level", state.fatLevel);
     updateStatusLevelBarHorz(happinessStatusLevelBar, createStatusLevelBar, 30, 290, "Happiness", state.happiness);
-    updateStatusLevelBarVert(vitaminAStatusLevelBar,"A.png", 30, 360, "Vit A", searchVitamin(state.vitamineAmountList,"Vitamine A").amount)
-    updateStatusLevelBarVert(vitaminBStatusLevelBar, "B.png", 130, 360, "Vit B", searchVitamin(state.vitamineAmountList,"Vitamine B").amount);
-    updateStatusLevelBarVert(vitaminCStatusLevelBar, "C.png", 230, 360, "Vit C", searchVitamin(state.vitamineAmountList,"Vitamine C").amount);
-    updateStatusLevelBarVert(vitaminDStatusLevelBar,"D.png", 30, 480, "Vit D", searchVitamin(state.vitamineAmountList,"Vitamine D").amount)
-    updateStatusLevelBarVert(calciumStatusLevelBar, "calcium.png", 130, 480, "Calcium", searchVitamin(state.vitamineAmountList,"Calcium").amount);
+    updateStatusLevelBarVert(vitaminAStatusLevelBar,"A.png", 30, 360, "Vit A", searchVitamin(state.vitamineAmountList,"Vitamine A"))
+    updateStatusLevelBarVert(vitaminBStatusLevelBar, "B.png", 130, 360, "Vit B", searchVitamin(state.vitamineAmountList,"Vitamine B"));
+    updateStatusLevelBarVert(vitaminCStatusLevelBar, "C.png", 230, 360, "Vit C", searchVitamin(state.vitamineAmountList,"Vitamine C"));
+    updateStatusLevelBarVert(vitaminDStatusLevelBar,"D.png", 30, 480, "Vit D", searchVitamin(state.vitamineAmountList,"Vitamine D"))
+    updateStatusLevelBarVert(calciumStatusLevelBar, "calcium.png", 130, 480, "Calcium", searchVitamin(state.vitamineAmountList,"Calcium"));
 
     var playerImg;
     if (state.fatLevel<25)
