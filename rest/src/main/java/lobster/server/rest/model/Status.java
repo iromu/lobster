@@ -27,8 +27,9 @@ public class Status implements Serializable {
 
     private Date lastEat;
 
+
     @OneToMany
-    private List<Vitamine> vitamines;
+    private List<StatusVitamine> statusVitamine;
 
 
     public Integer getId() {
@@ -71,11 +72,12 @@ public class Status implements Serializable {
         this.lastEat = lastEat;
     }
 
-    public List<Vitamine> getVitamines() {
-        return vitamines;
+
+    public List<StatusVitamine> getStatusVitamine() {
+        return statusVitamine;
     }
 
-    public void setVitamines(List<Vitamine> vitamines) {
-        this.vitamines = vitamines;
+    public void setStatusVitamine(List<StatusVitamine> statusVitamine) {
+        this.statusVitamine = statusVitamine;
     }
 }
