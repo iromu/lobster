@@ -23,7 +23,7 @@ public class Status implements Serializable {
 
     private Integer totalCalories;
 
-    private Integer idealCalories;
+    private Integer fatLevel;
 
     private Integer happiness;
 
@@ -36,7 +36,7 @@ public class Status implements Serializable {
     public Status()
     {
         totalCalories = new Integer(50);
-        idealCalories = new Integer(50);
+        fatLevel = new Integer(50);
         happiness  =new Integer(50);
         lastEat = new Date();
         statusVitamineList = new HashSet<StatusVitamine>();
@@ -58,12 +58,12 @@ public class Status implements Serializable {
         this.totalCalories = totalCalories;
     }
 
-    public Integer getIdealCalories() {
-        return idealCalories;
+    public Integer getFatLevel() {
+        return fatLevel;
     }
 
-    public void setIdealCalories(Integer idealCalories) {
-        this.idealCalories = idealCalories;
+    public void setFatLevel(Integer fatLevel) {
+        this.fatLevel = fatLevel;
     }
 
     public Integer getHappiness() {
