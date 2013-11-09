@@ -133,7 +133,9 @@ function createPlayer()
 							left:[30,37,"left",0.4], 
 							eat:[2,5,"idle",0.4], 
 							open:[6,6,"open",0.1],
-							sleep:[70,71,"sleep",0.1]}
+							sleep:[70,71,"sleep",0.1],
+							playGame3:[58,59,"sleep",0.1],
+							playGame5:[60,61,"sleep",0.1]}
 		};
 		
 		this.spriteSheet = new createjs.SpriteSheet(this.data);
@@ -164,6 +166,12 @@ function createPlayer()
 					break;
 				case "idle":
 					moveIdle(this);
+					break;
+				case "playGame3":
+					movePlayGame3(this);
+					break;
+				case "playGame5":
+					movePlayGame5(this);
 					break;
 			}
 		};
