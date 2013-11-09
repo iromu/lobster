@@ -33,8 +33,7 @@ public class ActivityApiController {
 
     @ResponseBody
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public List<Activity> getActivities()
-    {
+    public List<Activity> getActivities(){
         return activityService.getAll();
     }
 

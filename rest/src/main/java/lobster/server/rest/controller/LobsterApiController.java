@@ -1,8 +1,10 @@
 package lobster.server.rest.controller;
 
 import lobster.server.rest.model.*;
+import lobster.server.rest.persistence.ActivityService;
 import lobster.server.rest.persistence.FoodService;
 import lobster.server.rest.persistence.LobsterService;
+import lobster.server.rest.persistence.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +33,12 @@ public class LobsterApiController {
 
     @Autowired
     private FoodService foodService;
+
+    @Autowired
+    private ActivityService activityService;
+
+    @Autowired
+    private StatusService statusService;
 
     @ResponseBody
     @RequestMapping(value = "new", method = RequestMethod.POST)
@@ -100,5 +108,34 @@ public class LobsterApiController {
         totalCalories = totalCalories == null ? 0 : totalCalories;
         int calories = totalCalories + food.getCalories();
         status.setTotalCalories(calories < 100 ? calories : 100);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "{id}/doActivity/{actvtId}", method = RequestMethod.POST)
+    public void doActivity(@PathVariable("id") Integer id, @PathVariable("actvtId") Integer actvtId) {
+        Lobster lbs = lobsterService.getById(id);
+        Status status = lbs.getStatus();
+        Activity activity = activityService.getActivity(actvtId);
+
+        System.out.println("Status happ ---->" + status.getHappiness());
+        System.out.println("Activity happ ---->" + activity.getHappiness());
+        int happiness = status.getHappiness() + activity.getHappiness();
+        if(happiness < 0)
+            status.setHappiness(0);
+        else if(happiness >100)
+            status.setHappiness(100);
+        else
+            status.setHappiness(happiness);
+
+        int cals = status.getTotalCalories() + activity.getCalories();
+        if(cals < 0)
+            status.setTotalCalories(0);
+        else if (cals > 100)
+            status.setTotalCalories(100);
+        else
+            status.setTotalCalories(cals);
+
+        lbs.setStatus(status);
+        lobsterService.update(lbs);
     }
 }

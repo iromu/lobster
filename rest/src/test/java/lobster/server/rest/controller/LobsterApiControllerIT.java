@@ -1,5 +1,6 @@
 package lobster.server.rest.controller;
 
+import lobster.server.rest.model.Activity;
 import lobster.server.rest.model.Lobster;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,6 +66,11 @@ public class LobsterApiControllerIT {
     @Test
     public void giveFood() {
         restTemplate.postForLocation("http://localhost:8080/api/lobster/1/givefood/1",null);
+    }
+
+    @Test
+    public void doActivity(){
+        restTemplate.postForLocation("http://localhost:8080/api/lobster/1/doActivity/1",null);
     }
 
 }

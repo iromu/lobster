@@ -28,6 +28,10 @@ public class Activity implements Serializable {
 
     private String description;
 
+    private Integer hours;
+
+    private Integer happiness;
+
     public Integer getId() {
         return id;
     }
@@ -84,9 +88,7 @@ public class Activity implements Serializable {
         this.happiness = happiness;
     }
 
-    private Integer hours;
 
-    private Integer happiness;
 
 
 }
