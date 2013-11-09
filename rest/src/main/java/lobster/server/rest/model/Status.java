@@ -29,7 +29,7 @@ public class Status implements Serializable {
 
 
     @OneToMany(fetch = FetchType.EAGER)
-    private List<StatusVitamine> statusVitamine;
+    private List<StatusVitamine> statusVitamineList;
 
 
     public Integer getId() {
@@ -73,11 +73,11 @@ public class Status implements Serializable {
     }
 
 
-    public List<StatusVitamine> getStatusVitamine() {
-        return statusVitamine;
+    public List<StatusVitamine> getStatusVitamineList() {
+        return statusVitamineList;
     }
 
-    public void setStatusVitamine(List<StatusVitamine> statusVitamine) {
-        this.statusVitamine = statusVitamine;
+    public void setStatusVitamineList(List<StatusVitamine> statusVitamineList) {
+        this.statusVitamineList = statusVitamineList;
     }
 }
