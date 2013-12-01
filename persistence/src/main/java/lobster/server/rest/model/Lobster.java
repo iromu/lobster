@@ -19,7 +19,7 @@ public class Lobster implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
     private String password;
