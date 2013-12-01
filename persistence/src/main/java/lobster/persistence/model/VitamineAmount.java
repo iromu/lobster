@@ -1,5 +1,8 @@
 package lobster.persistence.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 /**
@@ -14,34 +17,17 @@ public class VitamineAmount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @Getter
+    @Setter
     private Vitamine vitamine;
 
+    @Getter
+    @Setter
     private Integer amount;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Vitamine getVitamine() {
-        return vitamine;
-    }
-
-    public void setVitamine(Vitamine vitamine) {
-        this.vitamine = vitamine;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
 }
