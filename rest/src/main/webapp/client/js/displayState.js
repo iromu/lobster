@@ -134,7 +134,7 @@ function updateState(data, textStatus, jqXHR)
     var playerImg;
     if (state.fatLevel<25)
     {
-        playerImg = "img/guy.png";
+        playerImg = "img/slim_guy.png";
     }
     else if (state.fatLevel>75)
     {
@@ -144,8 +144,10 @@ function updateState(data, textStatus, jqXHR)
     {
         playerImg = "img/guy.png";
     }
-
-    loadAnimation(player, playerImg);
+    if (playerImg != player.playerImg)
+    {
+        loadAnimation(player, playerImg);
+    }
 }
 
 function handleError(  jqXHR,  textStatus,  errorThrown)
