@@ -1,9 +1,7 @@
 package lobster.server.rest.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -31,12 +29,12 @@ public class Food implements Serializable {
     private Integer fatLevel;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="food_vitamines",
-    joinColumns = {@JoinColumn(name = "food_id", referencedColumnName = "id")},
-    inverseJoinColumns = {@JoinColumn(name = "vitamineamount_id", referencedColumnName = "id")})
+    @JoinTable(name = "food_vitamines",
+            joinColumns = {@JoinColumn(name = "food_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "vitamineamount_id", referencedColumnName = "id")})
     private Set<VitamineAmount> vitamines;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
     private String description;
