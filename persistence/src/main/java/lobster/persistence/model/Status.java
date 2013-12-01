@@ -1,5 +1,9 @@
 package lobster.persistence.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -17,77 +21,41 @@ import java.util.Set;
 public class Status implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Integer id;
 
+    @Getter
+    @Setter
     private Integer totalCalories;
 
+    @Getter
+    @Setter
     private Integer fatLevel;
 
+    @Getter
+    @Setter
     private Integer happiness;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Getter
+    @Setter
     private Date lastEat;
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name="status_vitamines")
+    @JoinTable(name = "status_vitamines")
+    @Getter
+    @Setter
     private Set<VitamineAmount> vitamineAmountList;
 
-    public Status()
-    {
+    public Status() {
         totalCalories = new Integer(50);
         fatLevel = new Integer(50);
-        happiness  =new Integer(50);
+        happiness = new Integer(50);
         lastEat = new Date();
-        vitamineAmountList = new HashSet<VitamineAmount>();
+        vitamineAmountList = new HashSet<>();
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getTotalCalories() {
-        return totalCalories == null? 0 : totalCalories;
-    }
-
-    public void setTotalCalories(Integer totalCalories) {
-        this.totalCalories = totalCalories;
-    }
-
-    public Integer getFatLevel() {
-        return fatLevel!=null?fatLevel:0;
-    }
-
-    public void setFatLevel(Integer fatLevel) {
-        this.fatLevel = fatLevel;
-    }
-
-    public Integer getHappiness() {
-        return happiness!=null?happiness:0;
-    }
-
-    public void setHappiness(Integer happiness) {
-        this.happiness = happiness;
-    }
-
-    public Date getLastEat() {
-        return lastEat;
-    }
-
-    public void setLastEat(Date lastEat) {
-        this.lastEat = lastEat;
-    }
-
-
-    public Set<VitamineAmount> getVitamineAmountList() {
-        return vitamineAmountList;
-    }
-
-    public void setVitamineAmountList(Set<VitamineAmount> vitamineAmountList) {
-        this.vitamineAmountList = vitamineAmountList;
-    }
 }
