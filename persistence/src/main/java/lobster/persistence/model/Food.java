@@ -1,4 +1,4 @@
-package lobster.server.rest.model;
+package lobster.persistence.model;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,16 +1,12 @@
 package lobster.server.rest.controller;
 
-import lobster.server.rest.model.Food;
-import lobster.server.rest.persistence.FoodService;
-import lobster.server.rest.persistence.LobsterService;
+import lobster.persistence.jpa.repository.FoodRepository;
+import lobster.persistence.model.Food;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,12 +20,11 @@ import java.util.List;
 public class FoodApiController {
 
     @Autowired
-    private FoodService foodService;
+    private FoodRepository foodRepository;
 
     @ResponseBody
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public List<Food> getFood()
-    {
-        return foodService.getAll();
+    public Iterable<Food> getFood() {
+        return foodRepository.findAll();
     }
 }

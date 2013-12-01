@@ -1,9 +1,8 @@
 package lobster.server.rest.controller;
 
-import lobster.server.rest.model.Lobster;
-import lobster.server.rest.model.Status;
-import lobster.server.rest.model.VitamineAmount;
-import lobster.server.rest.persistence.StatusService;
+import lobster.persistence.jpa.repository.StatusRepository;
+import lobster.persistence.model.Lobster;
+import lobster.persistence.model.Status;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,7 +27,7 @@ import static org.junit.Assert.assertThat;
 public class LobsterApiControllerIT {
 
     @Autowired
-    private StatusService statusService;
+    private StatusRepository statusRepository;
 
     private RestTemplate restTemplate;
 

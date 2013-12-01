@@ -1,11 +1,13 @@
 package quartz;
 
-import lobster.server.rest.model.*;
-import lobster.server.rest.persistence.ActivityService;
-import lobster.server.rest.persistence.LobsterService;
+import lobster.persistence.jpa.repository.ActivityRepository;
+import lobster.persistence.jpa.repository.LobsterRepository;
+import lobster.persistence.model.Lobster;
+import lobster.persistence.model.Status;
+import lobster.persistence.model.VitamineAmount;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,15 +19,15 @@ import java.util.*;
 public class PlayerTask {
 
     @Autowired
-    private ActivityService activityService;
+    private ActivityRepository activityRepository;
 
     @Autowired
-    private LobsterService lobsterService;
+    private LobsterRepository lobsterRepository;
 
     public void printCurrentTime() {
         // printing current system time
 
-        List<Lobster> list = lobsterService.getAll();
+        Iterable<Lobster> list = lobsterRepository.findAll();
         for (Lobster lob : list) {
 
             Status status = lob.getStatus();
@@ -60,7 +62,7 @@ public class PlayerTask {
                 }
 
                 lob.setStatus(status);
-                lobsterService.update(lob);
+                lobsterRepository.save(lob);
             }
 
         }

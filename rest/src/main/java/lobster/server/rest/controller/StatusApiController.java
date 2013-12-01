@@ -1,17 +1,13 @@
 package lobster.server.rest.controller;
 
-import lobster.server.rest.model.Activity;
-import lobster.server.rest.model.Status;
-import lobster.server.rest.persistence.ActivityService;
-import lobster.server.rest.persistence.StatusService;
+import lobster.persistence.jpa.repository.StatusRepository;
+import lobster.persistence.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,13 +20,13 @@ import java.util.List;
 @Controller
 public class StatusApiController {
     @Autowired
-    private StatusService statusService;
+    private StatusRepository statusRepository;
 
 
     @ResponseBody
     @RequestMapping(value = "getStatus/{lobsterId}", method = RequestMethod.GET)
-    public Status getStatus(@PathVariable("lobsterId") Integer lobsterId) {
-        return statusService.get(lobsterId);
+    public Status getStatus(@PathVariable("lobsterId") Long lobsterId) {
+        return statusRepository.findOne(lobsterId);
     }
 
 
