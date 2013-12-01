@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -26,7 +27,7 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(classes = TestConfiguration.class)
 @Transactional
 public class StatusRepositoryTest {
-    @Autowired
+    @Inject
     StatusRepository statusRepository;
 
     @Test

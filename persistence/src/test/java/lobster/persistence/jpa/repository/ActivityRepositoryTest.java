@@ -4,11 +4,11 @@ import com.google.common.collect.Lists;
 import lobster.persistence.model.Activity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -25,14 +25,14 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(classes = TestConfiguration.class)
 @Transactional
 public class ActivityRepositoryTest {
-    @Autowired
+    @Inject
     ActivityRepository activityRepository;
 
     @Test
     public void findAll() {
         Iterable<Activity> activities = activityRepository.findAll();
         List<Activity> arrayList = Lists.newArrayList(activities);
-        assertThat(arrayList.size(),is(5));
+        assertThat(arrayList.size(), is(5));
 
     }
 }
