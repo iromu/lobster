@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>lobster-server</artifactId>
         <groupId>lobster</groupId>
@@ -8,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>rest</artifactId>
-
+    <name>${groupId}:${artifactId}</name>
     <packaging>war</packaging>
 
     <build>
@@ -66,12 +67,6 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>lobster</groupId>
-            <artifactId>persistence</artifactId>
-            <version>0.0.10-SNAPSHOT</version>
-        </dependency>
-
         <!-- Quartz API -->
         <dependency>
             <groupId>opensymphony</groupId>
@@ -119,5 +114,44 @@
             <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>r09</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>${h2.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>spring-data-jpa</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>lobster</groupId>
+                    <artifactId>spring-data-jpa</artifactId>
+                    <version>0.0.10-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>
