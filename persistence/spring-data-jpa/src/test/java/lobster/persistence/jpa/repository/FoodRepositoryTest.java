@@ -1,11 +1,10 @@
 package lobster.persistence.jpa.repository;
 
 import com.google.common.collect.Lists;
+import lobster.persistence.model.Activity;
 import lobster.persistence.model.Food;
-import lobster.persistence.model.Status;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,14 +25,14 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
 @Transactional
-public class StatusRepositoryTest {
+public class FoodRepositoryTest {
     @Inject
-    StatusRepository statusRepository;
+    FoodRepository foodRepository;
 
     @Test
     public void findAll() {
-        Iterable<Status> iterable = statusRepository.findAll();
-        ArrayList<Status> arrayList = Lists.newArrayList(iterable);
-        assertThat(arrayList.size(),is(4));
+        Iterable<Food> iterable = foodRepository.findAll();
+        ArrayList<Food> arrayList = Lists.newArrayList(iterable);
+        assertThat(arrayList.size(),is(8));
     }
 }
