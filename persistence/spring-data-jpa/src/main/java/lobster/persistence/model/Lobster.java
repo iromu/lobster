@@ -1,8 +1,7 @@
-package lobster.server.rest.model;
+package lobster.persistence.model;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -16,10 +15,10 @@ import java.io.Serializable;
 public class Lobster implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
     private String password;

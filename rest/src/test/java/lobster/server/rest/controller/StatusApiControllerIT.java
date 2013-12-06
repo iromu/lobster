@@ -1,7 +1,7 @@
 package lobster.server.rest.controller;
 
-import lobster.server.rest.model.Lobster;
-import lobster.server.rest.model.Status;
+import lobster.persistence.model.Lobster;
+import lobster.persistence.model.Status;
 import org.junit.Before;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;

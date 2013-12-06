@@ -1,4 +1,4 @@
-package lobster.server.rest;
+package lobster.persistence.jpa.repository;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -6,8 +6,8 @@ import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -22,7 +22,6 @@ import org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect;
 import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
@@ -32,22 +31,19 @@ import java.util.Arrays;
 /**
  * Created with IntelliJ IDEA.
  * User: wantez
- * Date: 08/11/13
- * Time: 21:41
+ * Date: 01/12/13
+ * Time: 19:08
  * To change this template use File | Settings | File Templates.
  */
-
 @Configuration
 @EnableCaching
-@EnableWebMvc
-@EnableTransactionManagement(proxyTargetClass = true)
+@EnableTransactionManagement
 @EnableJpaRepositories("lobster.persistence.jpa.repository")
-@ImportResource({"classpath:spring-context.xml"})
 @PropertySource("classpath:jdbc.properties")
-public class ServicesConfiguration {
+public class TestConfiguration {
 
     @Inject
-    private org.springframework.core.env.Environment environment;
+    private Environment environment;
 
     @Bean
     public CacheManager cacheManager() throws Exception {
@@ -95,6 +91,13 @@ public class ServicesConfiguration {
         return new EclipseLinkJpaDialect();
     }
 
+    @Bean(name = "transactionManager")
+    public PlatformTransactionManager annotationDrivenTransactionManager() {
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+        jpaTransactionManager.setEntityManagerFactory(entityManagerFactory());
+        return jpaTransactionManager;
+    }
+
     @Bean
     public DataSourceInitializer dataSourceInitializer() {
         DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
@@ -110,12 +113,4 @@ public class ServicesConfiguration {
         resourceDatabasePopulator.addScript(new ClassPathResource(environment.getProperty("jdbc.initLocation")));
         return resourceDatabasePopulator;
     }
-
-    @Bean(name = "transactionManager")
-    public PlatformTransactionManager annotationDrivenTransactionManager() {
-        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-        jpaTransactionManager.setEntityManagerFactory(entityManagerFactory());
-        return jpaTransactionManager;
-    }
-
 }

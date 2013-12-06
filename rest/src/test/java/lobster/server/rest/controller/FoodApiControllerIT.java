@@ -1,7 +1,7 @@
 package lobster.server.rest.controller;
 
-import lobster.server.rest.model.Food;
-import lobster.server.rest.model.Lobster;
+import lobster.persistence.model.Food;
+import lobster.persistence.model.Lobster;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;

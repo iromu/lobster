@@ -1,7 +1,7 @@
 package lobster.server.rest.controller;
 
-import lobster.server.rest.model.*;
-import lobster.server.rest.persistence.*;
+import lobster.persistence.jpa.repository.*;
+import lobster.persistence.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,27 +23,26 @@ import java.util.*;
 public class LobsterApiController {
 
     @Autowired
-    private LobsterService lobsterService;
-
-
-    @Autowired
-    private FoodService foodService;
+    private LobsterRepository lobsterRepository;
 
     @Autowired
-    private ActivityService activityService;
+    private FoodRepository foodRepository;
 
     @Autowired
-    private StatusService statusService;
+    private ActivityRepository activityRepository;
 
     @Autowired
-    private VitaminService vitaminService;
+    private StatusRepository statusRepository;
+
+    @Autowired
+    private VitaminRepository vitaminRepository;
 
     @ResponseBody
     @RequestMapping(value = "new", method = RequestMethod.POST)
     public Integer addLobster(@Valid @RequestBody Lobster lobster) {
         lobster.setStatus(new Status());
         // Fill the list of StatusVitamin of Status
-        List<Vitamine> vitamines = vitaminService.getAll();
+        Iterable<Vitamine> vitamines = vitaminRepository.findAll();
         Iterator<Vitamine> it = vitamines.iterator();
         while (it.hasNext()) {
             Vitamine vit = it.next();
@@ -53,7 +52,7 @@ public class LobsterApiController {
             lobster.getStatus().getVitamineAmountList().add(vitamineAmount);
         }
 
-        lobster = lobsterService.create(lobster);
+        lobster = lobsterRepository.save(lobster);
         return lobster.getId();
     }
 
@@ -61,7 +60,7 @@ public class LobsterApiController {
     @ResponseBody
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public List<Lobster> getLobsters() {
-        List<Lobster> lobsters = lobsterService.getAll();
+        Iterable<Lobster> lobsters = lobsterRepository.findAll();
 
         List<Lobster> response = new ArrayList<Lobster>();
         for (Lobster lobster : lobsters) {
@@ -77,13 +76,13 @@ public class LobsterApiController {
 
     @ResponseBody
     @RequestMapping(value = "{id}/givefood/{foodId}", method = RequestMethod.POST)
-    public Status giveFood(@PathVariable("id") Integer id, @PathVariable("foodId") Integer foodId) {
+    public Status giveFood(@PathVariable("id") Long id, @PathVariable("foodId") Long foodId) {
 
-        Lobster lobster = lobsterService.getById(id);
+        Lobster lobster = lobsterRepository.findOne(id);
         Status status = lobster.getStatus();
 
 
-        Food food = foodService.getById(foodId);
+        Food food = foodRepository.findOne(foodId);
 
         updateVitamines(status, food);
 
@@ -92,7 +91,7 @@ public class LobsterApiController {
         updateFatLevel(status, food);
 
         status.setLastEat(new Date());
-        lobsterService.update(lobster);
+        lobsterRepository.save(lobster);
 
         return status;
     }
@@ -108,7 +107,7 @@ public class LobsterApiController {
                     Integer amount = vitamineAmount.getAmount();
 
                     int i = amount + foodVitamine.getAmount();
-                    vitamineAmount.setAmount(i>100?100:i);
+                    vitamineAmount.setAmount(i > 100 ? 100 : i);
 
                     found = true;
                     continue;
@@ -130,7 +129,7 @@ public class LobsterApiController {
         status.setTotalCalories(calories < 100 ? calories : 100);
     }
 
-    private void updateFatLevel(Status status, Food food){
+    private void updateFatLevel(Status status, Food food) {
         Integer fatLevel = status.getFatLevel();
         fatLevel = fatLevel == null ? 0 : fatLevel;
         int foodFatLevel = food.getFatLevel();
@@ -140,10 +139,10 @@ public class LobsterApiController {
 
     @ResponseBody
     @RequestMapping(value = "{id}/doActivity/{actvtId}", method = RequestMethod.POST)
-    public boolean doActivity(@PathVariable("id") Integer id, @PathVariable("actvtId") Integer actvtId) {
-        Lobster lbs = lobsterService.getById(id);
+    public boolean doActivity(@PathVariable("id") Long id, @PathVariable("actvtId") Long actvtId) {
+        Lobster lbs = lobsterRepository.findOne(id);
         Status status = lbs.getStatus();
-        Activity activity = activityService.getActivity(actvtId);
+        Activity activity = activityRepository.findOne(actvtId);
 
         int happiness = status.getHappiness() + activity.getHappiness();
         if (happiness < 0)
@@ -170,14 +169,14 @@ public class LobsterApiController {
             status.setFatLevel(fat);
 
         lbs.setStatus(status);
-        lobsterService.update(lbs);
+        lobsterRepository.save(lbs);
         return true;
     }
 
     @ResponseBody
     @RequestMapping(value = "getName/{lobsterId}", method = RequestMethod.GET)
-    public String getName(@PathVariable("lobsterId") Integer lobsterId) {
-        Lobster l = lobsterService.getById(lobsterId);
+    public String getName(@PathVariable("lobsterId") Long lobsterId) {
+        Lobster l = lobsterRepository.findOne(lobsterId);
 
         return l.getName();
     }
