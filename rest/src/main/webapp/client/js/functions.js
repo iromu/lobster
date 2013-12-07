@@ -297,7 +297,7 @@ function setPlayerName()
 {
 	$.ajax({
         type: "GET",
-        url: "/api/lobster/getName/"+getParameterByName("id"),
+        url: "/api/lobsters/getName/"+getParameterByName("id"),
         success: function(data)
 		{
 			player.name = data;

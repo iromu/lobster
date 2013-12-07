@@ -11,7 +11,7 @@ $(function() {
 			
 			$.ajax({  
 			  type: "POST",  
-			  url: "/api/lobster/new", 
+			  url: "/api/lobsters",
 			  contentType: "application/json; charset=utf-8",			  
 			  data: JSON.stringify(dataString),  
 			  datatype: 'json',  
