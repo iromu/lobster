@@ -3,7 +3,7 @@
  * User: Josep
  * Date: 9/11/13
  * Time: 3:48
- * To change this template use File | Settings | File Templates.
+ *
  */
 var FRAME_WIDTH = 200;
 var FRAME_HEIGHT = 30;
@@ -152,6 +152,8 @@ function updateState(data, textStatus, jqXHR)
 
 function handleError(  jqXHR,  textStatus,  errorThrown)
 {
+    alert('Error Message: '+textStatus);
+    alert('HTTP Error: '+errorThrown);
    window.location="index.htm";
 }
 
@@ -167,7 +169,7 @@ function queryState( )
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "/api/status/getStatus/"+id,
+        url: "/api/status/"+id,
         contentType: "application/json; charset=utf-8",
         // Pass the received state to the updateState function
         success: updateState,

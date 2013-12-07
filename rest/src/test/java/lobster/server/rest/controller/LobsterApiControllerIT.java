@@ -1,22 +1,15 @@
 package lobster.server.rest.controller;
 
-import lobster.server.rest.model.Lobster;
-import lobster.server.rest.model.Status;
-import lobster.server.rest.model.VitamineAmount;
-import lobster.server.rest.persistence.StatusService;
-import org.junit.Before;
+import lobster.persistence.model.Food;
+import lobster.persistence.model.Lobster;
+import lobster.persistence.model.Status;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
@@ -25,65 +18,44 @@ import static org.junit.Assert.assertThat;
  * User: wantez
  * Date: 08/11/13
  * Time: 22:30
- * To change this template use File | Settings | File Templates.
  */
-public class LobsterApiControllerIT {
+public class LobsterApiControllerIT extends AbstractControllerTest {
 
-    @Autowired
-    private StatusService statusService;
-
-    private RestTemplate restTemplate;
-
-    @Before
-    public void restTemplate() {
-        this.restTemplate = new RestTemplate();
-        restTemplate.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(new MappingJacksonHttpMessageConverter()));
-
-
-    }
+    protected static int TOTAL = 6;
 
     @Test
     public void add() {
         Lobster lobster = new Lobster();
         lobster.setName("test");
-
-        Integer id = restTemplate.postForObject("http://localhost:8080/api/lobster/new", lobster, Integer.class);
-        lobster.setId(id);
         lobster.setEmail("email");
 
-        //assertThat(id, is(7));
-        System.out.println(id);
+        Long id = restTemplate.postForObject(HTTP_API + "lobsters", lobster, Long.class);
+        assertNotNull(id);
+        TOTAL++;
 
-        // Retrieve the status of the added element and check that the list of vitamins is filled
-        Status status = restTemplate.getForObject("http://localhost:8080/api/status/getStatus/{lobsterId}", Status.class, id);
-        assertNotNull(status);
-        assertEquals(5, status.getVitamineAmountList().size());
+        lobster = restTemplate.getForObject(HTTP_API + "lobsters/{lobsterId}", Lobster.class, id);
+        assertThat(lobster, notNullValue());
+        assertThat(lobster.getStatus(), notNullValue());
     }
 
     @Test
     public void getAll() {
-
-        List<Lobster> list;
-        ResponseEntity<List> l;
-        l = restTemplate.getForEntity("http://localhost:8080/api/lobster/list", List.class);
-
-        System.out.println(l.toString());
+        List<Food> list = restTemplate.getForObject(HTTP_API + "lobsters", List.class);
+        assertThat(list.size(), is(TOTAL));
     }
 
 
     @Test
     public void giveFood() {
-        Status status = restTemplate.postForObject("http://localhost:8080/api/lobster/1/givefood/1", null, Status.class);
-        status = restTemplate.postForObject("http://localhost:8080/api/lobster/1/givefood/2", null, Status.class);
-
-        assertNotNull(status);
-        assertThat(status.getVitamineAmountList().size(), is(4));
+        Status status = restTemplate.postForObject(HTTP_API + "lobsters/1/givefood/2", null, Status.class);
+        assertThat(status, notNullValue());
+        assertThat(status.getVitamineAmountList().size(), is(3));
 
     }
 
     @Test
     public void doActivity() {
-        restTemplate.postForLocation("http://localhost:8080/api/lobster/1/doActivity/1", null);
+        restTemplate.postForLocation(HTTP_API + "lobsters/1/doActivity/1", null);
     }
 
 }

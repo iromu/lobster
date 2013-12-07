@@ -1,15 +1,13 @@
 package lobster.server.rest.controller;
 
-import lobster.server.rest.model.Lobster;
-import lobster.server.rest.model.Status;
+import lobster.persistence.model.Status;
 import org.junit.Before;
-import org.springframework.http.ResponseEntity;
+import org.junit.Test;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
-import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -19,24 +17,12 @@ import static org.junit.Assert.assertThat;
  * User: Ferni
  * Date: 9/11/13
  * Time: 4:13
- * To change this template use File | Settings | File Templates.
  */
-public class StatusApiControllerIT {
+public class StatusApiControllerIT extends AbstractControllerTest {
 
-    private RestTemplate restTemplate;
-
-    @Before
-    public void restTemplate() {
-        this.restTemplate = new RestTemplate();
-        restTemplate.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(new MappingJacksonHttpMessageConverter()));
-    }
-
-    @org.junit.Test
+    @Test
     public void get() {
-        Integer lobsterId = 1;
-       // ResponseEntity<Status> status;
-        Status status = restTemplate.getForObject("http://localhost:8080/api/status/getStatus/{lobsterId}", Status.class, lobsterId);
-
-        assertThat(status.getId(), is(1));
+        Status status = restTemplate.getForObject(HTTP_API + "status/{lobsterId}", Status.class, 1L);
+        assertThat(status.getId(), is(1L));
     }
 }

@@ -246,7 +246,7 @@ function eat(element) {
 
     $.ajax({
         type: "POST",
-        url: "/api/lobster/" + id + "/givefood/" + element.id,
+        url: "/api/lobsters/" + id + "/givefood/" + element.id,
         dataType: "json",
 		success: function (data, textStatus, jqXHR)
 		{
@@ -270,7 +270,7 @@ function play(element)
 
     $.ajax({
         type: "POST",
-        url: "/api/lobster/" + id + "/doActivity/" + element.id,
+        url: "/api/lobsters/" + id + "/doActivity/" + element.id,
         dataType: "json",
         success: function (data, textStatus, jqXHR)
 		{
@@ -291,7 +291,7 @@ function requestFoodItems()
 {
 	$.ajax({
         type: "GET",
-        url: "/api/food/list",
+        url: "/api/food",
         dataType: "json",
         success: function(data)
 		{
@@ -388,7 +388,7 @@ function requestGameItems()
 {
 	$.ajax({
         type: "GET",
-        url: "/api/activity/list",
+        url: "/api/activity",
         dataType: "json",
         success: function(data)
 		{

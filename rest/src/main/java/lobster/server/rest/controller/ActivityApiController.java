@@ -1,42 +1,31 @@
 package lobster.server.rest.controller;
 
-import lobster.server.rest.model.Activity;
-import lobster.server.rest.model.Food;
-import lobster.server.rest.model.Lobster;
-import lobster.server.rest.persistence.ActivityService;
-import lobster.server.rest.persistence.LobsterService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lobster.persistence.model.Activity;
+import lobster.server.rest.service.ActivityService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
+import javax.inject.Inject;
 import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
  * Date: 09/11/13
  * Time: 03:04
- * To change this template use File | Settings | File Templates.
  */
 
-@RequestMapping("/activity/")
+@RequestMapping("activity")
 @Controller
 public class ActivityApiController {
 
-    @Autowired
+    @Inject
     private ActivityService activityService;
 
-
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    @RequestMapping(value = "list", method = RequestMethod.GET)
-    public List<Activity> getActivities(){
+    public List<Activity> getAll() {
         return activityService.getAll();
     }
-
-
-
 }
