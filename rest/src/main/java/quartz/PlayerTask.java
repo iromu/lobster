@@ -14,7 +14,7 @@ import java.util.Set;
  * User: spawn
  * Date: 09/11/13
  * Time: 07:18
- * To change this template use File | Settings | File Templates.
+ *
  */
 public class PlayerTask {
 

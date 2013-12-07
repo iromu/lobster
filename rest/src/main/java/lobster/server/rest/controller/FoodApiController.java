@@ -16,7 +16,7 @@ import java.util.List;
  * User: Ferni
  * Date: 9/11/13
  * Time: 3:05
- * To change this template use File | Settings | File Templates.
+ *
  */
 @RequestMapping("/food/")
 @Controller
