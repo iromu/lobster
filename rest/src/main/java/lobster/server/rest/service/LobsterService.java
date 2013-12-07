@@ -27,9 +27,6 @@ public class LobsterService implements ICrudService<Lobster> {
     private ActivityRepository activityRepository;
 
     @Inject
-    private StatusRepository statusRepository;
-
-    @Inject
     private VitaminRepository vitaminRepository;
 
     public List<Lobster> getAll() {

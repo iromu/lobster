@@ -1,36 +1,31 @@
 package lobster.server.rest.controller;
 
-import com.google.common.collect.Lists;
-import lobster.persistence.jpa.repository.ActivityRepository;
 import lobster.persistence.model.Activity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lobster.server.rest.service.ActivityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
  * Date: 09/11/13
  * Time: 03:04
- *
  */
 
-@RequestMapping("/activity/")
+@RequestMapping("activity")
 @Controller
 public class ActivityApiController {
 
-    @Autowired
-    private ActivityRepository activityRepository;
+    @Inject
+    private ActivityService activityService;
 
-
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    @RequestMapping(value = "list", method = RequestMethod.GET)
-    public List<Activity> getActivities() {
-        return Lists.newArrayList(activityRepository.findAll());
+    public List<Activity> getAll() {
+        return activityService.getAll();
     }
-
-
 }

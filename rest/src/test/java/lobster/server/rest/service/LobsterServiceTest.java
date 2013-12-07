@@ -19,10 +19,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by wantez on 07/12/13.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
-@ContextConfiguration(classes = {ServiceConfig.class, PersistenceConfig.class}, loader = AnnotationConfigContextLoader.class)
-public class LobsterServiceTest {
+public class LobsterServiceTest extends AbstractServiceTest {
 
     @Inject
     LobsterService service;

@@ -17,18 +17,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Time: 3:50
  *
  */
-@RequestMapping("/status/")
+@RequestMapping("status")
 @Controller
 public class StatusApiController {
+
     @Autowired
     private StatusService statusService;
-
 
     @ResponseBody
     @RequestMapping(value = "{lobsterId}", method = RequestMethod.GET)
     public Status getStatus(@PathVariable("lobsterId") Long lobsterId) {
         return statusService.findByLobsterId(lobsterId);
     }
-
-
 }
