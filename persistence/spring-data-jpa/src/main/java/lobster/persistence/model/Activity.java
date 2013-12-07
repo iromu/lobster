@@ -11,7 +11,7 @@ import java.io.Serializable;
  * User: spawn
  * Date: 09/11/13
  * Time: 00:11
- * To change this template use File | Settings | File Templates.
+ *
  */
 @Entity
 public class Activity implements Serializable {
@@ -22,7 +22,7 @@ public class Activity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private Integer id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Getter
@@ -31,11 +31,11 @@ public class Activity implements Serializable {
 
     @Getter
     @Setter
-    private Integer calories;
+    private Long calories;
 
     @Getter
     @Setter
-    private Integer fatLevel;
+    private Long fatLevel;
 
     @Getter
     @Setter
@@ -47,10 +47,10 @@ public class Activity implements Serializable {
 
     @Getter
     @Setter
-    private Integer hours;
+    private Long hours;
 
     @Getter
     @Setter
-    private Integer happiness;
+    private Long happiness;
 
 }

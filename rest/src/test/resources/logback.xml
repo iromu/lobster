@@ -8,7 +8,7 @@
     <logger name="org.springframework.data" level="DEBUG" />
     <logger name="org.springframework.jdbc" level="DEBUG" />
     <root>
-        <level value="DEBUG"/>
+        <level value="INFO"/>
         <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>

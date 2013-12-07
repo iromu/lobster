@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
  * User: wantez
  * Date: 01/12/13
  * Time: 18:26
- * To change this template use File | Settings | File Templates.
+ *
  */
 public interface LobsterRepository extends CrudRepository<Lobster, Long> {
 }

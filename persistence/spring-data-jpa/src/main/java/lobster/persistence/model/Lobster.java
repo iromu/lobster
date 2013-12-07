@@ -9,14 +9,14 @@ import java.io.Serializable;
  * User: wantez
  * Date: 08/11/13
  * Time: 22:01
- * To change this template use File | Settings | File Templates.
+ *
  */
 @Entity
 public class Lobster implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -28,11 +28,11 @@ public class Lobster implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Status status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -66,5 +66,17 @@ public class Lobster implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Lobster{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", status=" + status +
+                '}';
     }
 }

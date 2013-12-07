@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThat;
  * User: wantez
  * Date: 01/12/13
  * Time: 18:36
- * To change this template use File | Settings | File Templates.
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)

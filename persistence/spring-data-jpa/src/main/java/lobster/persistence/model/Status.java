@@ -14,7 +14,6 @@ import java.util.Set;
  * User: spawn
  * Date: 09/11/13
  * Time: 00:22
- * To change this template use File | Settings | File Templates.
  */
 @Entity
 public class Status implements Serializable {
@@ -23,19 +22,19 @@ public class Status implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private Integer id;
+    private Long id;
 
     @Getter
     @Setter
-    private Integer totalCalories;
+    private Long totalCalories;
 
     @Getter
     @Setter
-    private Integer fatLevel;
+    private Long fatLevel;
 
     @Getter
     @Setter
-    private Integer happiness;
+    private Long happiness;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Getter
@@ -50,9 +49,9 @@ public class Status implements Serializable {
     private Set<VitamineAmount> vitamineAmountList;
 
     public Status() {
-        totalCalories = new Integer(50);
-        fatLevel = new Integer(50);
-        happiness = new Integer(50);
+        totalCalories = 50L;
+        fatLevel = 50L;
+        happiness = 50L;
         lastEat = new Date();
         vitamineAmountList = new HashSet<>();
     }

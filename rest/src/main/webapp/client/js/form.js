@@ -49,7 +49,7 @@ function requestUsers()
 	$.ajax({
             type: "GET",
 			dataType: "json",
-            url: "/api/lobster/list",
+            url: "/api/lobsters",
             success: function(list)
             {
 				carro = "";

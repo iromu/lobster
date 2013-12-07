@@ -11,7 +11,7 @@ import java.io.Serializable;
  * User: spawn
  * Date: 08/11/13
  * Time: 23:47
- * To change this template use File | Settings | File Templates.
+ *
  */
 @Entity
 public class Vitamine implements Serializable {
@@ -20,7 +20,7 @@ public class Vitamine implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private Integer id;
+    private Long id;
 
     @Getter
     @Setter

@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
  * User: wantez
  * Date: 08/11/13
  * Time: 22:30
- * To change this template use File | Settings | File Templates.
+ *
  */
 public class LobsterApiControllerIT {
 
@@ -35,34 +35,27 @@ public class LobsterApiControllerIT {
     public void restTemplate() {
         this.restTemplate = new RestTemplate();
         restTemplate.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(new MappingJacksonHttpMessageConverter()));
-
-
     }
 
     @Test
     public void add() {
         Lobster lobster = new Lobster();
         lobster.setName("test");
-
-        Integer id = restTemplate.postForObject("http://localhost:8080/api/lobster/new", lobster, Integer.class);
-        lobster.setId(id);
         lobster.setEmail("email");
 
-        //assertThat(id, is(7));
-        System.out.println(id);
+        Long id = restTemplate.postForObject("http://localhost:8080/api/lobsters", lobster, Long.class);
+        assertNotNull(id);
 
-        // Retrieve the status of the added element and check that the list of vitamins is filled
-        Status status = restTemplate.getForObject("http://localhost:8080/api/status/getStatus/{lobsterId}", Status.class, id);
-        assertNotNull(status);
-        assertEquals(5, status.getVitamineAmountList().size());
+        lobster = restTemplate.getForObject("http://localhost:8080/api/lobsters/{lobsterId}", Lobster.class, id);
+        assertNotNull(lobster);
+        assertNull(lobster.getStatus());
     }
 
     @Test
     public void getAll() {
 
-        List<Lobster> list;
         ResponseEntity<List> l;
-        l = restTemplate.getForEntity("http://localhost:8080/api/lobster/list", List.class);
+        l = restTemplate.getForEntity("http://localhost:8080/api/lobsters", List.class);
 
         System.out.println(l.toString());
     }
@@ -71,7 +64,7 @@ public class LobsterApiControllerIT {
     @Test
     public void giveFood() {
         Status status = restTemplate.postForObject("http://localhost:8080/api/lobster/1/givefood/1", null, Status.class);
-        status = restTemplate.postForObject("http://localhost:8080/api/lobster/1/givefood/2", null, Status.class);
+        status = restTemplate.postForObject("http://localhost:8080/api/lobsters/1/givefood/2", null, Status.class);
 
         assertNotNull(status);
         assertThat(status.getVitamineAmountList().size(), is(4));
@@ -80,7 +73,7 @@ public class LobsterApiControllerIT {
 
     @Test
     public void doActivity() {
-        restTemplate.postForLocation("http://localhost:8080/api/lobster/1/doActivity/1", null);
+        restTemplate.postForLocation("http://localhost:8080/api/lobsters/1/doActivity/1", null);
     }
 
 }

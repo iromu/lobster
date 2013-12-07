@@ -14,7 +14,7 @@ import java.util.Set;
  * User: spawn
  * Date: 09/11/13
  * Time: 07:18
- * To change this template use File | Settings | File Templates.
+ *
  */
 public class PlayerTask {
 
@@ -36,29 +36,29 @@ public class PlayerTask {
                 Set<VitamineAmount> vits = status.getVitamineAmountList();
                 for (VitamineAmount sv : vits) {
                     if (sv.getAmount() != null) {
-                        int amount = sv.getAmount() - 1;
+                        Long amount = sv.getAmount() - 1;
                         if (amount < 0)
-                            amount = 0;
+                            amount = 0L;
 
                         sv.setAmount(amount);
                     }
                 }
 
-                int happiness = status.getHappiness() - 1;
+                Long happiness = status.getHappiness() - 1;
                 if (happiness < 0)
-                    status.setHappiness(0);
+                    status.setHappiness(0L);
                 else
                     status.setHappiness(happiness);
 
 
                 if (status.getTotalCalories() != null) {
-                    int cals = status.getTotalCalories() - 1;
+                    Long cals = status.getTotalCalories() - 1;
                     if (cals < 0)
-                        status.setTotalCalories(0);
+                        status.setTotalCalories(0L);
                     else
                         status.setTotalCalories(cals);
                 } else {
-                    status.setTotalCalories(0);
+                    status.setTotalCalories(0L);
                 }
 
                 lob.setStatus(status);

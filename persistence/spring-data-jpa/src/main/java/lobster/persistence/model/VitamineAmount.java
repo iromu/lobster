@@ -10,7 +10,7 @@ import javax.persistence.*;
  * User: spawn
  * Date: 09/11/13
  * Time: 02:05
- * To change this template use File | Settings | File Templates.
+ *
  */
 @Entity
 public class VitamineAmount {
@@ -19,7 +19,7 @@ public class VitamineAmount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private Integer id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @Getter
@@ -28,6 +28,6 @@ public class VitamineAmount {
 
     @Getter
     @Setter
-    private Integer amount;
+    private Long amount;
 
 }

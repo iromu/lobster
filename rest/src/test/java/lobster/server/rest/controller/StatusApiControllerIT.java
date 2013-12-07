@@ -3,6 +3,7 @@ package lobster.server.rest.controller;
 import lobster.persistence.model.Lobster;
 import lobster.persistence.model.Status;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertThat;
  * User: Ferni
  * Date: 9/11/13
  * Time: 4:13
- * To change this template use File | Settings | File Templates.
+ *
  */
 public class StatusApiControllerIT {
 
@@ -31,12 +32,12 @@ public class StatusApiControllerIT {
         restTemplate.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(new MappingJacksonHttpMessageConverter()));
     }
 
-    @org.junit.Test
+    @Test
     public void get() {
         Integer lobsterId = 1;
        // ResponseEntity<Status> status;
-        Status status = restTemplate.getForObject("http://localhost:8080/api/status/getStatus/{lobsterId}", Status.class, lobsterId);
+        Status status = restTemplate.getForObject("http://localhost:8080/api/status/{lobsterId}", Status.class, lobsterId);
 
-        assertThat(status.getId(), is(1));
+        assertThat(status.getId(), is(1L));
     }
 }
