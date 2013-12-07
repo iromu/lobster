@@ -61,8 +61,6 @@ insert into lobster (name, password, email) values ('lobster1', 'pwd1', 'lob1@ma
 insert into lobster (name, password, email) values ('lobster2', 'pwd2', 'lob2@mail.com');
 insert into lobster (name, password, email) values ('lobster3', 'pwd3', 'lob3@mail.com');
 insert into lobster (name, password, email) values ('lobster4', 'pwd4', 'lob4@mail.com');
-insert into lobster (name, password, email) values ('lobster5', 'pwd5', 'lob5@mail.com');
-insert into lobster (name, password, email) values ('lobster6', 'pwd6', 'lob6@mail.com');
 
 
 insert into status (fatLevel, happiness, lastEat)  values (50, 80, null) ;
