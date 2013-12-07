@@ -19,7 +19,7 @@ public class VitamineAmount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private Integer id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @Getter
@@ -28,6 +28,6 @@ public class VitamineAmount {
 
     @Getter
     @Setter
-    private Integer amount;
+    private Long amount;
 
 }

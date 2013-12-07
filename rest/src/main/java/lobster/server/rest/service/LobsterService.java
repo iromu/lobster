@@ -58,7 +58,7 @@ public class LobsterService implements ICrudService<Lobster> {
             Vitamine vit = it.next();
             VitamineAmount vitamineAmount = new VitamineAmount();
             vitamineAmount.setVitamine(vit);
-            vitamineAmount.setAmount(50);
+            vitamineAmount.setAmount(50L);
             lobster.getStatus().getVitamineAmountList().add(vitamineAmount);
         }
 
@@ -105,9 +105,9 @@ public class LobsterService implements ICrudService<Lobster> {
             boolean found = false;
             for (VitamineAmount vitamineAmount : vitamineAmountList) {
                 if (vitamineAmount.getVitamine().equals(foodVitamine.getVitamine())) {
-                    Integer amount = vitamineAmount.getAmount();
+                    Long amount = vitamineAmount.getAmount();
 
-                    int i = amount + foodVitamine.getAmount();
+                    Long i = amount + foodVitamine.getAmount();
                     vitamineAmount.setAmount(i > 100 ? 100 : i);
 
                     found = true;
@@ -124,18 +124,18 @@ public class LobsterService implements ICrudService<Lobster> {
     }
 
     private void updateCalories(Status status, Food food) {
-        Integer totalCalories = status.getTotalCalories();
+        Long totalCalories = status.getTotalCalories();
         totalCalories = totalCalories == null ? 0 : totalCalories;
-        int calories = totalCalories + food.getCalories();
-        status.setTotalCalories(calories < 100 ? calories : 100);
+        Long calories = totalCalories + food.getCalories();
+        status.setTotalCalories(calories < 100 ? calories : 100L);
     }
 
     private void updateFatLevel(Status status, Food food) {
-        Integer fatLevel = status.getFatLevel();
+        Long fatLevel = status.getFatLevel();
         fatLevel = fatLevel == null ? 0 : fatLevel;
-        int foodFatLevel = food.getFatLevel();
-        int newFatLevel = fatLevel + foodFatLevel;
-        status.setFatLevel(newFatLevel < 100 ? newFatLevel : 100);
+        Long foodFatLevel = food.getFatLevel();
+        Long newFatLevel = fatLevel + foodFatLevel;
+        status.setFatLevel(newFatLevel < 100 ? newFatLevel : 100L);
     }
 
 
@@ -144,27 +144,27 @@ public class LobsterService implements ICrudService<Lobster> {
         Status status = lbs.getStatus();
         Activity activity = activityRepository.findOne(actvtId);
 
-        int happiness = status.getHappiness() + activity.getHappiness();
+        Long happiness = status.getHappiness() + activity.getHappiness();
         if (happiness < 0)
-            status.setHappiness(0);
+            status.setHappiness(0L);
         else if (happiness > 100)
-            status.setHappiness(100);
+            status.setHappiness(100L);
         else
             status.setHappiness(happiness);
 
-        int cals = status.getTotalCalories() + activity.getCalories();
+        Long cals = status.getTotalCalories() + activity.getCalories();
         if (cals < 0)
-            status.setTotalCalories(0);
+            status.setTotalCalories(0L);
         else if (cals > 100)
-            status.setTotalCalories(100);
+            status.setTotalCalories(100L);
         else
             status.setTotalCalories(cals);
 
-        int fat = status.getFatLevel() + activity.getFatLevel();
+        Long fat = status.getFatLevel() + activity.getFatLevel();
         if (fat < 0)
-            status.setFatLevel(0);
+            status.setFatLevel(0L);
         else if (fat > 100)
-            status.setFatLevel(100);
+            status.setFatLevel(100L);
         else
             status.setFatLevel(fat);
 

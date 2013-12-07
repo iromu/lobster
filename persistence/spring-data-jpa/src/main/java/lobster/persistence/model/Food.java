@@ -24,7 +24,7 @@ public class Food implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private Integer id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Getter
@@ -33,11 +33,11 @@ public class Food implements Serializable {
 
     @Getter
     @Setter
-    private Integer calories;
+    private Long calories;
 
     @Getter
     @Setter
-    private Integer fatLevel;
+    private Long fatLevel;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "food_vitamines",

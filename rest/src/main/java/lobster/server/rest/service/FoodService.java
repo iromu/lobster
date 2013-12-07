@@ -1,7 +1,6 @@
 package lobster.server.rest.service;
 
 import com.google.common.collect.Lists;
-import lobster.persistence.jpa.repository.ActivityRepository;
 import lobster.persistence.jpa.repository.FoodRepository;
 import lobster.persistence.model.Food;
 import org.springframework.stereotype.Service;

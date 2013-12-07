@@ -38,6 +38,6 @@ public class StatusApiControllerIT {
        // ResponseEntity<Status> status;
         Status status = restTemplate.getForObject("http://localhost:8080/api/status/{lobsterId}", Status.class, lobsterId);
 
-        assertThat(status.getId(), is(1));
+        assertThat(status.getId(), is(1L));
     }
 }
