@@ -10,7 +10,7 @@ import javax.persistence.*;
  * User: spawn
  * Date: 09/11/13
  * Time: 02:05
- * To change this template use File | Settings | File Templates.
+ *
  */
 @Entity
 public class VitamineAmount {

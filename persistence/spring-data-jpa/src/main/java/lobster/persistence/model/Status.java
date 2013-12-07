@@ -14,7 +14,7 @@ import java.util.Set;
  * User: spawn
  * Date: 09/11/13
  * Time: 00:22
- * To change this template use File | Settings | File Templates.
+ *
  */
 @Entity
 public class Status implements Serializable {

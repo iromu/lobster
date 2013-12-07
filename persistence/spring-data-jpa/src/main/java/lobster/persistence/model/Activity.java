@@ -11,7 +11,7 @@ import java.io.Serializable;
  * User: spawn
  * Date: 09/11/13
  * Time: 00:11
- * To change this template use File | Settings | File Templates.
+ *
  */
 @Entity
 public class Activity implements Serializable {

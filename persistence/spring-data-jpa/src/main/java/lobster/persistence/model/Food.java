@@ -12,7 +12,7 @@ import java.util.Set;
  * User: spawn
  * Date: 08/11/13
  * Time: 23:39
- * To change this template use File | Settings | File Templates.
+ *
  */
 @Entity
 public class Food implements Serializable {
