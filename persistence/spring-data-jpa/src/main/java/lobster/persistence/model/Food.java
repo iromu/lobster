@@ -39,7 +39,7 @@ public class Food implements Serializable {
     @Setter
     private Long fatLevel;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "food_vitamines",
             joinColumns = {@JoinColumn(name = "food_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "vitamineamount_id", referencedColumnName = "id")})

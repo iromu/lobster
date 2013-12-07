@@ -21,7 +21,7 @@ public class VitamineAmount {
     @Setter
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @Getter
     @Setter
     private Vitamine vitamine;

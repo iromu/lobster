@@ -48,6 +48,9 @@ public class Status implements Serializable {
     @Setter
     private Set<VitamineAmount> vitamineAmountList;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Lobster lobster;
+
     public Status() {
         totalCalories = 50L;
         fatLevel = 50L;
