@@ -33,6 +33,6 @@ public class LobsterRepositoryTest {
     public void findAll() {
         Iterable<Lobster> iterable = lobsterRepository.findAll();
         ArrayList<Lobster> arrayList = Lists.newArrayList(iterable);
-        assertThat(arrayList.size(),is(6));
+        assertThat(arrayList.size(),is(4));
     }
 }
