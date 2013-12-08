@@ -161,6 +161,13 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>lobster</groupId>
+            <artifactId>classic-ui</artifactId>
+            <version>0.0.11-SNAPSHOT</version>
+            <type>war</type>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
