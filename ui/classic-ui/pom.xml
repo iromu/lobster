@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>classic-ui</artifactId>
-    <name>${groupId}:${parent.artifactId}:${artifactId}</name>
+    <name>${project.groupId}:${project.parent.artifactId}:${project.artifactId}</name>
     <packaging>war</packaging>
     <build>
         <finalName>classic-ui</finalName>
