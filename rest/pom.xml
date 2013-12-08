@@ -3,7 +3,7 @@
     <parent>
         <artifactId>lobster-parent</artifactId>
         <groupId>lobster</groupId>
-        <version>0.0.11-SNAPSHOT</version>
+        <version>0.0.11</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -163,7 +163,7 @@
         <dependency>
             <groupId>lobster</groupId>
             <artifactId>classic-ui</artifactId>
-            <version>0.0.11-SNAPSHOT</version>
+            <version>0.0.11</version>
             <type>war</type>
             <scope>runtime</scope>
         </dependency>
@@ -192,7 +192,7 @@
                 <dependency>
                     <groupId>lobster</groupId>
                     <artifactId>spring-data-jpa</artifactId>
-                    <version>0.0.11-SNAPSHOT</version>
+                    <version>0.0.11</version>
                 </dependency>
             </dependencies>
         </profile>
