@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>lobster-parent</artifactId>
+        <artifactId>ui</artifactId>
         <groupId>lobster</groupId>
         <version>0.0.11</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>persistence</artifactId>
-    <name>${project.groupId}:${project.artifactId}</name>
-    <packaging>pom</packaging>
+    <artifactId>classic-ui</artifactId>
+    <name>${project.groupId}:${project.parent.artifactId}:${project.artifactId}</name>
+    <packaging>war</packaging>
+    <build>
+        <finalName>classic-ui</finalName>
+    </build>
 
-    <modules>
-        <module>spring-data-jpa</module>
-    </modules>
 </project>
